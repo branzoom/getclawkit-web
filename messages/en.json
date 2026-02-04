@@ -1,0 +1,12 @@
+{
+    "HomePage": {
+        "title": "GetClawKit",
+        "subtitle": "The missing toolkit for OpenClaw. Configure, diagnose, and optimize your agents in seconds."
+    },
+    "Navigation": {
+        "status": "Status",
+        "config": "Config",
+        "doctor": "Doctor",
+        "skills": "Skills"
+    }
+}

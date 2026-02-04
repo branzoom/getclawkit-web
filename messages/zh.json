@@ -1,0 +1,12 @@
+{
+    "HomePage": {
+        "title": "GetClawKit",
+        "subtitle": "OpenClaw 缺失的工具箱。秒级完成 Agent 配置、诊断与优化。"
+    },
+    "Navigation": {
+        "status": "系统状态",
+        "config": "配置向导",
+        "doctor": "环境诊断",
+        "skills": "技能插件"
+    }
+}
