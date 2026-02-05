@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { FileJson, ShieldCheck, Calculator, Package, Activity, ArrowRight, Zap, Github, CheckCircle2, Terminal, AlertTriangle, BookOpen, HelpCircle, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Image from 'next/image';
 
 export default function HomePage() {
   const tools = [
@@ -127,11 +128,15 @@ export default function HomePage() {
               <p className="text-zinc-400 leading-relaxed">
                 Use the <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> to toggle your LLM provider (OpenAI, DeepSeek) and platform. We validate the schema automatically.
               </p>
-              <div className="bg-zinc-900 rounded-lg p-4 border border-white/10 mt-4">
-                <div className="flex flex-col items-center justify-center h-32 text-zinc-600 border-2 border-dashed border-zinc-800 rounded">
-                  <FileJson className="w-8 h-8 mb-2" />
-                  <span className="text-xs">Screenshot: Config Wizard UI</span>
-                </div>
+              <div className="mt-4 rounded-lg overflow-hidden border border-white/10 shadow-2xl shadow-blue-500/10">
+                <Image
+                  src="/ConfigWizard.png"
+                  alt="ClawKit Config Wizard Interface showing JSON generation with Windows path fix enabled"
+                  width={800} // 根据你截图的实际宽度大致填写
+                  height={450} // 根据你截图的实际高度大致填写
+                  className="w-full h-auto"
+                  quality={90}
+                />
               </div>
             </div>
 
