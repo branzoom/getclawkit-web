@@ -1,7 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
+/* 🚀 核心修复：Tailwind v4 必须在这里引入插件 */
 
 @theme inline {
   --color-background: var(--background);
@@ -119,6 +121,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

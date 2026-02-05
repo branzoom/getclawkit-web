@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: ['/api/'], // 不让爬虫爬 API
+            disallow: ['/api/'], // 保护 API 不被滥用
         },
         sitemap: 'https://getclawkit.com/sitemap.xml',
     };

@@ -1,7 +1,4 @@
-import type { NextConfig } from "next";
-import createNextIntlPlugin from 'next-intl/plugin';
-
-const withNextIntl = createNextIntlPlugin();
+import type { NextConfig } from 'next';
 
 const nextConfig = {
   // 核心修复：添加 "as const"，把 string 锁死为字面量
@@ -13,7 +10,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
+      { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
+    ]
+  }
 };
 
-// 最后导出时，强制断言为 NextConfig 类型，忽略任何中间的类型不匹配
-export default withNextIntl(nextConfig as NextConfig);
+export default nextConfig;

@@ -1,10 +1,11 @@
-# 🦞 OpenClaw Nexus - 产品需求文档 (PRD) v2.1
+# 🦞 ClawKit - 产品需求文档 (PRD) v2.1
 **—— The "Unofficial Companion" for OpenClaw Ecosystem**
 *(Final Execution Build - Do Not Edit)*
 
 | 项目属性 | 内容 |
 | :--- | :--- |
-| **项目名称** | **OpenClaw Nexus** (代码代号: LobsterTrap) |
+| **项目名称** | **ClawKit** (代码代号: LobsterTrap) |
+| **项目域名** | **getclawkit.com** |
 | **版本号** | **v2.1 (Definitive Edition)** |
 | **文档日期** | 2026-02-04 |
 | **项目负责人** | You (The Solo Vibe Coder) |

@@ -1,121 +1,93 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import Fuse from 'fuse.js';
-import { Search, Terminal, Download, ExternalLink, Command, Package } from 'lucide-react';
-import { INITIAL_SKILLS, Skill } from '@/data/skills';
+import { useState } from 'react';
+import Link from 'next/link';
+import { skills } from '@/data/skills';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Search, Download, ArrowRight, Star } from 'lucide-react';
 
 export default function SkillRegistry() {
-    const [query, setQuery] = useState('');
-    const [activeTab, setActiveTab] = useState<string | null>(null); // 控制哪个卡片展开显示安装命令
+    const [searchTerm, setSearchTerm] = useState('');
 
-    // 配置 Fuse 模糊搜索
-    const fuse = useMemo(() => new Fuse(INITIAL_SKILLS, {
-        keys: ['name', 'description', 'author'],
-        threshold: 0.3, // 模糊程度
-    }), []);
-
-    const results = query
-        ? fuse.search(query).map(result => result.item)
-        : INITIAL_SKILLS;
+    // 实时过滤逻辑 (Client-side filtering)
+    const filteredSkills = skills.filter(skill =>
+        skill.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        skill.shortDesc.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        skill.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
     return (
-        <div className="w-full max-w-4xl mx-auto my-16">
-            <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-2">
-                    <Package className="w-8 h-8 text-purple-600" />
-                    Skill Registry
-                </h2>
-                <p className="text-gray-500 mt-2">Discover verified skills to extend your agent.</p>
-            </div>
-
-            {/* 搜索框 */}
-            <div className="relative mb-8 max-w-xl mx-auto">
-                <Search className="absolute left-3 top-3 text-gray-400 w-5 h-5" />
-                <input
+        <div className="space-y-8">
+            {/* Search Bar */}
+            <div className="relative max-w-xl mx-auto">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
+                <Input
                     type="text"
-                    placeholder="Search skills (e.g. 'twitter', 'search', 'file')..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-purple-500 outline-none shadow-sm transition-all"
+                    placeholder="Search skills (e.g., 'browser', 'crypto', 'adapter')..."
+                    className="pl-12 py-6 text-lg bg-zinc-900/50 border-white/10 focus-visible:ring-blue-500 rounded-full text-white placeholder:text-zinc-500"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </div>
 
-            {/* 列表区域 */}
-            <div className="grid gap-4">
-                {results.map((skill) => (
-                    <div key={skill.id} className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-4 hover:shadow-md transition-shadow">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            {/* Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredSkills.map((skill) => (
+                    <Card key={skill.id} className="bg-zinc-900/40 border-white/5 hover:border-blue-500/30 transition-all hover:-translate-y-1 group flex flex-col relative overflow-hidden">
+                        {/* 全卡片点击链接 - SEO 友好 */}
+                        <Link href={`/skills/${skill.id}`} className="absolute inset-0 z-10" aria-label={`View details for ${skill.name}`} />
 
-                            {/* 信息 */}
-                            <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <h3 className="font-bold text-gray-900 dark:text-gray-100">{skill.name}</h3>
-                                    <span className={`px-2 py-0.5 text-[10px] uppercase rounded-full font-medium
-                    ${skill.category === 'tool' ? 'bg-blue-100 text-blue-700' :
-                                            skill.category === 'adapter' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}
-                  `}>
-                                        {skill.category}
-                                    </span>
-                                </div>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">{skill.description}</p>
-                                <div className="text-xs text-gray-400 mt-2 flex items-center gap-1">
-                                    By @{skill.author}
+                        <CardHeader>
+                            <div className="flex justify-between items-start mb-3 relative z-20 pointer-events-none">
+                                <Badge variant="outline" className="border-white/10 text-zinc-400 group-hover:text-blue-400 group-hover:border-blue-500/30">
+                                    {skill.category}
+                                </Badge>
+                                <div className="flex items-center text-xs text-zinc-500">
+                                    <Download className="w-3 h-3 mr-1" />
+                                    {skill.downloads.toLocaleString()}
                                 </div>
                             </div>
 
-                            {/* 动作按钮 */}
-                            <div className="flex items-center gap-2 shrink-0">
-                                <button
-                                    onClick={() => setActiveTab(activeTab === skill.id ? null : skill.id)}
-                                    className={`px-4 py-2 text-sm font-medium rounded-lg border transition-all flex items-center gap-2
-                    ${activeTab === skill.id
-                                            ? 'bg-gray-900 text-white border-gray-900 dark:bg-white dark:text-black'
-                                            : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 dark:bg-black dark:text-gray-300 dark:border-gray-700'}`}
-                                >
-                                    <Download className="w-4 h-4" />
-                                    Install
-                                </button>
-                            </div>
-                        </div>
+                            <CardTitle className="text-xl text-white group-hover:text-blue-400 transition-colors relative z-20 pointer-events-none">
+                                {skill.name}
+                            </CardTitle>
+                        </CardHeader>
 
-                        {/* 展开的安装面板 (Dual Mode) */}
-                        {activeTab === skill.id && (
-                            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 -mx-4 -mb-4 px-4 pb-4 rounded-b-xl animate-in slide-in-from-top-2 duration-200">
-                                <div className="flex gap-4 mb-3">
-                                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1">
-                                        <Command className="w-3 h-3" /> Recommended
-                                    </span>
-                                </div>
+                        <CardContent className="flex-1 relative z-20 pointer-events-none">
+                            <p className="text-sm text-zinc-400 leading-relaxed line-clamp-3">
+                                {skill.shortDesc}
+                            </p>
 
-                                <div className="relative group">
-                                    <div className="bg-gray-900 text-gray-300 font-mono text-sm p-3 rounded-lg flex justify-between items-center">
-                                        <span>{skill.installCmd}</span>
-                                        <button
-                                            onClick={() => navigator.clipboard.writeText(skill.installCmd)}
-                                            className="text-gray-500 hover:text-white"
-                                        >
-                                            <Terminal className="w-4 h-4" />
-                                        </button>
-                                    </div>
-                                    <div className="mt-2 text-xs text-gray-500 flex justify-between">
-                                        <span>Or download manually from GitHub</span>
-                                        <a href={skill.repoUrl} target="_blank" className="flex items-center gap-1 hover:text-purple-600">
-                                            View Source <ExternalLink className="w-3 h-3" />
-                                        </a>
-                                    </div>
-                                </div>
+                            {/* Tags Preview */}
+                            <div className="flex flex-wrap gap-2 mt-4 opacity-50">
+                                {skill.tags.slice(0, 3).map(tag => (
+                                    <span key={tag} className="text-[10px] text-zinc-500 bg-white/5 px-2 py-1 rounded">#{tag}</span>
+                                ))}
                             </div>
-                        )}
-                    </div>
+                        </CardContent>
+
+                        <CardFooter className="relative z-20">
+                            {/* 视觉上的按钮，实际点击行为由覆盖全卡的 Link 触发 */}
+                            <Button className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 group-hover:border-blue-500/30 group-hover:text-blue-200 transition-all">
+                                View Details <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </Button>
+                        </CardFooter>
+                    </Card>
                 ))}
-
-                {results.length === 0 && (
-                    <div className="text-center py-12 text-gray-400">
-                        No skills found matching "{query}".
-                    </div>
-                )}
             </div>
+
+            {/* Empty State */}
+            {filteredSkills.length === 0 && (
+                <div className="text-center py-20 bg-zinc-900/30 rounded-2xl border border-white/5 border-dashed">
+                    <p className="text-zinc-500 text-lg mb-4">No skills found matching "{searchTerm}".</p>
+                    <Button variant="link" className="text-blue-400" onClick={() => setSearchTerm('')}>
+                        Clear Search
+                    </Button>
+                </div>
+            )}
         </div>
     );
 }

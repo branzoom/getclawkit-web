@@ -5,25 +5,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // 定义所有静态路由
     const routes = [
-        '',
+        '', // 首页
         '/status',
         '/tools/config',
         '/tools/doctor',
-        '/tools/cost',
+        '/tools/cost', // 如果你保留了这个页面
         '/skills',
         '/docs/migration',
         '/docs/troubleshooting'
     ];
 
-    // 为每个路由生成 en 和 zh 两个版本
-    const sitemapEntries = routes.flatMap((route) => {
-        return ['en', 'zh'].map((locale) => ({
-            url: `${baseUrl}/${locale}${route}`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly' as const,
-            priority: route === '' ? 1.0 : 0.8,
-        }));
-    });
-
-    return sitemapEntries;
+    return routes.map((route) => ({
+        url: `${baseUrl}${route}`, // 直接拼接，没有 locale
+        lastModified: new Date(),
+        changeFrequency: route === '' ? 'daily' : 'weekly',
+        priority: route === '' ? 1.0 : 0.8,
+    }));
 }
