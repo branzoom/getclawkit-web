@@ -6,7 +6,9 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Download, Star, Calendar, ShieldCheck, Terminal, Copy, ArrowLeft, Github, AlertTriangle } from 'lucide-react';
+import { Download, Star, Calendar, ShieldCheck, Terminal, Copy, ArrowLeft, Github, AlertTriangle, FileDown } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface Props {
     params: Promise<{ skillId: string }>;
@@ -86,34 +88,89 @@ export default async function SkillDetailPage({ params }: Props) {
                                     <ShieldCheck className="w-3 h-3" /> Verified Safe
                                 </Badge>
                             )}
+                            <Badge variant="secondary" className="bg-white/10 text-zinc-300">
+                                v{skill.version}
+                            </Badge>
                         </div>
                         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{skill.name}</h1>
                         <p className="text-xl text-zinc-400 leading-relaxed">{skill.shortDesc}</p>
                     </div>
 
-                    {/* Installation Box (Big & Clear) */}
+                    {/* Action Card: Install & Download */}
                     <Card className="bg-[#0d1117] border-zinc-800">
-                        <CardContent className="p-6">
-                            <h3 className="text-sm font-bold text-white mb-3 flex items-center gap-2">
-                                <Terminal className="w-4 h-4 text-purple-400" /> Installation Command
-                            </h3>
-                            <div className="flex gap-2">
-                                <code className="flex-1 bg-black border border-zinc-800 rounded p-3 text-green-400 font-mono text-sm overflow-x-auto">
-                                    {skill.command}
-                                </code>
-                                <Button variant="secondary" size="icon" className="shrink-0">
-                                    <Copy className="w-4 h-4" />
-                                </Button>
+                        <CardContent className="p-6 space-y-5">
+                            {/* Option 1: CLI Install */}
+                            <div>
+                                <h3 className="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                                    <Terminal className="w-4 h-4 text-purple-400" /> Install via CLI (Recommended)
+                                </h3>
+                                <div className="flex gap-2">
+                                    <code className="flex-1 bg-black border border-zinc-800 rounded p-3 text-green-400 font-mono text-sm overflow-x-auto">
+                                        {skill.command}
+                                    </code>
+                                    {/* 简单的复制按钮占位，实际可加交互逻辑 */}
+                                    <Button variant="secondary" size="icon" className="shrink-0">
+                                        <Copy className="w-4 h-4" />
+                                    </Button>
+                                </div>
                             </div>
-                            <p className="text-xs text-zinc-500 mt-3">
-                                Requires OpenClaw v{skill.version} or higher. Run in your project root.
-                            </p>
+
+                            <div className="relative">
+                                <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-white/5"></span></div>
+                                <div className="relative flex justify-center text-xs uppercase"><span className="bg-[#0d1117] px-2 text-zinc-500">Or</span></div>
+                            </div>
+
+                            {/* Option 2: Direct Download */}
+                            <div>
+                                <Button asChild className="w-full bg-white text-black hover:bg-zinc-200 font-bold" size="lg">
+                                    {/* 使用 Python 脚本生成的 downloadUrl，如果不存在则回退到 repo 地址 */}
+                                    <a href={(skill as any).downloadUrl || skill.authorUrl} target="_blank" rel="noopener noreferrer">
+                                        <FileDown className="w-4 h-4 mr-2" />
+                                        Download Source Code (.zip)
+                                    </a>
+                                </Button>
+                                <p className="text-xs text-zinc-500 text-center mt-2">
+                                    Downloaded directly from GitHub default branch.
+                                </p>
+                            </div>
                         </CardContent>
                     </Card>
 
-                    {/* Rich Description (HTML Content) */}
-                    <div className="prose prose-invert max-w-none prose-h3:text-white prose-h3:text-xl prose-p:text-zinc-400 prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-white/10">
-                        <div dangerouslySetInnerHTML={{ __html: skill.longDesc }} />
+                    {/* Rich Description (Markdown Content) */}
+                    <div className="prose prose-invert max-w-none prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-white/10 prose-headings:text-white prose-a:text-blue-400">
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                                // 自定义链接样式，强制新窗口打开
+                                a: ({ node, ...props }) => <a {...props} className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer" />,
+                                // 自定义代码块样式
+                                code: ({ node, inline, className, children, ...props }: any) => {
+                                    return inline ? (
+                                        <code className="bg-white/10 rounded px-1 py-0.5 text-sm font-mono text-red-300" {...props}>
+                                            {children}
+                                        </code>
+                                    ) : (
+                                        <code className="block bg-black/50 p-4 rounded-lg overflow-x-auto text-sm font-mono text-zinc-300" {...props}>
+                                            {children}
+                                        </code>
+                                    )
+                                }
+                            }}
+                        >
+                            {skill.longDesc}
+                        </ReactMarkdown>
+                    </div>
+                    {/* Read More Button */}
+                    <div className="mt-8 pt-6 border-t border-white/5 text-center">
+                        <Button variant="outline" className="gap-2 text-zinc-400 hover:text-white border-zinc-700 hover:border-zinc-500" asChild>
+                            <Link href={(skill as any).downloadUrl} target="_blank">
+                                <Github className="w-4 h-4" />
+                                Read Full Documentation on GitHub
+                            </Link>
+                        </Button>
+                        <p className="text-xs text-zinc-600 mt-2">
+                            Description truncated for performance. View original source for complete details.
+                        </p>
                     </div>
                 </div>
 
@@ -125,7 +182,7 @@ export default async function SkillDetailPage({ params }: Props) {
                                 <h3 className="text-sm font-medium text-zinc-500 mb-2">Metadata</h3>
                                 <div className="space-y-3">
                                     <div className="flex justify-between items-center text-sm">
-                                        <span className="text-zinc-400 flex items-center gap-2"><Download className="w-4 h-4" /> Downloads</span>
+                                        <span className="text-zinc-400 flex items-center gap-2"><Download className="w-4 h-4" /> Downloads (Forks)</span>
                                         <span className="text-white font-mono">{skill.downloads.toLocaleString()}</span>
                                     </div>
                                     <Separator className="bg-white/5" />
