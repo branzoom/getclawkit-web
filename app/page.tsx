@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FileJson, ShieldCheck, Calculator, Package, Activity, ArrowRight, Zap, Github, CheckCircle2, Terminal, AlertTriangle, BookOpen } from 'lucide-react';
+import { FileJson, ShieldCheck, Calculator, Package, Activity, ArrowRight, Zap, Github, CheckCircle2, Terminal, AlertTriangle, BookOpen, HelpCircle, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -101,7 +101,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🔥 新增：深度内容板块 (Content Thickening) 🔥 */}
+      {/* Content Thickening: Step-by-Step Guide */}
       <section className="bg-black py-20 border-t border-white/5">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="mb-12">
@@ -128,7 +128,6 @@ export default function HomePage() {
                 Use the <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> to toggle your LLM provider (OpenAI, DeepSeek) and platform. We validate the schema automatically.
               </p>
               <div className="bg-zinc-900 rounded-lg p-4 border border-white/10 mt-4">
-                {/* 这里是一个 placeholder，提醒你以后放截图 */}
                 <div className="flex flex-col items-center justify-center h-32 text-zinc-600 border-2 border-dashed border-zinc-800 rounded">
                   <FileJson className="w-8 h-8 mb-2" />
                   <span className="text-xs">Screenshot: Config Wizard UI</span>
@@ -165,7 +164,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why We Built This (Pain Points) - 保留但视觉优化 */}
+      {/* Why We Built This (Pain Points) */}
       <section className="bg-zinc-900/30 border-y border-white/5 py-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -222,14 +221,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SEO: FAQ Section */}
+      {/* 🔥 Enhanced FAQ Section 🔥 */}
       <section className="container mx-auto px-4 py-20 max-w-3xl">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-          <p className="text-zinc-400">Common questions about the unofficial toolkit.</p>
+          <p className="text-zinc-400">Common questions about the toolkit, safety, and compatibility.</p>
         </div>
 
         <Accordion type="single" collapsible className="w-full">
+          {/* Item 1: Unofficial Disclaimer */}
           <AccordionItem value="item-1" className="border-white/10">
             <AccordionTrigger className="text-white hover:text-blue-400">Is ClawKit an official OpenClaw product?</AccordionTrigger>
             <AccordionContent className="text-zinc-400">
@@ -237,17 +237,51 @@ export default function HomePage() {
             </AccordionContent>
           </AccordionItem>
 
+          {/* Item 2: Security */}
           <AccordionItem value="item-2" className="border-white/10">
             <AccordionTrigger className="text-white hover:text-blue-400">Is my API Key safe?</AccordionTrigger>
             <AccordionContent className="text-zinc-400">
-              Yes. The <Link href="/tools/config" className="underline">Config Wizard</Link> runs entirely in your browser (Client-Side). Your API keys are saved to the JSON file you download, but they are <strong>never</strong> sent to our servers.
+              Yes. The <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> runs entirely in your browser (Client-Side). Your API keys are saved to the JSON file you download, but they are <strong>never</strong> sent to our servers.
             </AccordionContent>
           </AccordionItem>
 
+          {/* Item 3: Windows Support */}
           <AccordionItem value="item-3" className="border-white/10">
             <AccordionTrigger className="text-white hover:text-blue-400">Does this work on Windows?</AccordionTrigger>
             <AccordionContent className="text-zinc-400">
-              Absolutely. We built the Config Wizard specifically to solve the "Windows Backslash Issue". Just toggle the "Windows" switch, and we handle the path escaping automatically.
+              Absolutely. Windows users often face "JSON Parse Error" due to backslash paths (e.g. <code>C:\Users</code>). Our tools automatically detect and escape these paths for you.
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* NEW Item 4: Docker Requirement */}
+          <AccordionItem value="item-4" className="border-white/10">
+            <AccordionTrigger className="text-white hover:text-blue-400">Do I need Docker to run OpenClaw?</AccordionTrigger>
+            <AccordionContent className="text-zinc-400">
+              While not strictly required, Docker is <strong>highly recommended</strong> to prevent dependency conflicts (especially with Python skills). ClawKit's Config Wizard can generate a <code>docker-compose.yml</code> file for you that is optimized for v2.
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* NEW Item 5: Cost Accuracy */}
+          <AccordionItem value="item-5" className="border-white/10">
+            <AccordionTrigger className="text-white hover:text-blue-400">How accurate is the Cost Estimator?</AccordionTrigger>
+            <AccordionContent className="text-zinc-400">
+              It provides a baseline estimate based on current public pricing (OpenAI, DeepSeek, Anthropic). Actual costs depend on your specific prompt engineering, context window usage, and tool calls. We recommend setting hard limits in your API provider's dashboard.
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* NEW Item 6: Contribution */}
+          <AccordionItem value="item-6" className="border-white/10">
+            <AccordionTrigger className="text-white hover:text-blue-400">How can I submit my own Skill?</AccordionTrigger>
+            <AccordionContent className="text-zinc-400">
+              We automatically index skills from the community! If you have built a useful plugin, ensure your GitHub repository has a valid <code>README.md</code> or <code>SKILL.md</code>, and submit a PR to our <Link href="https://github.com/branzoom/getclawkit-web" target="_blank" className="text-blue-400 underline">seeds.json file</Link> on GitHub.
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* NEW Item 7: DeepSeek Support */}
+          <AccordionItem value="item-7" className="border-white/10">
+            <AccordionTrigger className="text-white hover:text-blue-400">Can I use DeepSeek with OpenClaw?</AccordionTrigger>
+            <AccordionContent className="text-zinc-400">
+              Yes! DeepSeek is fully supported and is often 10x cheaper than GPT-4o for similar performance. Our <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> has a preset for DeepSeek V3/R1 that sets the correct API base URL and model names.
             </AccordionContent>
           </AccordionItem>
         </Accordion>

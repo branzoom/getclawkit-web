@@ -1,5 +1,5 @@
-当前站点问题审计结果：
-
+当前站点SEO问题审计结果：
+优势：省略，大部分很好
 劣势（Weaknesses）
 
 元标签缺失：主页和子页面缺少 meta description（描述标签），这会降低搜索结果点击率（CTR）。页面标题（如主页的 “ClawKit - The Unofficial OpenClaw Setup Companion”）存在，但不优化（未包含长尾关键词）。缺少 Open Graph (OG) 和 Twitter meta 标签，导致社交分享时预览不佳。

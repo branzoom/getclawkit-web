@@ -42,8 +42,8 @@ export function SiteHeader() {
                             key={item.href}
                             href={item.href}
                             className={`transition-colors hover:text-white ${pathname === item.href || pathname.startsWith(item.href + '/')
-                                    ? 'text-white font-bold'
-                                    : 'text-zinc-400'
+                                ? 'text-white font-bold'
+                                : 'text-zinc-400'
                                 }`}
                         >
                             {item.name}
@@ -54,8 +54,9 @@ export function SiteHeader() {
                 {/* Icons */}
                 <div className="flex items-center gap-4">
                     <Link
-                        href="https://github.com/your-repo/openclaw-nexus" // [提醒] 上线前记得改这里的链接
+                        href="https://github.com/branzoom/getclawkit-web" // (或者你的实际仓库地址)
                         target="_blank"
+                        rel="noopener noreferrer" // 安全性最佳实践
                         className="text-zinc-400 hover:text-white transition-colors"
                         aria-label="GitHub Repository"
                     >

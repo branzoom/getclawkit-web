@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ClawKit - OpenClaw Configuration Solved',
     description: 'Fix ECONNREFUSED and Windows path errors in seconds. The missing GUI for OpenClaw agents.',
-    creator: '@your_twitter_handle', // 替换为你的推特账号
+    creator: '@Xbrave_R', // 替换为你的推特账号
     images: ['/og-image.png'],
   },
 
