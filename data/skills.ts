@@ -1,5 +1,10 @@
 // data/skills.ts
 import skillsData from './skills.json';
+// 定义 SEO 内容的结构
+export interface SeoContent {
+  seo_title: string;
+  seo_description: string;
+}
 
 export interface Skill {
   id: string;
@@ -17,6 +22,10 @@ export interface Skill {
   command: string;
   safetyRating: string;
   tags: string[];
+  // 🔥 新增 pSEO 字段 (必须定义，否则前端报错) 🔥
+  file_sha?: string;
+  downloadUrl?: string;
+  seo_content?: SeoContent;
 }
 
 // 强制类型转换，确保符合接口定义
