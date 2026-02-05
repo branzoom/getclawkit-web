@@ -20,7 +20,7 @@ LLM_MODEL = os.getenv('LLM_MODEL', 'deepseek-chat')
 DRY_RUN = os.getenv('DRY_RUN', 'False').lower() == 'true'
 
 # ⚠️ 调试模式：设置数字 (如 5) 只抓前 5 个，设为 None 则抓全量
-DEBUG_LIMIT = 5 
+DEBUG_LIMIT = None
 # DEBUG_LIMIT = None 
 
 # 路径配置
