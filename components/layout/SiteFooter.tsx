@@ -42,8 +42,10 @@ export function SiteFooter() {
                     <div>
                         <h3 className="font-bold text-white mb-4">Resources</h3>
                         <ul className="space-y-2 text-sm text-zinc-400">
-                            <li><Link href="/docs/migration" className="hover:text-white transition-colors">Migration Guide</Link></li>
-                            <li><Link href="/docs/troubleshooting" className="hover:text-white transition-colors">Troubleshooting</Link></li>
+                            <li><Link href="/docs" className="hover:text-white transition-colors">Documentation</Link></li>
+                            <li><Link href="/docs/getting-started/installation" className="hover:text-white transition-colors">Installation Guide</Link></li>
+                            <li><Link href="/docs/troubleshooting/connection-errors" className="hover:text-white transition-colors">Troubleshooting</Link></li>
+                            <li><Link href="/docs/guides/v1-to-v2-migration" className="hover:text-white transition-colors">Migration Guide</Link></li>
                             <li><Link href="/status" className="hover:text-white transition-colors">System Status</Link></li>
                             <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
                         </ul>
@@ -51,9 +53,15 @@ export function SiteFooter() {
                 </div>
 
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-zinc-600 text-sm">
-                        © {new Date().getFullYear()} ClawKit. Not affiliated with OpenClaw.
-                    </p>
+                    <div className="flex flex-col md:flex-row items-center gap-4 text-sm">
+                        <p className="text-zinc-600">
+                            © {new Date().getFullYear()} ClawKit. Not affiliated with OpenClaw.
+                        </p>
+                        <div className="flex items-center gap-2 text-zinc-500">
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-xs">Skills Updated: Feb 6, 2026 | 3 new plugins added</span>
+                        </div>
+                    </div>
                     <div className="flex items-center gap-6">
                         <a href="https://github.com/branzoom/getclawkit-web" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-white transition-colors">
                             <Github className="w-5 h-5" />

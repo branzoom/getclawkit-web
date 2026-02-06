@@ -12,6 +12,8 @@ export function SiteHeader() {
 
     const navItems = [
         { name: 'Status', href: '/status' },
+        { name: 'Docs', href: '/docs' },
+        { name: 'Wiki', href: '/wiki' },
         { name: 'Config', href: '/tools/config' },
         { name: 'Doctor', href: '/tools/doctor' },
         { name: 'Cost', href: '/tools/cost' }, // [修复 2] 补全 Cost 入口

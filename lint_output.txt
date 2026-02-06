@@ -1,0 +1,24 @@
+
+/Users/wangboran/getclawkit-web/components/ConfigGenerator.tsx
+    9:39  warning  'TabsContent' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   11:95  warning  'Zap' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  110:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/wangboran/getclawkit-web/components/ConfigGenerator.tsx:110:13
+  108 |                 fieldErrors[key] = err.message;
+  109 |             });
+> 110 |             setErrors(fieldErrors);
+      |             ^^^^^^^^^ Avoid calling setState() directly within an effect
+  111 |         } else {
+  112 |             setErrors({});
+  113 |         }  react-hooks/set-state-in-effect
+  198:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-explicit-any
+
+✖ 4 problems (2 errors, 2 warnings)
+

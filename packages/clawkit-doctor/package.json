@@ -1,0 +1,24 @@
+{
+    "name": "clawkit-doctor",
+    "version": "1.0.0",
+    "description": "Diagnostic tool for OpenClaw environment",
+    "main": "bin/index.js",
+    "bin": {
+        "clawkit-doctor": "./bin/index.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "openclaw",
+        "diagnostic",
+        "doctor",
+        "cli"
+    ],
+    "author": "OpenClaw Team",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^4.1.2",
+        "ora": "^5.4.1"
+    }
+}

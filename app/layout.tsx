@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: '%s | ClawKit',
     default: 'ClawKit - Free OpenClaw Setup Tool & Skill Registry', // 优化：加入 Free 和 Skill Registry 关键词
   },
-  description: 'The essential unofficial toolkit for OpenClaw agents. Generate verified JSON configs, fix connection refused errors, and discover community skills.',
+  description: 'Fix OpenClaw setup errors in 5 minutes. Auto-generate configs, debug ECONNREFUSED, install verified plugins. Free, open-source, privacy-first. Works on Windows, macOS, Linux.',
   metadataBase: new URL('https://getclawkit.com'),
 
   // ✅ 新增：Canonical URL 防重复

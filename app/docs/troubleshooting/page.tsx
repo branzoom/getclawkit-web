@@ -73,7 +73,7 @@ export default function TroubleshootingPage() {
                                 </p>
                             </div>
                             <p>
-                                Or use our <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> which sets this correctly by default.
+                                Or use our <Link href="/tools/config" className="text-blue-400">Config Wizard</Link> which sets this correctly by default.
                             </p>
                         </AccordionContent>
                     </AccordionItem>
@@ -92,7 +92,7 @@ export default function TroubleshootingPage() {
                                 <p className="text-green-400 font-mono text-sm mt-2">"path": "C:\\Users\\Data"</p>
                             </div>
                             <p>
-                                <Link href="/tools/config" className="text-blue-400 underline">Generate a Windows-compatible config</Link> automatically.
+                                <Link href="/tools/config" className="text-blue-400">Generate a Windows-compatible config</Link> automatically.
                             </p>
                         </AccordionContent>
                     </AccordionItem>

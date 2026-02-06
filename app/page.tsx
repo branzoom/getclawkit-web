@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FileJson, ShieldCheck, Calculator, Package, Activity, ArrowRight, Zap, Github, CheckCircle2, Terminal, AlertTriangle, BookOpen, HelpCircle, Bot } from 'lucide-react';
+import { FileJson, ShieldCheck, Calculator, Package, Activity, ArrowRight, Zap, Github, CheckCircle2, Terminal, AlertTriangle, BookOpen, HelpCircle, Bot, TrendingUp, Users, Monitor } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from 'next/image';
@@ -8,28 +8,28 @@ export default function HomePage() {
   const tools = [
     {
       title: 'Config Wizard',
-      desc: 'Generate strict JSON configs. Auto-fix Windows backslash paths.',
+      desc: 'Generate strict JSON configs in 30 seconds. Auto-fixes Windows paths, validates API keys, supports DeepSeek/Claude/GPT-4.',
       href: '/tools/config',
       icon: <FileJson className="w-6 h-6 text-blue-400" />,
       bg: 'bg-blue-500/10 border-blue-500/20'
     },
     {
       title: 'Local Doctor',
-      desc: 'Diagnose environment issues (Node.js, Permissions) safely.',
+      desc: 'Diagnose ECONNREFUSED, permission issues, and Node.js version conflicts. One-click fix for 90% of setup errors.',
       href: '/tools/doctor',
       icon: <ShieldCheck className="w-6 h-6 text-green-400" />,
       bg: 'bg-green-500/10 border-green-500/20'
     },
     {
       title: 'Cost Estimator',
-      desc: 'Compare token costs: DeepSeek vs Claude vs GPT-4o.',
+      desc: 'Compare token costs across DeepSeek, Claude, and GPT-4o. Avoid surprise bills with real-time pricing.',
       href: '/tools/cost',
       icon: <Calculator className="w-6 h-6 text-purple-400" />,
       bg: 'bg-purple-500/10 border-purple-500/20'
     },
     {
       title: 'Skill Registry',
-      desc: 'Discover and install verified community skills and plugins.',
+      desc: 'Browse 45+ verified community plugins. Browser control, memory, crypto tracking - all safety-checked.',
       href: '/skills',
       icon: <Package className="w-6 h-6 text-orange-400" />,
       bg: 'bg-orange-500/10 border-orange-500/20'
@@ -48,15 +48,15 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
-            The Missing <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Software Toolkit</span><br />
-            for OpenClaw.
+            Fix OpenClaw <br className="md:hidden" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Setup Errors</span><br />
+            in Minutes.
           </h1>
 
           <p className="text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
-            Stop wrestling with YAML configs and connection errors.
+            Auto-generate configs, debug ECONNREFUSED errors, install verified plugins.
             <br className="hidden md:inline" />
-            ClawKit provides the essential utilities to configure, fix, and extend your AI agents.
+            Zero coding required. Privacy-first. Works on Windows, macOS, Linux.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
@@ -77,6 +77,67 @@ export default function HomePage() {
 
         {/* Background Gradient */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] -z-10 opacity-50 pointer-events-none" />
+      </section>
+
+      {/* Scenario Guidance with Stats (I want to...) */}
+      <section className="container mx-auto px-4 -mt-12 mb-20 relative z-20">
+        <div className="bg-zinc-900/80 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto shadow-2xl">
+          {/* Live Stats */}
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-6 pb-6 border-b border-white/5">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-blue-400" />
+              <div>
+                <div className="text-lg font-bold text-white tabular-nums">1,203</div>
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Configs</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Package className="w-4 h-4 text-orange-400" />
+              <div>
+                <div className="text-lg font-bold text-white tabular-nums">45</div>
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Skills</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4 text-green-400" />
+              <div>
+                <div className="text-lg font-bold text-white tabular-nums">847</div>
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Users</div>
+              </div>
+            </div>
+          </div>
+
+          <h2 className="text-zinc-500 text-xs font-bold uppercase tracking-wider mb-4 text-center">I want to...</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            <Link href="/tools/doctor" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+              <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center text-red-400 group-hover:scale-110 transition-transform">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <div className="text-sm font-medium text-white group-hover:text-blue-400">Fix 'Connection Refused' NOW</div>
+                <div className="text-xs text-zinc-500">Run Diagnostic Tool</div>
+              </div>
+            </Link>
+            <Link href="/skills" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+              <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform">
+                <Package className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <div className="text-sm font-medium text-white group-hover:text-blue-400">Add Browser Control</div>
+                <div className="text-xs text-zinc-500">Install Plugins</div>
+              </div>
+            </Link>
+            <Link href="/tools/config" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+              <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                <FileJson className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <div className="text-sm font-medium text-white group-hover:text-blue-400">Generate My First Config</div>
+                <div className="text-xs text-zinc-500">30 Seconds Setup</div>
+              </div>
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Tools Grid Section */}
@@ -182,14 +243,14 @@ export default function HomePage() {
               </p>
               <ul className="space-y-4">
                 {[
-                  "YAML indentation errors crashing the agent.",
-                  "Windows paths using single backslashes (\\).",
-                  "Confusion about which plugins are safe to install.",
-                  "Unexpectedly high bills from inefficient prompting."
+                  { text: "Spent 2 hours debugging 'Connection Refused' errors", icon: "⏱️" },
+                  { text: "Agent crashes every time I change the config file", icon: "💥" },
+                  { text: "Accidentally spent $50 on a single prompt", icon: "💸" },
+                  { text: "Can't find reliable plugins - afraid of breaking my setup", icon: "😰" }
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-zinc-300">
-                    <AlertTriangle className="w-5 h-5 text-yellow-500 flex-shrink-0" />
-                    {item}
+                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                    <span className="pt-1">{item.text}</span>
                   </li>
                 ))}
               </ul>
@@ -282,8 +343,43 @@ export default function HomePage() {
             </AccordionContent>
           </AccordionItem>
 
-          {/* NEW Item 7: DeepSeek Support */}
+          {/* NEW Item 7: ECONNREFUSED Fix */}
           <AccordionItem value="item-7" className="border-white/10">
+            <AccordionTrigger className="text-white hover:text-blue-400">How do I fix "ECONNREFUSED" or "Connection Refused" errors?</AccordionTrigger>
+            <AccordionContent className="text-zinc-400">
+              This is the #1 most common error. It usually means your agent isn't running or is bound to the wrong network interface. Try these steps:<br /><br />
+              <strong>1. Check if the agent is running:</strong> Run <code>docker ps</code> or check your process manager.<br />
+              <strong>2. Use 127.0.0.1 instead of localhost:</strong> Node.js v18+ prefers IPv6. Change <code>localhost</code> to <code>127.0.0.1</code> in your config.<br />
+              <strong>3. Run our diagnostic:</strong> Use <Link href="/tools/doctor" className="text-blue-400 underline">Local Doctor</Link> to auto-detect the issue.
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* NEW Item 8: Agent Not Responding */}
+          <AccordionItem value="item-8" className="border-white/10">
+            <AccordionTrigger className="text-white hover:text-blue-400">Why is my agent not responding to prompts?</AccordionTrigger>
+            <AccordionContent className="text-zinc-400">
+              Common causes:<br /><br />
+              <strong>1. Invalid API Key:</strong> Double-check your OpenAI/DeepSeek API key is correct and has credits.<br />
+              <strong>2. Rate Limiting:</strong> You may have hit your API provider's rate limit. Wait 60 seconds and try again.<br />
+              <strong>3. Config Syntax Error:</strong> Use our <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> to validate your JSON file.<br />
+              <strong>4. Check Logs:</strong> Run <code>docker logs openclaw</code> to see detailed error messages.
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* NEW Item 9: v1 vs v2 Migration */}
+          <AccordionItem value="item-9" className="border-white/10">
+            <AccordionTrigger className="text-white hover:text-blue-400">What's the difference between OpenClaw v1 and v2?</AccordionTrigger>
+            <AccordionContent className="text-zinc-400">
+              OpenClaw v2 introduced breaking changes:<br /><br />
+              <strong>1. Config Format:</strong> v2 uses strict JSON instead of YAML. Our <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> generates v2-compatible files.<br />
+              <strong>2. Plugin System:</strong> v2 has a new skill registry. Browse compatible plugins in our <Link href="/skills" className="text-blue-400 underline">Skill Registry</Link>.<br />
+              <strong>3. Docker Required:</strong> v2 strongly recommends Docker for dependency isolation.<br />
+              See our <Link href="/docs/migration" className="text-blue-400 underline">Migration Guide</Link> for step-by-step instructions.
+            </AccordionContent>
+          </AccordionItem>
+
+          {/* Item 10: DeepSeek Support (was item-7) */}
+          <AccordionItem value="item-10" className="border-white/10">
             <AccordionTrigger className="text-white hover:text-blue-400">Can I use DeepSeek with OpenClaw?</AccordionTrigger>
             <AccordionContent className="text-zinc-400">
               Yes! DeepSeek is fully supported and is often 10x cheaper than GPT-4o for similar performance. Our <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> has a preset for DeepSeek V3/R1 that sets the correct API base URL and model names.

@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { Download, Star, Calendar, ShieldCheck, Terminal, Copy, ArrowLeft, Github, AlertTriangle, FileDown, Sparkles, User, Tag, Scale } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import SkillConfigSnippet from '@/components/SkillConfigSnippet';
 
 interface Props {
     params: Promise<{ skillId: string }>;
@@ -232,6 +233,9 @@ export default async function SkillDetailPage({ params }: Props) {
                             </Button>
                         </CardContent>
                     </Card>
+
+                    {/* Config Generator Snippet (New) */}
+                    <SkillConfigSnippet skillId={skill.id} skillName={skill.name} />
 
                     {/* Tags Section (新增) */}
                     {skill.tags && skill.tags.length > 0 && (

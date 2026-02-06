@@ -36,10 +36,10 @@ export default function DoctorPage() {
                             <span className="text-red-400">🔴</span> Node.js Not Found
                         </h3>
                         <p className="text-zinc-400 text-sm leading-relaxed">
-                            OpenClaw requires Node.js v18 or newer. If the script shows red, verify your installation by running <code>node -v</code> in your terminal.
+                            OpenClaw requires Node.js v18 or newer. Check our <Link href="/docs/getting-started/installation" className="text-blue-400 hover:text-blue-300">Installation Guide</Link> for detailed setup steps.
                         </p>
-                        <Link href="https://nodejs.org/" target="_blank" className="text-blue-400 text-sm hover:underline flex items-center gap-1">
-                            Download Node.js <ArrowRight className="w-3 h-3" />
+                        <Link href="/docs/getting-started/installation" className="text-blue-400 text-sm hover:text-blue-300 flex items-center gap-1 transition-colors">
+                            Read Installation Guide <ArrowRight className="w-3 h-3" />
                         </Link>
                     </div>
 
@@ -48,10 +48,35 @@ export default function DoctorPage() {
                             <span className="text-yellow-400">🟡</span> Permission Denied (EACCES)
                         </h3>
                         <p className="text-zinc-400 text-sm leading-relaxed">
-                            If you see permission errors on macOS/Linux, your <code>~/.openclaw</code> folder might be owned by root. Fix it by running:
-                            <br />
-                            <code className="bg-zinc-900 px-2 py-1 rounded text-xs mt-2 block w-fit">sudo chown -R $(whoami) ~/.openclaw</code>
+                            Permission errors are common on macOS/Linux. View our <Link href="/docs/troubleshooting/windows-issues" className="text-blue-400 hover:text-blue-300">Platform Troubleshooting</Link> for fixes.
                         </p>
+                        <Link href="/docs/troubleshooting/windows-issues" className="text-blue-400 text-sm hover:text-blue-300 flex items-center gap-1 transition-colors">
+                            View Fixes <ArrowRight className="w-3 h-3" />
+                        </Link>
+                    </div>
+
+                    <div className="space-y-4">
+                        <h3 className="text-xl font-semibold text-white flex items-center gap-2">
+                            <span className="text-orange-400">🟠</span> JSON Parse Error
+                        </h3>
+                        <p className="text-zinc-400 text-sm leading-relaxed">
+                            Trailing commas or unescaped backslashes can break your agent. Use our <Link href="/docs/troubleshooting/json-parse-errors" className="text-blue-400 hover:text-blue-300">JSON Guide</Link> to debug.
+                        </p>
+                        <Link href="/docs/troubleshooting/json-parse-errors" className="text-blue-400 text-sm hover:text-blue-300 flex items-center gap-1 transition-colors">
+                            Fix JSON Errors <ArrowRight className="w-3 h-3" />
+                        </Link>
+                    </div>
+
+                    <div className="space-y-4">
+                        <h3 className="text-xl font-semibold text-white flex items-center gap-2">
+                            <span className="text-purple-400">🟣</span> Help & Support
+                        </h3>
+                        <p className="text-zinc-400 text-sm leading-relaxed">
+                            Can&apos;t find your issue? Browse our full <Link href="/docs" className="text-blue-400 hover:text-blue-300">Documentation</Link> or join the Discord.
+                        </p>
+                        <Link href="/docs" className="text-blue-400 text-sm hover:text-blue-300 flex items-center gap-1 transition-colors">
+                            Browse All Docs <ArrowRight className="w-3 h-3" />
+                        </Link>
                     </div>
                 </div>
             </div>

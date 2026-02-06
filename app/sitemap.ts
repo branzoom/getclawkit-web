@@ -13,13 +13,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/tools/doctor',
         '/tools/cost',
         '/skills',
-        '/docs/migration',
-        '/docs/troubleshooting'
+        '/docs',
+        '/docs/getting-started/installation',
+        '/docs/getting-started/first-config',
+        '/docs/getting-started/docker-setup',
+        '/docs/troubleshooting/connection-errors',
+        '/docs/troubleshooting/json-parse-errors',
+        '/docs/troubleshooting/windows-issues',
+        '/docs/troubleshooting/api-key-problems',
+        '/docs/guides/v1-to-v2-migration',
+        '/docs/guides/cost-optimization',
+        '/docs/guides/deepseek-setup',
+        '/docs/guides/plugin-installation',
+        '/wiki',
+        '/wiki/architecture',
+        '/wiki/roadmap',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
         changeFrequency: 'daily' as const,
-        priority: route === '' ? 1.0 : 0.8,
+        priority: route === '' ? 1.0 : (route === '/docs' ? 0.9 : 0.8),
     }));
 
     // 2. 动态 pSEO 页面 (Skills)
