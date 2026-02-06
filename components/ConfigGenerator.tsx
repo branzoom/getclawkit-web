@@ -8,8 +8,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Copy, Check, RefreshCw, Terminal, Monitor, AlertCircle, Play, CheckCircle2, XCircle } from 'lucide-react';
+import { Copy, Check, RefreshCw, Terminal, Monitor, AlertCircle, Play, CheckCircle2, XCircle, Shield } from 'lucide-react';
 import { z } from 'zod';
+import { CONFIG_PRESETS } from '@/data/models';
 
 
 // --- Zod Schema Definitions ---
@@ -29,53 +30,8 @@ const configSchema = z.object({
 type ConfigState = z.infer<typeof configSchema>;
 type ValidationErrors = Record<string, string>;
 
-// --- Presets ---
-const PRESETS = {
-    openai: {
-        id: 'openai',
-        name: "OpenAI Standard",
-        description: "Official OpenAI API",
-        config: {
-            provider: 'openai',
-            model: 'gpt-4o',
-            baseUrl: 'https://api.openai.com/v1',
-            apiKey: '',
-        }
-    },
-    deepseek: {
-        id: 'deepseek',
-        name: "DeepSeek",
-        description: "DeepSeek V3/R1",
-        config: {
-            provider: 'deepseek',
-            model: 'deepseek-chat',
-            baseUrl: 'https://api.deepseek.com',
-            apiKey: '',
-        }
-    },
-    anthropic: {
-        id: 'anthropic',
-        name: "Anthropic",
-        description: "Claude 3.5 Sonnet",
-        config: {
-            provider: 'anthropic',
-            model: 'claude-3-5-sonnet-20240620',
-            baseUrl: 'https://api.anthropic.com',
-            apiKey: '',
-        }
-    },
-    ollama: {
-        id: 'ollama',
-        name: "Ollama (Local)",
-        description: "Local Inference",
-        config: {
-            provider: 'ollama',
-            model: 'llama3',
-            baseUrl: 'http://localhost:11434/v1',
-            apiKey: 'ollama', // Placeholder for validation
-        }
-    }
-};
+// --- Presets (from centralized data) ---
+const PRESETS = CONFIG_PRESETS;
 
 const DEFAULT_CONFIG: ConfigState = {
     llm: PRESETS.openai.config,
@@ -236,9 +192,12 @@ export default function ConfigGenerator() {
                             <Button
                                 key={key}
                                 variant="outline"
-                                className="justify-start h-auto py-3 px-4 hover:border-blue-500 hover:bg-blue-500/5 transition-all text-left block"
+                                className={`justify-start h-auto py-3 px-4 hover:border-blue-500 hover:bg-blue-500/5 transition-all text-left block relative overflow-hidden ${key === 'deepseek' ? 'border-blue-500/50 bg-blue-500/5 ring-1 ring-blue-500/20' : ''}`}
                                 onClick={() => applyPreset(key as keyof typeof PRESETS)}
                             >
+                                {key === 'deepseek' && (
+                                    <div className="absolute top-0 right-0 bg-blue-500 text-[8px] font-bold px-1.5 py-0.5 text-black">TRENDING</div>
+                                )}
                                 <div className="font-semibold text-sm">{preset.name}</div>
                                 <div className="text-[10px] text-muted-foreground mt-0.5 font-normal">{preset.description}</div>
                             </Button>
@@ -266,6 +225,7 @@ export default function ConfigGenerator() {
                                         <SelectItem value="openai">OpenAI</SelectItem>
                                         <SelectItem value="anthropic">Anthropic</SelectItem>
                                         <SelectItem value="deepseek">DeepSeek</SelectItem>
+                                        <SelectItem value="google">Google Gemini</SelectItem>
                                         <SelectItem value="ollama">Ollama (Local)</SelectItem>
                                     </SelectContent>
                                 </Select>
@@ -277,7 +237,7 @@ export default function ConfigGenerator() {
                                     id="model"
                                     value={config.llm.model}
                                     onChange={(e) => updateConfig('llm', 'model', e.target.value)}
-                                    placeholder="e.g. gpt-4o"
+                                    placeholder="e.g. gpt-4.1"
                                     className={errors['llm.model'] ? "border-red-500" : ""}
                                 />
                                 {errors['llm.model'] && <p className="text-[10px] text-red-500">{errors['llm.model']}</p>}
@@ -431,8 +391,29 @@ export default function ConfigGenerator() {
                     </p>
                 </div>
 
-                {/* Cross-Link: Recommended Skills */}
-                <div className="pt-6 border-t border-white/5 space-y-3">
+                {/* Cross-Link: Recommended Skills & Doctor */}
+                <div className="pt-6 border-t border-white/5 space-y-4">
+                    <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                        <h4 className="text-xs font-bold text-blue-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                            <Shield className="w-3 h-3" /> Quick Test
+                        </h4>
+                        <p className="text-[10px] text-zinc-400 mb-3">Run the diagnostic tool to ensure your environment is ready.</p>
+                        <div className="flex items-center gap-2 bg-black/50 rounded p-2 border border-white/5">
+                            <code className="text-[10px] font-mono text-white flex-1 truncate">npx clawkit-doctor@latest</code>
+                            <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-6 w-6 p-0"
+                                onClick={() => {
+                                    navigator.clipboard.writeText('npx clawkit-doctor@latest');
+                                    // We could add a local toast/state here if needed
+                                }}
+                            >
+                                <Copy className="w-3 h-3" />
+                            </Button>
+                        </div>
+                    </div>
+
                     <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2">
                         Next Steps: Install Plugins
                     </h3>

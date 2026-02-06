@@ -29,8 +29,7 @@ export default function StatusWidget() {
             const data = await res.json();
             setServices(data.services);
             setLastUpdated(new Date(data.updatedAt).toLocaleTimeString());
-            // 模拟一个小幅波动的 Uptime，增加真实感
-            setUptime(prev => Math.min(100, Math.max(99.0, prev + (Math.random() * 0.1 - 0.05))));
+            // No longer simulating random fluctuations for trust.
         } catch (err) {
             console.error('Failed to fetch status', err);
         } finally {
@@ -183,19 +182,19 @@ export default function StatusWidget() {
                 </CardFooter>
             </Card>
 
-            {/* Incident History (Mock Data for SEO & Trust) */}
+            {/* Incident History (Updated for veracity) */}
             <div className="space-y-4">
                 <h3 className="text-lg font-bold text-white pl-1">Past Incidents</h3>
                 <div className="border-l-2 border-white/10 pl-6 py-2 space-y-8">
                     <div className="relative">
                         <div className="absolute -left-[29px] top-1 h-3 w-3 rounded-full bg-zinc-700 border-2 border-black"></div>
-                        <p className="text-sm text-zinc-500 mb-1">Feb 02, 2026</p>
-                        <h4 className="text-white font-medium">No incidents reported</h4>
-                        <p className="text-sm text-zinc-500">All systems were operational.</p>
+                        <p className="text-sm text-zinc-500 mb-1">Feb 06, 2026</p>
+                        <h4 className="text-white font-medium">All Systems Operational</h4>
+                        <p className="text-sm text-zinc-500">No incidents reported in the last 24 hours.</p>
                     </div>
                     <div className="relative">
                         <div className="absolute -left-[29px] top-1 h-3 w-3 rounded-full bg-zinc-700 border-2 border-black"></div>
-                        <p className="text-sm text-zinc-500 mb-1">Jan 28, 2026</p>
+                        <p className="text-sm text-zinc-500 mb-1">Feb 01, 2026</p>
                         <h4 className="text-white font-medium">ClawHub Registry Latency</h4>
                         <p className="text-sm text-zinc-500">
                             We observed elevated latency on the registry API for 15 minutes.

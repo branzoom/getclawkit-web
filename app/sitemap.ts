@@ -28,6 +28,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/wiki',
         '/wiki/architecture',
         '/wiki/roadmap',
+        '/compare/deepseek-vs-gpt4o',
+        '/errors/econnrefused',
+        '/privacy',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),

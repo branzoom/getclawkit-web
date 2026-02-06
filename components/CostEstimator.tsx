@@ -8,77 +8,15 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
-import { AlertTriangle, TrendingUp, Settings2, Edit3, HelpCircle, RotateCcw, Flame } from 'lucide-react';
+import { AlertTriangle, TrendingUp, Settings2, Edit3, HelpCircle, RotateCcw, Flame, Share2, Clock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as ChartTooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Tooltip as UiTooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-
-// 初始数据 (2026 参考价)
-const INITIAL_MODELS = [
-    {
-        id: 'local',
-        name: 'Local Llama 3',
-        provider: 'Ollama',
-        inputPrice: 0,
-        outputPrice: 0,
-        cachePrice: 0,
-        color: '#4ade80',
-        stroke: '#22c55e',
-        badge: 'Free',
-        isEditable: false
-    },
-    {
-        id: 'deepseek',
-        name: 'DeepSeek V3',
-        provider: 'DeepSeek',
-        inputPrice: 0.14,
-        outputPrice: 0.28,
-        cachePrice: 0.014,
-        color: '#60a5fa',
-        stroke: '#3b82f6',
-        badge: 'Budget King',
-        isEditable: true
-    },
-    {
-        id: 'gemini',
-        name: 'Gemini 1.5 Flash',
-        provider: 'Google',
-        inputPrice: 0.075, // 极低价
-        outputPrice: 0.30,
-        cachePrice: 0.02,
-        color: '#f472b6', // pink-400
-        stroke: '#db2777',
-        badge: 'Google Fast',
-        isEditable: true
-    },
-    {
-        id: 'gpt4o',
-        name: 'GPT-4o',
-        provider: 'OpenAI',
-        inputPrice: 2.50,
-        outputPrice: 10.00,
-        cachePrice: 1.25,
-        color: '#c084fc',
-        stroke: '#a855f7',
-        badge: 'Standard',
-        isEditable: true
-    },
-    {
-        id: 'custom',
-        name: 'Custom / Other',
-        provider: 'User Defined',
-        inputPrice: 1.00,
-        outputPrice: 2.00,
-        cachePrice: 0.10,
-        color: '#94a3b8',
-        stroke: '#64748b',
-        badge: 'Custom',
-        isEditable: true
-    }
-];
+import { COST_ESTIMATOR_MODELS, PRICING_LAST_UPDATED } from '@/data/models';
 
 export default function CostEstimator() {
     // 状态管理
-    const [models, setModels] = useState(INITIAL_MODELS);
+    const [models, setModels] = useState(COST_ESTIMATOR_MODELS);
     const [runsPerDay, setRunsPerDay] = useState([50]);
     const [stepsPerRun, setStepsPerRun] = useState([10]);
     const [avgTokens, setAvgTokens] = useState([2000]);
@@ -99,7 +37,7 @@ export default function CostEstimator() {
     };
 
     // 重置数据
-    const resetModels = () => setModels(INITIAL_MODELS);
+    const resetModels = () => setModels(COST_ESTIMATOR_MODELS);
 
     // 核心算法：生成图表数据 (指数增长)
     const chartData = useMemo(() => {
@@ -133,7 +71,7 @@ export default function CostEstimator() {
         return data;
     }, [runsPerDay, stepsPerRun, avgTokens, contextGrowth, cacheHitRate, models]);
 
-    // 计算最终月度总价 (指数增长)
+    // 计算最终月度总价 (指数增长) — 修复: 移除冗余外层循环
     const finalMonthlyCosts = useMemo(() => {
         const costs: Record<string, number> = {};
         models.forEach(model => costs[model.id] = 0);
@@ -144,26 +82,27 @@ export default function CostEstimator() {
         const growthRate = contextGrowth[0] / 100;
         const cacheRate = cacheHitRate[0] / 100;
 
-        for (let i = 0; i < dailyRuns * 30; i++) {
-            for (let step = 1; step <= steps; step++) {
-                // [算法升级] 同步指数增长
-                const currentInput = baseTokens * Math.pow(1 + growthRate, step);
+        for (let step = 1; step <= steps; step++) {
+            const currentInput = baseTokens * Math.pow(1 + growthRate, step);
+            const cached = currentInput * cacheRate;
+            const fresh = currentInput * (1 - cacheRate);
 
-                const cached = currentInput * cacheRate;
-                const fresh = currentInput * (1 - cacheRate);
-
-                models.forEach(model => {
-                    const stepInputCost = (cached * model.cachePrice + fresh * model.inputPrice) / 1000000;
-                    const stepOutputCost = (baseTokens * 0.3 * model.outputPrice) / 1000000;
-                    if (i === 0) {
-                        // 简化计算：只算一次完整的 30 天循环
-                        costs[model.id] += (stepInputCost + stepOutputCost) * dailyRuns * 30;
-                    }
-                });
-            }
+            models.forEach(model => {
+                const stepInputCost = (cached * model.cachePrice + fresh * model.inputPrice) / 1000000;
+                const stepOutputCost = (baseTokens * 0.3 * model.outputPrice) / 1000000;
+                costs[model.id] += (stepInputCost + stepOutputCost) * dailyRuns * 30;
+            });
         }
         return costs;
     }, [runsPerDay, stepsPerRun, avgTokens, contextGrowth, cacheHitRate, models]);
+
+    // Share Functionality
+    const handleShare = () => {
+        const gptCost = finalMonthlyCosts['gpt4']?.toFixed(0) ?? '0';
+        const dsCost = finalMonthlyCosts['deepseek']?.toFixed(0) ?? '0';
+        const text = `My AI agent cost simulation on ClawKit:\n📉 GPT-4.1: $${gptCost}/mo\n🚀 DeepSeek V3.2: $${dsCost}/mo\n\nScale your agents without going bankrupt! 💸\nCheck it out: https://getclawkit.com/tools/cost`;
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+    };
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
@@ -179,9 +118,19 @@ export default function CostEstimator() {
                         </TabsTrigger>
                     </TabsList>
 
-                    <div className="text-xs text-zinc-500 flex items-center gap-2 bg-zinc-900/50 px-3 py-1 rounded-full border border-white/5">
-                        <HelpCircle className="w-3 h-3" />
-                        <span>Scenario: 30-Day continuous operation simulation</span>
+                    <div className="flex items-center gap-3">
+                        <div className="hidden md:flex text-xs text-zinc-500 items-center gap-2 bg-zinc-900/50 px-3 py-1 rounded-full border border-white/5">
+                            <HelpCircle className="w-3 h-3" />
+                            <span>Scenario: 30-Day simulation</span>
+                        </div>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleShare}
+                            className="bg-blue-600 hover:bg-blue-700 border-none text-white gap-2"
+                        >
+                            <Share2 className="w-3 h-3" /> Share Result
+                        </Button>
                     </div>
                 </div>
 
@@ -397,7 +346,7 @@ export default function CostEstimator() {
                             <div className="flex gap-3">
                                 <AlertTriangle className="w-5 h-5 text-yellow-500 shrink-0" />
                                 <div className="text-xs text-yellow-200/80 leading-relaxed">
-                                    <strong>Disclaimer:</strong> This tool provides estimates based on public API pricing as of Feb 2026.
+                                    <strong>Disclaimer:</strong> This tool provides estimates based on public API pricing as of {PRICING_LAST_UPDATED}.
                                     Real-world costs may vary due to tokenization differences, network retries, and provider-specific calculation methods.
                                     We are not responsible for any financial discrepancies.
                                 </div>
