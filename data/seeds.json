@@ -8,9 +8,9 @@
     },
     {
         "id": "official-core-v2",
-        "type": "recursive_author",
+        "type": "flat",
         "repo": "openclaw/openclaw",
         "path": "skills",
-        "description": "The official OpenClaw skill registry v2"
+        "description": "The official OpenClaw built-in skills"
     }
 ]

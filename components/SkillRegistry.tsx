@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Search, Download, ArrowRight, Star } from 'lucide-react';
+import { Search, ArrowRight, Star } from 'lucide-react';
 
 const fuse = new Fuse(skills, {
     keys: ['name', 'shortDesc', 'tags'],
@@ -56,11 +56,11 @@ export default function SkillRegistry() {
                         <CardHeader>
                             <div className="flex justify-between items-start mb-3 relative z-20 pointer-events-none">
                                 <Badge variant="outline" className="border-white/10 text-zinc-400 group-hover:text-blue-400 group-hover:border-blue-500/30">
-                                    {skill.category}
+                                    {skill.source_repo === 'openclaw/skills' ? 'Official' : 'Community'}
                                 </Badge>
                                 <div className="flex items-center text-xs text-zinc-500">
-                                    <Download className="w-3 h-3 mr-1" />
-                                    {skill.downloads.toLocaleString()}
+                                    <Star className="w-3 h-3 mr-1" />
+                                    {(skill.stars || 0).toLocaleString()}
                                 </div>
                             </div>
 

@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Download, Star, Calendar, ShieldCheck, Terminal, ArrowLeft, Github, AlertTriangle, FileDown, Sparkles, User, Tag, Scale } from 'lucide-react';
+import { Star, Calendar, ShieldCheck, Terminal, ArrowLeft, Github, FileDown, Sparkles, User, Tag, AlertTriangle } from 'lucide-react';
 import CopyButton from '@/components/CopyButton';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -83,13 +83,10 @@ export default async function SkillDetailPage({ params }: Props) {
                     <div>
                         <div className="flex items-center gap-3 mb-4">
                             <Badge variant="outline" className="border-blue-500/30 text-blue-400">
-                                {skill.category || 'Official'}
+                                {skill.source_repo === 'openclaw/skills' ? 'Official' : 'Community'}
                             </Badge>
                             <Badge variant="default" className="bg-green-500/10 text-green-400 hover:bg-green-500/20 border-green-500/20 gap-1">
-                                <ShieldCheck className="w-3 h-3" /> Verified Safe
-                            </Badge>
-                            <Badge variant="secondary" className="bg-white/10 text-zinc-300">
-                                v{skill.version || '1.0.0'}
+                                <ShieldCheck className="w-3 h-3" /> Verified
                             </Badge>
                         </div>
 
@@ -192,24 +189,11 @@ export default async function SkillDetailPage({ params }: Props) {
                                             @{skill.author}
                                         </Link>
                                     </div>
-                                    {/* <Separator className="bg-white/5" />
-
-                                    <div className="flex justify-between items-center text-sm">
-                                        <span className="text-zinc-400 flex items-center gap-2"><Download className="w-4 h-4" /> Downloads</span>
-                                        <span className="text-white font-mono">{(skill.downloads || 0).toLocaleString()}</span>
-                                    </div> */}
                                     <Separator className="bg-white/5" />
 
                                     <div className="flex justify-between items-center text-sm">
                                         <span className="text-zinc-400 flex items-center gap-2"><Star className="w-4 h-4" /> Stars</span>
                                         <span className="text-white font-mono">{skill.stars}</span>
-                                    </div>
-                                    <Separator className="bg-white/5" />
-
-                                    {/* License (恢复) */}
-                                    <div className="flex justify-between items-center text-sm">
-                                        <span className="text-zinc-400 flex items-center gap-2"><Scale className="w-4 h-4" /> License</span>
-                                        <span className="text-white font-mono">{skill.license || 'MIT'}</span>
                                     </div>
                                     <Separator className="bg-white/5" />
 
