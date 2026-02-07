@@ -1,36 +1,70 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Fuse from 'fuse.js';
-import { skills } from '@/data/skills';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Search, ArrowRight, Star } from 'lucide-react';
+import { Search, ArrowRight, Star, ChevronDown } from 'lucide-react';
 
-const fuse = new Fuse(skills, {
-    keys: ['name', 'shortDesc', 'tags'],
-    threshold: 0.4,
-    includeScore: true,
-});
+export interface SkillIndexItem {
+    id: string;
+    name: string;
+    shortDesc: string;
+    tags: string[];
+    author: string;
+    stars: number;
+    source_repo: string;
+}
 
-export default function SkillRegistry() {
+const PAGE_SIZE = 30;
+
+export default function SkillRegistry({ skills }: { skills: SkillIndexItem[] }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedTerm, setDebouncedTerm] = useState('');
+    const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-    // UX-03: 300ms debounce
+    // Build Fuse index once from props
+    const fuse = useMemo(
+        () => new Fuse(skills, {
+            keys: ['name', 'shortDesc', 'tags'],
+            threshold: 0.4,
+            includeScore: true,
+        }),
+        [skills]
+    );
+
+    // 300ms debounce for search
     useEffect(() => {
         const timer = setTimeout(() => setDebouncedTerm(searchTerm), 300);
         return () => clearTimeout(timer);
     }, [searchTerm]);
 
-    // FUNC-08: Fuse.js fuzzy search
+    // Reset pagination when search changes
+    useEffect(() => {
+        setVisibleCount(PAGE_SIZE);
+    }, [debouncedTerm]);
+
+    // Fuzzy search
     const filteredSkills = useMemo(() => {
         if (!debouncedTerm.trim()) return skills;
         return fuse.search(debouncedTerm).map(result => result.item);
-    }, [debouncedTerm]);
+    }, [debouncedTerm, skills, fuse]);
+
+    // Paginated slice
+    const visibleSkills = useMemo(
+        () => filteredSkills.slice(0, visibleCount),
+        [filteredSkills, visibleCount]
+    );
+
+    const hasMore = visibleCount < filteredSkills.length;
+    const remaining = filteredSkills.length - visibleCount;
+
+    const loadMore = useCallback(() => {
+        setVisibleCount(prev => prev + PAGE_SIZE);
+    }, []);
 
     return (
         <div className="space-y-8">
@@ -39,18 +73,23 @@ export default function SkillRegistry() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
                 <Input
                     type="text"
-                    placeholder="Search skills (e.g., 'browser', 'crypto', 'adapter')..."
+                    placeholder="Search skills (e.g., 'browser', 'crypto', 'slack')..."
                     className="pl-12 py-6 text-lg bg-zinc-900/50 border-white/10 focus-visible:ring-blue-500 rounded-full text-white placeholder:text-zinc-500"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
+                {/* Result count */}
+                {debouncedTerm && (
+                    <div className="text-center mt-3 text-sm text-zinc-500">
+                        {filteredSkills.length} result{filteredSkills.length !== 1 ? 's' : ''} for &quot;{debouncedTerm}&quot;
+                    </div>
+                )}
             </div>
 
             {/* Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredSkills.map((skill) => (
+                {visibleSkills.map((skill) => (
                     <Card key={skill.id} className="bg-zinc-900/40 border-white/5 hover:border-blue-500/30 transition-all hover:-translate-y-1 group flex flex-col relative overflow-hidden">
-                        {/* 全卡片点击链接 - SEO 友好 */}
                         <Link href={`/skills/${skill.id}`} className="absolute inset-0 z-10" aria-label={`View details for ${skill.name}`} />
 
                         <CardHeader>
@@ -74,16 +113,16 @@ export default function SkillRegistry() {
                                 {skill.shortDesc}
                             </p>
 
-                            {/* Tags Preview */}
-                            <div className="flex flex-wrap gap-2 mt-4 opacity-50">
-                                {skill.tags.slice(0, 3).map(tag => (
-                                    <span key={tag} className="text-[10px] text-zinc-500 bg-white/5 px-2 py-1 rounded">#{tag}</span>
-                                ))}
-                            </div>
+                            {skill.tags.length > 0 && (
+                                <div className="flex flex-wrap gap-2 mt-4 opacity-50">
+                                    {skill.tags.slice(0, 3).map(tag => (
+                                        <span key={tag} className="text-[10px] text-zinc-500 bg-white/5 px-2 py-1 rounded">#{tag}</span>
+                                    ))}
+                                </div>
+                            )}
                         </CardContent>
 
                         <CardFooter className="relative z-20">
-                            {/* 视觉上的按钮，实际点击行为由覆盖全卡的 Link 触发 */}
                             <Button className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 group-hover:border-blue-500/30 group-hover:text-blue-200 transition-all">
                                 View Details <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </Button>
@@ -91,6 +130,28 @@ export default function SkillRegistry() {
                     </Card>
                 ))}
             </div>
+
+            {/* Load More */}
+            {hasMore && (
+                <div className="text-center pt-4">
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        onClick={loadMore}
+                        className="gap-2 text-zinc-400 hover:text-white border-zinc-700 hover:border-zinc-500 px-8"
+                    >
+                        <ChevronDown className="w-4 h-4" />
+                        Load More ({remaining > PAGE_SIZE ? PAGE_SIZE : remaining} of {remaining.toLocaleString()} remaining)
+                    </Button>
+                </div>
+            )}
+
+            {/* Total count footer */}
+            {!debouncedTerm && (
+                <div className="text-center text-sm text-zinc-600">
+                    Showing {visibleSkills.length.toLocaleString()} of {filteredSkills.length.toLocaleString()} skills
+                </div>
+            )}
 
             {/* Empty State */}
             {filteredSkills.length === 0 && (

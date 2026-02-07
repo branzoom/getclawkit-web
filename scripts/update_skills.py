@@ -209,6 +209,42 @@ def parse_frontmatter(content):
     return {}, content
 
 
+def _safe_str(val, fallback=""):
+    """Ensure a value is a plain string. Handles objects, lists, numbers from YAML."""
+    if val is None:
+        return fallback
+    if isinstance(val, str):
+        return val
+    if isinstance(val, (int, float)):
+        return str(val)
+    if isinstance(val, list):
+        # Try to join list items as strings
+        parts = [str(v) for v in val if isinstance(v, (str, int, float))]
+        return ', '.join(parts) if parts else fallback
+    if isinstance(val, dict):
+        # Some YAML fields are objects like {TODO: "..."}
+        return fallback
+    return str(val)
+
+
+def _normalize_tags(raw_tags):
+    """Ensure tags is always a list of strings, handling comma-separated strings."""
+    if not raw_tags:
+        return []
+    if isinstance(raw_tags, list):
+        # Flatten: each item could still be comma-separated
+        result = []
+        for t in raw_tags:
+            if isinstance(t, str):
+                result.extend(s.strip().lower() for s in t.split(',') if s.strip())
+            else:
+                result.append(str(t).lower().strip())
+        return result
+    if isinstance(raw_tags, str):
+        return [s.strip().lower() for s in raw_tags.split(',') if s.strip()]
+    return []
+
+
 def truncate_text(text, max_len):
     """Truncate text to max_len characters, ending at a sentence or paragraph boundary."""
     if not text or max_len <= 0 or len(text) <= max_len:
@@ -552,17 +588,20 @@ def main():
 
         skill_dir = info['doc_path'].rsplit('/', 1)[0]
 
+        fallback_name = info['skill_name'].replace('-', ' ').title()
+        fallback_desc = f"Skill by {info['author']}"
+
         record = {
             "id": skill_id,
-            "name": meta.get('name', info['skill_name'].replace('-', ' ').title()),
-            "shortDesc": meta.get('description', f"Skill by {info['author']}"),
+            "name": _safe_str(meta.get('name'), fallback_name) or fallback_name,
+            "shortDesc": _safe_str(meta.get('description'), fallback_desc) or fallback_desc,
             "longDesc": truncate_text(body, LONG_DESC_MAX) if LONG_DESC_MAX else body,
             "author": info['author'],
             "authorUrl": f"https://github.com/{info['author']}",
             "stars": stars,
             "lastUpdated": datetime.now().strftime('%Y-%m-%d'),
             "command": f"clawhub install {seed['repo']}/{skill_dir}",
-            "tags": meta.get('tags', []),
+            "tags": _normalize_tags(meta.get('tags', [])),
             "file_sha": info['doc_sha'],
             "seo_content": None,
             "downloadUrl": f"https://github.com/{seed['repo']}/tree/{branch}/{skill_dir}",

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { skills } from '@/data/skills';
 import SkillRegistry from '@/components/SkillRegistry';
 import { Package, Zap } from 'lucide-react';
 
@@ -8,6 +9,17 @@ export const metadata: Metadata = {
 };
 
 export default function SkillsPage() {
+    // Extract lightweight index on the server — only send ~1MB to client instead of 19MB
+    const skillsIndex = skills.map(s => ({
+        id: s.id,
+        name: String(s.name || ''),
+        shortDesc: String(s.shortDesc || ''),
+        tags: Array.isArray(s.tags) ? s.tags.filter((t): t is string => typeof t === 'string') : [],
+        author: s.author || '',
+        stars: s.stars || 0,
+        source_repo: s.source_repo || '',
+    }));
+
     return (
         <div className="container mx-auto px-4 py-12 max-w-7xl">
             {/* Header */}
@@ -20,12 +32,12 @@ export default function SkillsPage() {
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">Agent Capabilities.</span>
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                    Browse 50+ community-verified skills. From web browsing to image generation, find the tools to build your dream agent.
+                    Browse {skillsIndex.length.toLocaleString()}+ community-verified skills. From web browsing to image generation, find the tools to build your dream agent.
                 </p>
             </div>
 
-            {/* The Registry Component */}
-            <SkillRegistry />
+            {/* The Registry Component — receives lightweight data as props */}
+            <SkillRegistry skills={skillsIndex} />
 
             {/* SEO Content: Developer FAQ */}
             <div className="mt-24 border-t border-white/10 pt-16">

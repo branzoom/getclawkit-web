@@ -23,8 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (!skill) return { title: 'Skill Not Found' };
 
-    const seoTitle = skill.seo_content?.seo_title || `${skill.name} - OpenClaw Plugin | ClawKit`;
-    const seoDesc = skill.seo_content?.seo_description || `Install ${skill.name} for OpenClaw. ${skill.shortDesc}`;
+    const name = String(skill.name || '');
+    const shortDesc = String(skill.shortDesc || '');
+    const seoTitle = skill.seo_content?.seo_title || `${name} - OpenClaw Plugin | ClawKit`;
+    const seoDesc = skill.seo_content?.seo_description || `Install ${name} for OpenClaw. ${shortDesc}`;
 
     return {
         title: seoTitle,
@@ -90,8 +92,8 @@ export default async function SkillDetailPage({ params }: Props) {
                             </Badge>
                         </div>
 
-                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{skill.name}</h1>
-                        <p className="text-xl text-zinc-400 leading-relaxed mb-6">{skill.shortDesc}</p>
+                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{String(skill.name || '')}</h1>
+                        <p className="text-xl text-zinc-400 leading-relaxed mb-6">{String(skill.shortDesc || '')}</p>
 
                         {/* Why use this skill? */}
                         {skill.seo_content?.seo_description && (
@@ -216,13 +218,13 @@ export default async function SkillDetailPage({ params }: Props) {
                     <SkillConfigSnippet skillId={skill.id} skillName={skill.name} />
 
                     {/* Tags Section (新增) */}
-                    {skill.tags && skill.tags.length > 0 && (
+                    {Array.isArray(skill.tags) && skill.tags.length > 0 && (
                         <div className="space-y-2">
                             <h3 className="text-sm font-medium text-zinc-500 px-1 flex items-center gap-2">
                                 <Tag className="w-3 h-3" /> Tags
                             </h3>
                             <div className="flex flex-wrap gap-2">
-                                {skill.tags.map((tag) => (
+                                {skill.tags.filter(t => typeof t === 'string').map((tag) => (
                                     <Badge key={tag} variant="secondary" className="bg-white/5 hover:bg-white/10 text-zinc-400 border-white/5">
                                         #{tag}
                                     </Badge>
