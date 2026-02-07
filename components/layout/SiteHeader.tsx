@@ -14,13 +14,13 @@ export function SiteHeader() {
     useEffect(() => { setIsOpen(false); }, [pathname]);
 
     const navItems = [
-        { name: 'Status', href: '/status' },
         { name: 'Docs', href: '/docs' },
-        { name: 'Wiki', href: '/wiki' },
         { name: 'Config', href: '/tools/config' },
         { name: 'Doctor', href: '/tools/doctor' },
-        { name: 'Cost', href: '/tools/cost' }, // [修复 2] 补全 Cost 入口
+        { name: 'Cost', href: '/tools/cost' },
+        { name: 'Status', href: '/status' },
         { name: 'Skills', href: '/skills' },
+        { name: 'Wiki', href: '/wiki' },
     ];
 
     return (

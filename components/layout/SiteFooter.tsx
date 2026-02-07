@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Github } from 'lucide-react';
+import Image from 'next/image';
 
 export function SiteFooter() {
     return (
@@ -10,7 +11,13 @@ export function SiteFooter() {
                     {/* Brand & Author (EEAT 重点) */}
                     <div className="md:col-span-2 space-y-4">
                         <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-lg"></div>
+                            <Image
+                                src="/logo.png"
+                                alt="ClawKit Logo"
+                                width={32}
+                                height={32}
+                                className="w-8 h-8 rounded-md"
+                            />
                             <span className="font-bold text-xl text-white">ClawKit</span>
                         </div>
                         <p className="text-zinc-400 text-sm max-w-sm leading-relaxed">
