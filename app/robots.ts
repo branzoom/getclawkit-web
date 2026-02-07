@@ -3,13 +3,13 @@ import type { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
     return {
         rules: [
-            // 1. 对于所有普通爬虫（Google, Bing 等）：允许
+            // 对于所有普通爬虫（Google, Bing 等）：允许，但禁止 api 路径
             {
                 userAgent: '*',
                 allow: '/',
                 disallow: '/api/',
             },
-            // 2. 专门封禁 AI 训练爬虫 (这是目前业界标准做法)
+            // 专门封禁 AI 训练爬虫（业界标准做法，实际效果比 Content-Signal 更可靠）
             {
                 userAgent: [
                     'GPTBot',           // OpenAI (ChatGPT)

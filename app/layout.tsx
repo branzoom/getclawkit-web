@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import ScrollToTop from '@/components/ScrollToTop';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -102,6 +103,8 @@ export default function RootLayout({
         </main>
         <SiteFooter />
         <ScrollToTop />
+        <GoogleAnalytics gaId="G-GYPRK39SQN" />
+        <script defer src="https://umami-i.brazom.com/script.js" data-website-id="035b3cc3-853b-440e-9130-a3a5f985cee4"></script>
       </body>
     </html>
   );
