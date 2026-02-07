@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import Fuse from 'fuse.js';
 import { skills } from '@/data/skills';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -9,15 +10,27 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Search, Download, ArrowRight, Star } from 'lucide-react';
 
+const fuse = new Fuse(skills, {
+    keys: ['name', 'shortDesc', 'tags'],
+    threshold: 0.4,
+    includeScore: true,
+});
+
 export default function SkillRegistry() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [debouncedTerm, setDebouncedTerm] = useState('');
 
-    // 实时过滤逻辑 (Client-side filtering)
-    const filteredSkills = skills.filter(skill =>
-        skill.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        skill.shortDesc.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        skill.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+    // UX-03: 300ms debounce
+    useEffect(() => {
+        const timer = setTimeout(() => setDebouncedTerm(searchTerm), 300);
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
+
+    // FUNC-08: Fuse.js fuzzy search
+    const filteredSkills = useMemo(() => {
+        if (!debouncedTerm.trim()) return skills;
+        return fuse.search(debouncedTerm).map(result => result.item);
+    }, [debouncedTerm]);
 
     return (
         <div className="space-y-8">
@@ -82,7 +95,7 @@ export default function SkillRegistry() {
             {/* Empty State */}
             {filteredSkills.length === 0 && (
                 <div className="text-center py-20 bg-zinc-900/30 rounded-2xl border border-white/5 border-dashed">
-                    <p className="text-zinc-500 text-lg mb-4">No skills found matching "{searchTerm}".</p>
+                    <p className="text-zinc-500 text-lg mb-4">No skills found matching &quot;{searchTerm}&quot;.</p>
                     <Button variant="link" className="text-blue-400" onClick={() => setSearchTerm('')}>
                         Clear Search
                     </Button>

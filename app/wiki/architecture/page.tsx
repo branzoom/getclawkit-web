@@ -1,4 +1,4 @@
-import { GitBranch, Terminal, Shield, Cpu, Activity, Zap, Box, Lock, Globe } from 'lucide-react';
+import { GitBranch, Terminal, Shield, Cpu, ChevronRight, Zap, Box, Lock, Globe } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ArchitecturePage() {
@@ -76,7 +76,3 @@ export default function ArchitecturePage() {
     );
 }
 
-// Minimal placeholder component since I don't have ChevronRight imported here but in the layout
-function ChevronRight(props: any) {
-    return <Activity {...props} />; // Placeholder
-}

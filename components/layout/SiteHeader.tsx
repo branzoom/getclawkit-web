@@ -3,12 +3,15 @@
 import Link from 'next/link'; // [修复 1] 移除 i18n 依赖，使用原生 Link
 import { usePathname } from 'next/navigation';
 import { Github, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export function SiteHeader() {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
+
+    // UX-02: Auto-close mobile menu on route change
+    useEffect(() => { setIsOpen(false); }, [pathname]);
 
     const navItems = [
         { name: 'Status', href: '/status' },
@@ -76,7 +79,7 @@ export function SiteHeader() {
 
             {/* Mobile Nav */}
             {isOpen && (
-                <div className="md:hidden border-t border-white/10 bg-black absolute w-full left-0 top-16 h-screen animate-in fade-in zoom-in-95 duration-200">
+                <div className="md:hidden border-t border-white/10 bg-black absolute w-full left-0 top-16 h-screen overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
                     <div className="flex flex-col p-6 gap-6 text-lg">
                         {/* 移动端增加 Home 链接，方便手指点击 */}
                         <Link

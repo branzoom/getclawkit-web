@@ -6,7 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Download, Star, Calendar, ShieldCheck, Terminal, Copy, ArrowLeft, Github, AlertTriangle, FileDown, Sparkles, User, Tag, Scale } from 'lucide-react';
+import { Download, Star, Calendar, ShieldCheck, Terminal, ArrowLeft, Github, AlertTriangle, FileDown, Sparkles, User, Tag, Scale } from 'lucide-react';
+import CopyButton from '@/components/CopyButton';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SkillConfigSnippet from '@/components/SkillConfigSnippet';
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: seoTitle,
         description: seoDesc,
-        keywords: [...skill.tags, 'openclaw skill', 'agent plugin', 'clawkit registry', skill.name]
+        alternates: { canonical: `https://getclawkit.com/skills/${skillId}` },
     };
 }
 
@@ -55,11 +56,6 @@ export default async function SkillDetailPage({ params }: Props) {
         "author": {
             "@type": "Person",
             "name": skill.author
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": skill.stars || 1
         },
         "offers": {
             "@type": "Offer",
@@ -127,9 +123,7 @@ export default async function SkillDetailPage({ params }: Props) {
                                     <code className="flex-1 bg-black border border-zinc-800 rounded p-3 text-green-400 font-mono text-sm overflow-x-auto">
                                         {skill.command}
                                     </code>
-                                    <Button variant="secondary" size="icon" className="shrink-0">
-                                        <Copy className="w-4 h-4" />
-                                    </Button>
+                                    <CopyButton text={skill.command} />
                                 </div>
                             </div>
                             <div className="relative">
@@ -138,7 +132,7 @@ export default async function SkillDetailPage({ params }: Props) {
                             </div>
                             <div>
                                 <Button asChild className="w-full bg-white text-black hover:bg-zinc-200 font-bold" size="lg">
-                                    <Link href={(skill as any).downloadUrl || (skill as any).authorUrl || '#'} target="_blank">
+                                    <Link href={skill.downloadUrl || skill.authorUrl || '#'} target="_blank">
                                         <FileDown className="w-4 h-4 mr-2" />
                                         Download Source Code (.zip)
                                     </Link>
@@ -172,7 +166,7 @@ export default async function SkillDetailPage({ params }: Props) {
 
                     <div className="mt-8 pt-6 border-t border-white/5 text-center">
                         <Button variant="outline" className="gap-2 text-zinc-400 hover:text-white border-zinc-700 hover:border-zinc-500" asChild>
-                            <Link href={(skill as any).downloadUrl || '#'} target="_blank">
+                            <Link href={skill.downloadUrl || skill.authorUrl || '#'} target="_blank">
                                 <Github className="w-4 h-4" />
                                 Read Full Documentation on GitHub
                             </Link>
@@ -191,7 +185,7 @@ export default async function SkillDetailPage({ params }: Props) {
                                     <div className="flex justify-between items-center text-sm">
                                         <span className="text-zinc-400 flex items-center gap-2"><User className="w-4 h-4" /> Author</span>
                                         <Link
-                                            href={(skill as any).authorUrl || '#'}
+                                            href={skill.authorUrl || '#'}
                                             target="_blank"
                                             className="text-blue-400 hover:text-blue-300 font-mono underline-offset-4 hover:underline"
                                         >
@@ -227,7 +221,7 @@ export default async function SkillDetailPage({ params }: Props) {
                             </div>
 
                             <Button className="w-full gap-2" variant="outline" asChild>
-                                <Link href={(skill as any).authorUrl || '#'} target="_blank">
+                                <Link href={skill.authorUrl || '#'} target="_blank">
                                     <Github className="w-4 h-4" /> View Author Profile
                                 </Link>
                             </Button>

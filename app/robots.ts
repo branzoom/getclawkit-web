@@ -7,6 +7,7 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
+                disallow: '/api/',
             },
             // 2. 专门封禁 AI 训练爬虫 (这是目前业界标准做法)
             {

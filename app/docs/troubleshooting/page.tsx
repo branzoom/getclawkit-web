@@ -74,6 +74,7 @@ export default function TroubleshootingPage() {
                             </div>
                             <p>
                                 Or use our <Link href="/tools/config" className="text-blue-400">Config Wizard</Link> which sets this correctly by default.
+                                See our <Link href="/errors/econnrefused" className="text-blue-400">detailed ECONNREFUSED guide</Link> for more solutions.
                             </p>
                         </AccordionContent>
                     </AccordionItem>

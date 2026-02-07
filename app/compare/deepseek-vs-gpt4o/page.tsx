@@ -8,9 +8,24 @@ export const metadata: Metadata = {
     description: 'Stop overpaying for AI agents. Compare real-world costs of DeepSeek V3.2 and GPT-4.1. Save up to 85% on API fees with context caching and ClawKit optimization.',
 };
 
+const compareJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "DeepSeek V3.2 vs GPT-4.1 Cost Comparison",
+    "description": "Compare real-world API costs of DeepSeek V3.2 and GPT-4.1 for AI agent workloads.",
+    "about": [
+        { "@type": "Product", "name": "DeepSeek V3.2", "brand": "DeepSeek" },
+        { "@type": "Product", "name": "GPT-4.1", "brand": "OpenAI" },
+    ],
+};
+
 export default function DeepSeekComparePage() {
     return (
         <div className="min-h-screen bg-black">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(compareJsonLd) }}
+            />
             <div className="container mx-auto px-4 py-16">
                 <div className="max-w-4xl mx-auto">
                     {/* SEO Header */}

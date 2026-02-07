@@ -12,6 +12,7 @@ export default function WikiIndexPage() {
             links: [
                 { title: 'Architecture Overview', href: '/wiki/architecture', desc: 'How OpenClaw processes signals and makes decisions.' },
                 { title: 'Skill System Design', href: '/wiki/skill-system', desc: 'Understanding the MCP-based plugin architecture.' },
+                { title: 'Data Sovereignty', href: '/wiki/data-privacy', desc: 'What data stays local, what goes to the LLM, and how to stay private.' },
             ]
         },
         {
@@ -23,6 +24,7 @@ export default function WikiIndexPage() {
             links: [
                 { title: 'Agent Fundamentals', href: '/wiki/agent-theory', desc: 'Memory, Planning, and Tool Use explained.' },
                 { title: 'Goal Decomposition', href: '/wiki/goal-decomposition', desc: 'How agents break complex tasks into sub-steps.' },
+                { title: 'Tool Use Patterns', href: '/wiki/tool-use', desc: 'Common patterns and best practices for LLM tool calling.' },
             ]
         },
         {

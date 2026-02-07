@@ -20,22 +20,19 @@ export async function GET() {
         {
             id: 'core',
             name: 'OpenClaw Core',
-            // 这里假设官方仓库是 openclaw/openclaw，如果是别的请修改
             url: 'https://api.github.com/repos/openclaw/openclaw/releases/latest',
             type: 'github'
         },
         {
             id: 'registry',
             name: 'ClawHub Registry',
-            // 用 HEAD 请求检测连通性即可，不需要下载内容
             url: 'https://moltbook.ai',
             type: 'http'
         },
         {
             id: 'community',
             name: 'Discord / Community',
-            // 模拟一个社区检测，或者检测文档站
-            url: 'https://docs.openclaw.ai', // 假设的文档地址
+            url: 'https://docs.openclaw.ai',
             type: 'http'
         }
     ];
@@ -57,21 +54,22 @@ export async function GET() {
 
                     const latency = Date.now() - targetStart;
 
-                    // GitHub 需要判断 200，HTTP HEAD 判断 2xx-3xx
                     const isHealthy = response.ok;
 
                     return {
                         id: target.id,
                         name: target.name,
-                        status: isHealthy ? 'operational' : 'down',
+                        status: isHealthy ? 'operational' : (response.status === 403 ? 'degraded' : 'down'),
                         latency,
                     };
-                } catch (error) {
+                } catch (error: any) {
                     console.error(`Check failed for ${target.name}:`, error);
+                    // Timeout = degraded (service may be slow), other errors = down
+                    const isTimeout = error?.name === 'TimeoutError' || error?.name === 'AbortError';
                     return {
                         id: target.id,
                         name: target.name,
-                        status: 'down', // 只要报错就是挂了
+                        status: isTimeout ? 'degraded' : 'down',
                         latency: 0,
                     };
                 }

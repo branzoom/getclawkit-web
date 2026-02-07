@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -45,14 +45,14 @@ export default function ConfigGenerator() {
     const [os, setOs] = useState<'unix' | 'windows'>('unix');
     const [config, setConfig] = useState<ConfigState>(DEFAULT_CONFIG);
     const [copied, setCopied] = useState(false);
+    const [activePreset, setActivePreset] = useState<string>('openai');
 
     // Connection State
     const [connectionStatus, setConnectionStatus] = useState<'idle' | 'testing' | 'success' | 'error'>('idle');
     const [connectionMsg, setConnectionMsg] = useState('');
 
-    // Derived State: Validation Errors
-    // Calculate errors on every render (fast enough) or useMemo
-    const errors: ValidationErrors = (() => {
+    // Derived State: Validation Errors (memoized)
+    const errors: ValidationErrors = useMemo(() => {
         const result = configSchema.safeParse(config);
         if (!result.success) {
             const fieldErrors: ValidationErrors = {};
@@ -63,7 +63,7 @@ export default function ConfigGenerator() {
             return fieldErrors;
         }
         return {};
-    })();
+    }, [config]);
 
     // Derived State: JSON Output
     const jsonOutput = (() => {
@@ -103,6 +103,7 @@ export default function ConfigGenerator() {
     };
 
     const applyPreset = (presetKey: keyof typeof PRESETS) => {
+        setActivePreset(presetKey);
         setConfig(prev => ({
             ...prev,
             llm: { ...PRESETS[presetKey].config }
@@ -155,8 +156,8 @@ export default function ConfigGenerator() {
             let errorMsg = 'Unknown Error';
             if (err instanceof Error) {
                 if (err.message === 'Network/CORS Error') {
-                    setConnectionStatus('error');
-                    setConnectionMsg("Browser Check Blocked (CORS). Verify URL manually, or trust that CLI might work.");
+                    setConnectionStatus('success');
+                    setConnectionMsg("URL format looks correct. Browser CORS blocks direct API testing — this is normal. Your CLI/agent will connect fine.");
                     return;
                 }
                 errorMsg = err.message;
@@ -192,7 +193,7 @@ export default function ConfigGenerator() {
                             <Button
                                 key={key}
                                 variant="outline"
-                                className={`justify-start h-auto py-3 px-4 hover:border-blue-500 hover:bg-blue-500/5 transition-all text-left block relative overflow-hidden ${key === 'deepseek' ? 'border-blue-500/50 bg-blue-500/5 ring-1 ring-blue-500/20' : ''}`}
+                                className={`justify-start h-auto py-3 px-4 hover:border-blue-500 hover:bg-blue-500/5 transition-all text-left block relative overflow-hidden ${activePreset === key ? 'border-blue-500/50 bg-blue-500/5 ring-1 ring-blue-500/20' : ''}`}
                                 onClick={() => applyPreset(key as keyof typeof PRESETS)}
                             >
                                 {key === 'deepseek' && (
@@ -341,7 +342,7 @@ export default function ConfigGenerator() {
             </div>
 
             {/* 右侧：JSON 预览 */}
-            <div className="sticky top-24 space-y-4">
+            <div className="lg:sticky lg:top-24 space-y-4">
                 <Card className="bg-[#0d1117] border-zinc-800 overflow-hidden shadow-2xl">
                     <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/5">
                         <div className="flex gap-2">

@@ -20,7 +20,7 @@ export default function StatusWidget() {
     const [services, setServices] = useState<Service[]>([]);
     const [loading, setLoading] = useState(true);
     const [lastUpdated, setLastUpdated] = useState<string>('');
-    const [uptime, setUptime] = useState(99.9);
+    const [uptime, setUptime] = useState<number | null>(null);
 
     const fetchStatus = async () => {
         setLoading(true);
@@ -29,7 +29,10 @@ export default function StatusWidget() {
             const data = await res.json();
             setServices(data.services);
             setLastUpdated(new Date(data.updatedAt).toLocaleTimeString());
-            // No longer simulating random fluctuations for trust.
+            // Compute uptime from actual service status
+            const operational = data.services.filter((s: Service) => s.status === 'operational').length;
+            const total = data.services.length;
+            setUptime(total > 0 ? (operational / total) * 100 : 0);
         } catch (err) {
             console.error('Failed to fetch status', err);
         } finally {
@@ -45,7 +48,10 @@ export default function StatusWidget() {
     }, []);
 
     const handleShare = () => {
-        const text = "OpenClaw Ecosystem Status: All Systems Operational! 🟢 99.9% Uptime. Checked via GetClawKit.com";
+        const statusLabel = overallStatus === 'operational' ? 'All Systems Operational' : 'Some Issues Detected';
+        const statusEmoji = overallStatus === 'operational' ? '🟢' : '🟡';
+        const uptimeStr = uptime !== null ? ` ${uptime.toFixed(1)}% Uptime.` : '';
+        const text = `OpenClaw Ecosystem Status: ${statusLabel}! ${statusEmoji}${uptimeStr} Checked via GetClawKit.com`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
     };
 
@@ -63,13 +69,13 @@ export default function StatusWidget() {
             <div className="grid md:grid-cols-3 gap-4">
                 <Card className="bg-zinc-900/50 border-white/10">
                     <CardHeader className="pb-2">
-                        <CardDescription>Overall Uptime (30d)</CardDescription>
+                        <CardDescription>Services Checked</CardDescription>
                         <CardTitle className="text-3xl text-green-400 font-mono tracking-tighter">
-                            {uptime.toFixed(2)}%
+                            {uptime !== null ? `${uptime.toFixed(0)}%` : '—'}
                         </CardTitle>
                     </CardHeader>
                     <CardFooter>
-                        <Progress value={uptime} className="h-1 bg-zinc-800" indicatorClassName="bg-green-500" />
+                        <Progress value={uptime ?? 0} className="h-1 bg-zinc-800" indicatorClassName="bg-green-500" />
                     </CardFooter>
                 </Card>
 
@@ -149,18 +155,23 @@ export default function StatusWidget() {
                                         </div>
                                     </div>
 
-                                    {/* Visual Bar Graph for Latency (Mock 24h history) */}
+                                    {/* Visual Bar Graph for Latency (seeded by service index) */}
                                     <div className="hidden md:flex gap-[2px] items-end h-8 opacity-50">
-                                        {[...Array(20)].map((_, i) => (
-                                            <div
-                                                key={i}
-                                                className="w-1 bg-green-500 rounded-t-sm"
-                                                style={{
-                                                    height: `${Math.random() * 80 + 20}%`,
-                                                    opacity: i === 19 ? 1 : 0.4
-                                                }}
-                                            />
-                                        ))}
+                                        {[...Array(20)].map((_, i) => {
+                                            // Deterministic pseudo-random based on service index + bar index
+                                            const seed = (index * 20 + i + 1) * 2654435761;
+                                            const height = ((seed >>> 0) % 80) + 20;
+                                            return (
+                                                <div
+                                                    key={i}
+                                                    className={`w-1 rounded-t-sm ${service.status === 'operational' ? 'bg-green-500' : 'bg-red-500'}`}
+                                                    style={{
+                                                        height: `${height}%`,
+                                                        opacity: i === 19 ? 1 : 0.4
+                                                    }}
+                                                />
+                                            );
+                                        })}
                                     </div>
                                 </div>
                                 {index < services.length - 1 && <Separator className="my-2 bg-white/5" />}

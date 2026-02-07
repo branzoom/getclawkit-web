@@ -27,14 +27,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/docs/guides/plugin-installation',
         '/wiki',
         '/wiki/architecture',
+        '/wiki/skill-system',
+        '/wiki/data-privacy',
+        '/wiki/agent-theory',
+        '/wiki/goal-decomposition',
+        '/wiki/tool-use',
         '/wiki/roadmap',
+        '/wiki/community',
         '/compare/deepseek-vs-gpt4o',
         '/errors/econnrefused',
         '/privacy',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
-        lastModified: new Date(),
-        changeFrequency: 'daily' as const,
+        lastModified: new Date('2026-02-06'),
+        changeFrequency: (route === '' || route === '/status' ? 'daily' : 'weekly') as 'daily' | 'weekly',
         priority: route === '' ? 1.0 : (route === '/docs' ? 0.9 : 0.8),
     }));
 

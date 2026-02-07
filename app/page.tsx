@@ -3,19 +3,37 @@ import { FileJson, ShieldCheck, Calculator, Package, Activity, ArrowRight, Zap, 
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from 'next/image';
-import fs from 'fs';
-import path from 'path';
+import skillsData from '@/data/skills.json';
+
+// FAQ data used for both rendering and JSON-LD structured data
+const FAQ_ITEMS = [
+  { q: 'Is ClawKit an official OpenClaw product?', a: 'No. ClawKit is an unofficial, community-driven project. We are not affiliated with the core team, but we build tools to make their ecosystem more accessible to beginners.' },
+  { q: 'Is my API Key safe?', a: 'Yes. The Config Wizard runs entirely in your browser (Client-Side). Your API keys are saved to the JSON file you download, but they are never sent to our servers.' },
+  { q: 'Does this work on Windows?', a: 'Absolutely. Windows users often face "JSON Parse Error" due to backslash paths (e.g. C:\\Users). Our tools automatically detect and escape these paths for you.' },
+  { q: 'Do I need Docker to run OpenClaw?', a: 'While not strictly required, Docker is highly recommended to prevent dependency conflicts (especially with Python skills). ClawKit\'s Config Wizard can generate a docker-compose.yml file for you that is optimized for v2.' },
+  { q: 'How accurate is the Cost Estimator?', a: 'It provides a baseline estimate based on current public pricing (OpenAI, DeepSeek, Anthropic). Actual costs depend on your specific prompt engineering, context window usage, and tool calls. We recommend setting hard limits in your API provider\'s dashboard.' },
+  { q: 'How can I submit my own Skill?', a: 'We automatically index skills from the community! If you have built a useful plugin, ensure your GitHub repository has a valid README.md or SKILL.md, and submit a PR to our seeds.json file on GitHub.' },
+  { q: 'How do I fix "ECONNREFUSED" or "Connection Refused" errors?', a: 'This is the #1 most common error. It usually means your agent isn\'t running or is bound to the wrong network interface. Try: 1) Check if the agent is running with docker ps. 2) Use 127.0.0.1 instead of localhost. 3) Run our Local Doctor diagnostic tool.' },
+  { q: 'Why is my agent not responding to prompts?', a: 'Common causes: 1) Invalid API Key - double-check your OpenAI/DeepSeek API key. 2) Rate Limiting - wait 60 seconds and try again. 3) Config Syntax Error - use our Config Wizard to validate. 4) Check Logs with docker logs openclaw.' },
+  { q: "What's the difference between OpenClaw v1 and v2?", a: 'OpenClaw v2 introduced breaking changes: 1) Config Format uses strict JSON instead of YAML. 2) New plugin system with skill registry. 3) Docker is strongly recommended for dependency isolation. See our Migration Guide for details.' },
+  { q: 'Can I use DeepSeek with OpenClaw?', a: 'Yes! DeepSeek is fully supported and is often 7x cheaper than GPT-4.1 for similar performance. Our Config Wizard has a preset for DeepSeek V3.2 that sets the correct API base URL and model names.' },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": FAQ_ITEMS.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a,
+    },
+  })),
+};
 
 export default function HomePage() {
-  // Load dynamic stats from local data
-  let skillCount = 45; // Fallback
-  try {
-    const skillsPath = path.join(process.cwd(), 'data', 'skills.json');
-    const skillsData = JSON.parse(fs.readFileSync(skillsPath, 'utf8'));
-    skillCount = Array.isArray(skillsData) ? skillsData.length : 5; // Updated fallback based on actual audit
-  } catch (e) {
-    console.error('Failed to load skill count:', e);
-  }
+  const skillCount = Array.isArray(skillsData) ? skillsData.length : 5;
   const tools = [
     {
       title: 'Config Wizard',
@@ -33,14 +51,14 @@ export default function HomePage() {
     },
     {
       title: 'Cost Estimator',
-      desc: 'Compare token costs across DeepSeek, Claude, and GPT-4o. Avoid surprise bills with real-time pricing.',
+      desc: 'Compare token costs across DeepSeek V3.2, Claude 4.5, and GPT-4.1. Avoid surprise bills with up-to-date pricing.',
       href: '/tools/cost',
       icon: <Calculator className="w-6 h-6 text-purple-400" />,
       bg: 'bg-purple-500/10 border-purple-500/20'
     },
     {
       title: 'Skill Registry',
-      desc: 'Browse 45+ verified community plugins. Browser control, memory, crypto tracking - all safety-checked.',
+      desc: `Browse ${skillCount}+ verified community plugins. Browser control, memory, crypto tracking - all safety-checked.`,
       href: '/skills',
       icon: <Package className="w-6 h-6 text-orange-400" />,
       bg: 'bg-orange-500/10 border-orange-500/20'
@@ -49,6 +67,11 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* FAQ Structured Data (SEO-09) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-32 overflow-hidden">
@@ -98,8 +121,8 @@ export default function HomePage() {
             <div className="flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-blue-400" />
               <div>
-                <div className="text-lg font-bold text-white tabular-nums">1,240+</div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Estimated Configs</div>
+                <div className="text-lg font-bold text-white tabular-nums">5</div>
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Free Tools</div>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -112,8 +135,8 @@ export default function HomePage() {
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4 text-green-400" />
               <div>
-                <div className="text-lg font-bold text-white tabular-nums">850+</div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Community Users</div>
+                <div className="text-lg font-bold text-white tabular-nums">Open Source</div>
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Community Driven</div>
               </div>
             </div>
           </div>
@@ -409,18 +432,18 @@ export default function HomePage() {
         <div className="grid md:grid-cols-3 gap-6">
           <Link href="/docs/migration" className="group p-6 rounded-xl bg-zinc-900 border border-white/5 hover:border-blue-500/50 transition-all">
             <BookOpen className="w-8 h-8 text-blue-500 mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Migration Guide 🦞</h3>
+            <h3 className="font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Migration Guide</h3>
             <p className="text-sm text-zinc-400">Upgrading from ClawdBot? Learn what changed in OpenClaw v2.0.</p>
           </Link>
           <Link href="/docs/troubleshooting" className="group p-6 rounded-xl bg-zinc-900 border border-white/5 hover:border-red-500/50 transition-all">
             <Terminal className="w-8 h-8 text-red-500 mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="font-bold text-white mb-2 group-hover:text-red-400 transition-colors">Troubleshooting 🔧</h3>
+            <h3 className="font-bold text-white mb-2 group-hover:text-red-400 transition-colors">Troubleshooting</h3>
             <p className="text-sm text-zinc-400">Fix common errors like &quot;Connection Refused&quot; and API key issues.</p>
           </Link>
           <Link href="/skills" className="group p-6 rounded-xl bg-zinc-900 border border-white/5 hover:border-orange-500/50 transition-all">
             <Package className="w-8 h-8 text-orange-500 mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="font-bold text-white mb-2 group-hover:text-orange-400 transition-colors">Skill Registry 📦</h3>
-            <p className="text-sm text-zinc-400">Browse 50+ community skills to extend your agent&apos;s capabilities.</p>
+            <h3 className="font-bold text-white mb-2 group-hover:text-orange-400 transition-colors">Skill Registry</h3>
+            <p className="text-sm text-zinc-400">Browse {skillCount}+ community skills to extend your agent&apos;s capabilities.</p>
           </Link>
         </div>
       </section>

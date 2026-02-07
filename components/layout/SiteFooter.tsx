@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Github, Twitter } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 export function SiteFooter() {
     return (
@@ -66,11 +66,6 @@ export function SiteFooter() {
                         <a href="https://github.com/branzoom/getclawkit-web" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-white transition-colors">
                             <Github className="w-5 h-5" />
                             <span className="sr-only">GitHub</span>
-                        </a>
-                        {/* 记得替换这里为你的 Twitter */}
-                        <a href="https://twitter.com/your_handle" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-white transition-colors">
-                            <Twitter className="w-5 h-5" />
-                            <span className="sr-only">Twitter</span>
                         </a>
                     </div>
                 </div>

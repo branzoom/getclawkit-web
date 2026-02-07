@@ -179,9 +179,12 @@ export default function CostOptimizationPage() {
             </p>
             <ul>
                 <li>Different providers (OpenAI, DeepSeek, Claude)</li>
-                <li>Different models (GPT-4o, GPT-4o-mini, DeepSeek V3)</li>
+                <li>Different models (GPT-4.1, GPT-4.1 Mini, DeepSeek V3.2)</li>
                 <li>Your expected usage (tokens per day)</li>
             </ul>
+            <p>
+                Also check our <Link href="/compare/deepseek-vs-gpt4o" className="text-blue-400 hover:text-blue-300">DeepSeek V3.2 vs GPT-4.1 deep-dive comparison</Link> for a detailed breakdown.
+            </p>
 
             <h2>Real-World Example</h2>
             <div className="not-prose bg-blue-500/10 border border-blue-500/20 rounded-lg p-6 my-6">

@@ -8,11 +8,12 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
-import { AlertTriangle, TrendingUp, Settings2, Edit3, HelpCircle, RotateCcw, Flame, Share2, Clock } from 'lucide-react';
+import { AlertTriangle, TrendingUp, Settings2, Edit3, HelpCircle, RotateCcw, Flame, Share2, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as ChartTooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Tooltip as UiTooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { COST_ESTIMATOR_MODELS, PRICING_LAST_UPDATED } from '@/data/models';
+import Link from 'next/link';
 
 export default function CostEstimator() {
     // 状态管理
@@ -223,7 +224,7 @@ export default function CostEstimator() {
                                 <CardTitle className="text-white">Monthly Cost Projection</CardTitle>
                                 <CardDescription>Estimated cost based on exponential context growth.</CardDescription>
                             </CardHeader>
-                            <CardContent className="flex-1 min-h-[300px]">
+                            <CardContent className="flex-1 min-h-[400px]">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <LineChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
                                         <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
@@ -355,6 +356,13 @@ export default function CostEstimator() {
                     </Card>
                 </TabsContent>
             </Tabs>
+
+            {/* Cross-link to compare page (SEO-06) */}
+            <div className="text-center pt-2">
+                <Link href="/compare/deepseek-vs-gpt4o" className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors">
+                    Deep dive: DeepSeek V3.2 vs GPT-4.1 cost analysis <ArrowRight className="w-3 h-3" />
+                </Link>
+            </div>
         </div>
     );
 }
