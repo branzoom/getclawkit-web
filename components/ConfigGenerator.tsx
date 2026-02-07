@@ -419,16 +419,16 @@ export default function ConfigGenerator() {
                         Next Steps: Install Plugins
                     </h3>
                     <div className="grid grid-cols-1 gap-2">
-                        <a href="/skills/browser-use" target="_blank" className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors group">
+                        <a href="/skills/official-jfrux-browser-use-api" target="_blank" className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors group">
                             <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400">
                                 <Monitor className="w-4 h-4" />
                             </div>
                             <div className="flex-1">
                                 <div className="text-sm font-bold text-white group-hover:text-blue-400">Browser Use</div>
-                                <div className="text-[10px] text-zinc-500">Let agent control Chrome</div>
+                                <div className="text-[10px] text-zinc-500">Let agent control browser</div>
                             </div>
                         </a>
-                        <a href="/skills/memory-core" target="_blank" className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors group">
+                        <a href="/skills/official-nextfrontierbuilds-elite-longterm-memory" target="_blank" className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors group">
                             <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400">
                                 <CheckCircle2 className="w-4 h-4" />
                             </div>
