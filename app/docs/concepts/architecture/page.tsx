@@ -68,11 +68,10 @@ export default function ArchitecturePage() {
 
             <div className="not-prose mt-16 p-8 border-t border-white/10 text-center">
                 <p className="text-zinc-500 mb-4 italic italic">"Architecture is what happens when you stop guessing and start measuring."</p>
-                <Link href="/wiki/agent-theory" className="inline-flex items-center gap-2 text-orange-400 font-bold hover:underline">
+                <Link href="/docs/concepts/agent-theory" className="inline-flex items-center gap-2 text-orange-400 font-bold hover:underline">
                     Next: Understanding Agent Theory <ChevronRight className="w-4 h-4" />
                 </Link>
             </div>
         </>
     );
 }
-

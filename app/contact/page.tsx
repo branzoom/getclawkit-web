@@ -32,7 +32,7 @@ export default function ContactPage() {
                             The fastest way to get technical help or report broken scripts.
                         </p>
                         <Button asChild className="w-full bg-white text-black hover:bg-zinc-200">
-                            <Link href="https://github.com/your-repo/issues" target="_blank">
+                            <Link href="https://github.com/branzoom/getclawkit-web/issues" target="_blank">
                                 Open GitHub Issue
                             </Link>
                         </Button>
@@ -51,8 +51,8 @@ export default function ContactPage() {
                             Ideal for quick questions, feature requests, or just sharing your setup.
                         </p>
                         <Button asChild variant="outline" className="w-full border-blue-500/20 text-blue-400 hover:bg-blue-500/10">
-                            <Link href="https://twitter.com/your_handle" target="_blank">
-                                DM on Twitter
+                            <Link href="https://x.com/Xbrave_R" target="_blank">
+                                DM on X
                             </Link>
                         </Button>
                     </CardContent>

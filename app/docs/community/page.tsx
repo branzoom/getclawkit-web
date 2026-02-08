@@ -95,7 +95,7 @@ export default function CommunityPage() {
                 Want to add a Skill to the <Link href="/skills" className="text-red-400 hover:text-red-300">Skill Registry</Link>? Here&apos;s the process:
             </p>
             <ol>
-                <li><strong>Build your Skill</strong> following the MCP tool specification (see <Link href="/wiki/skill-system" className="text-red-400 hover:text-red-300">Skill System Design</Link>)</li>
+                <li><strong>Build your Skill</strong> following the MCP tool specification (see <Link href="/docs/concepts/skill-system" className="text-red-400 hover:text-red-300">Skill System Design</Link>)</li>
                 <li><strong>Test thoroughly</strong> — document expected inputs and outputs</li>
                 <li><strong>Submit for review</strong> — open a PR adding your Skill to the registry data file</li>
                 <li><strong>Community review</strong> — maintainers and community members test and verify</li>
@@ -133,10 +133,10 @@ export default function CommunityPage() {
             </div>
 
             <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/wiki/roadmap" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+                <Link href="/docs/roadmap" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Project Roadmap
                 </Link>
-                <Link href="/wiki" className="inline-flex items-center gap-2 text-red-400 font-bold hover:underline">
+                <Link href="/docs" className="inline-flex items-center gap-2 text-red-400 font-bold hover:underline">
                     Back to Wiki Home <ChevronRight className="w-4 h-4" />
                 </Link>
             </div>

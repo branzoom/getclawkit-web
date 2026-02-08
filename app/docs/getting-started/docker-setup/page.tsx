@@ -150,9 +150,9 @@ services:
                     <h3 className="text-white font-semibold mb-2">Install Plugins</h3>
                     <p className="text-sm text-zinc-400">Add browser control, memory, and more</p>
                 </Link>
-                <Link href="/docs/best-practices/production-deployment" className="p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-lg hover:bg-cyan-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">Production Deployment</h3>
-                    <p className="text-sm text-zinc-400">Deploy to AWS, GCP, or Azure</p>
+                <Link href="/docs/guides/cost-optimization" className="p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-lg hover:bg-cyan-500/20 transition-colors">
+                    <h3 className="text-white font-semibold mb-2">Cost Optimization</h3>
+                    <p className="text-sm text-zinc-400">Reduce API costs with caching and model routing</p>
                 </Link>
             </div>
 

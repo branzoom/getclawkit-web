@@ -13,7 +13,7 @@ const docNav = [
     {
         title: 'Getting Started',
         items: [
-            { title: 'Installation Guide', href: '/docs/getting-started/installation' },
+            { title: 'Quick Start', href: '/docs/getting-started/quick-start' },
             { title: 'Your First Config', href: '/docs/getting-started/first-config' },
             { title: 'Docker Setup', href: '/docs/getting-started/docker-setup' },
         ]
@@ -34,6 +34,24 @@ const docNav = [
             { title: 'Cost Optimization', href: '/docs/guides/cost-optimization' },
             { title: 'DeepSeek Setup', href: '/docs/guides/deepseek-setup' },
             { title: 'Plugin Installation', href: '/docs/guides/plugin-installation' },
+        ]
+    },
+    {
+        title: 'Concepts',
+        items: [
+            { title: 'Architecture Overview', href: '/docs/concepts/architecture' },
+            { title: 'Skill System', href: '/docs/concepts/skill-system' },
+            { title: 'Agent Theory', href: '/docs/concepts/agent-theory' },
+            { title: 'Tool Use Patterns', href: '/docs/concepts/tool-use' },
+            { title: 'Data Privacy', href: '/docs/concepts/data-privacy' },
+            { title: 'Goal Decomposition', href: '/docs/concepts/goal-decomposition' },
+        ]
+    },
+    {
+        title: 'Community',
+        items: [
+            { title: 'Contributing', href: '/docs/community' },
+            { title: 'Roadmap', href: '/docs/roadmap' },
         ]
     },
 ];

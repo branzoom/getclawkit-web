@@ -18,9 +18,9 @@ export function SiteHeader() {
         { name: 'Config', href: '/tools/config' },
         { name: 'Doctor', href: '/tools/doctor' },
         { name: 'Cost', href: '/tools/cost' },
-        { name: 'Status', href: '/status' },
+        // { name: 'Status', href: '/status' },
         { name: 'Skills', href: '/skills' },
-        { name: 'Wiki', href: '/wiki' },
+        // { name: 'Wiki', href: '/wiki' },
     ];
 
     return (

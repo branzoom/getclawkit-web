@@ -5,9 +5,9 @@ import { Flame, AlertTriangle, TrendingUp, ExternalLink, BookOpen } from 'lucide
 import { Card, CardContent } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-    title: 'Agent Cost Explosion Simulator - DeepSeek vs GPT-4o Calculator',
-    description: 'Calculate AI Agent API costs. Simulate exponential token growth. Compare DeepSeek V3 ($0.14) vs GPT-4o ($2.50) and learn how to prevent bankruptcy.',
-    keywords: ['AI Cost Calculator', 'DeepSeek Pricing', 'GPT-4o API Cost', 'Agent Token Usage', 'Ollama Cost Savings'],
+    title: 'Agent Cost Explosion Simulator - DeepSeek vs GPT-4.1 Calculator',
+    description: 'Calculate AI Agent API costs. Simulate exponential token growth. Compare DeepSeek V3.2 ($0.28) vs GPT-4.1 ($2.00) and learn how to prevent bankruptcy.',
+    keywords: ['AI Cost Calculator', 'DeepSeek Pricing', 'GPT-4.1 API Cost', 'Agent Token Usage', 'Ollama Cost Savings'],
     openGraph: {
         title: 'Why Your First Agent Might Bankrupt You (Simulator)',
         description: 'You think you are running an agent, but you are running an exponential function. Test the burn rate now.',
@@ -102,10 +102,10 @@ export default function CostPage() {
                                 </div>
                                 <h3 className="text-xl font-bold text-white">The "Budget Agent"</h3>
                                 <p className="text-sm text-zinc-400">
-                                    Using DeepSeek V3 with context caching enabled.
+                                    Using DeepSeek V3.2 with context caching enabled.
                                 </p>
                                 <ul className="text-sm space-y-2 text-zinc-300 pt-2 border-t border-white/5">
-                                    <li className="flex justify-between"><span>Model:</span> <span>DeepSeek V3</span></li>
+                                    <li className="flex justify-between"><span>Model:</span> <span>DeepSeek V3.2</span></li>
                                     <li className="flex justify-between"><span>Est. Cost:</span> <span className="text-blue-400 font-bold">~$5 - $15 / mo</span></li>
                                     <li className="flex justify-between"><span>Value:</span> <span>High ROI</span></li>
                                 </ul>
@@ -119,10 +119,10 @@ export default function CostPage() {
                                 </div>
                                 <h3 className="text-xl font-bold text-white">The "Bankruptcy"</h3>
                                 <p className="text-sm text-zinc-400">
-                                    Running GPT-4o without summarizing history.
+                                    Running GPT-4.1 without summarizing history.
                                 </p>
                                 <ul className="text-sm space-y-2 text-zinc-300 pt-2 border-t border-white/5">
-                                    <li className="flex justify-between"><span>Model:</span> <span>GPT-4o</span></li>
+                                    <li className="flex justify-between"><span>Model:</span> <span>GPT-4.1</span></li>
                                     <li className="flex justify-between"><span>Est. Cost:</span> <span className="text-red-400 font-bold">$500+ / mo</span></li>
                                     <li className="flex justify-between"><span>Risk:</span> <span>Extreme</span></li>
                                 </ul>

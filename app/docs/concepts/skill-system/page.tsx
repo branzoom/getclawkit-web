@@ -128,10 +128,10 @@ export default function SkillSystemPage() {
             </p>
 
             <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/wiki/architecture" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+                <Link href="/docs/concepts/architecture" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Architecture Overview
                 </Link>
-                <Link href="/wiki/data-privacy" className="inline-flex items-center gap-2 text-orange-400 font-bold hover:underline">
+                <Link href="/docs/concepts/data-privacy" className="inline-flex items-center gap-2 text-orange-400 font-bold hover:underline">
                     Next: Data Sovereignty <ChevronRight className="w-4 h-4" />
                 </Link>
             </div>

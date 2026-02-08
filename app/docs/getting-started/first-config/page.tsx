@@ -87,7 +87,7 @@ export default function FirstConfigPage() {
 
             <h2>Using DeepSeek (10x Cheaper)</h2>
             <p>
-                DeepSeek V3 offers GPT-4-level performance at 1/10th the cost:
+                DeepSeek V3.2 offers GPT-4-level performance at 1/10th the cost:
             </p>
 
             <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">

@@ -36,9 +36,9 @@ export default function DoctorPage() {
                             <span className="text-red-400">🔴</span> Node.js Not Found
                         </h3>
                         <p className="text-zinc-400 text-sm leading-relaxed">
-                            OpenClaw requires Node.js v18 or newer. Check our <Link href="/docs/getting-started/installation" className="text-blue-400 hover:text-blue-300">Installation Guide</Link> for detailed setup steps.
+                            OpenClaw requires Node.js v18 or newer. Check our <Link href="/docs/getting-started/quick-start" className="text-blue-400 hover:text-blue-300">Installation Guide</Link> for detailed setup steps.
                         </p>
-                        <Link href="/docs/getting-started/installation" className="text-blue-400 text-sm hover:text-blue-300 flex items-center gap-1 transition-colors">
+                        <Link href="/docs/getting-started/quick-start" className="text-blue-400 text-sm hover:text-blue-300 flex items-center gap-1 transition-colors">
                             Read Installation Guide <ArrowRight className="w-3 h-3" />
                         </Link>
                     </div>

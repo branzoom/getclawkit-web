@@ -12,7 +12,7 @@ export default function DeepSeekSetupPage() {
                     <div>
                         <h3 className="text-lg font-bold mb-2">The Economy King</h3>
                         <p className="text-zinc-300">
-                            DeepSeek V3 provides GPT-4o level performance at <strong>1/20th of the cost</strong>. It is the highly recommended model for 2026 agent workflows.
+                            DeepSeek V3.2 provides GPT-4.1 level performance at a fraction of the cost. It is the highly recommended model for budget-conscious agent workflows.
                         </p>
                     </div>
                 </div>

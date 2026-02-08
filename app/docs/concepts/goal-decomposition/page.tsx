@@ -140,10 +140,10 @@ export default function GoalDecompositionPage() {
             </div>
 
             <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/wiki/agent-theory" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+                <Link href="/docs/concepts/agent-theory" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Agent Fundamentals
                 </Link>
-                <Link href="/wiki/tool-use" className="inline-flex items-center gap-2 text-amber-400 font-bold hover:underline">
+                <Link href="/docs/concepts/tool-use" className="inline-flex items-center gap-2 text-amber-400 font-bold hover:underline">
                     Next: Tool Use Patterns <ChevronRight className="w-4 h-4" />
                 </Link>
             </div>

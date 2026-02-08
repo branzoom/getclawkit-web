@@ -35,22 +35,22 @@ export default function CostOptimizationPage() {
 
             <h3>1. Switch to DeepSeek (10x Cheaper)</h3>
             <p>
-                DeepSeek V3 offers GPT-4-level performance at 1/10th the cost.
+                DeepSeek V3.2 offers GPT-4-level performance at 1/10th the cost.
             </p>
 
             <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
                 <div className="grid md:grid-cols-3 gap-4 text-center">
                     <div>
-                        <div className="text-2xl font-bold text-red-400">$30/M tokens</div>
-                        <div className="text-xs text-zinc-500 mt-1">GPT-4o</div>
+                        <div className="text-2xl font-bold text-red-400">$10/M tokens</div>
+                        <div className="text-xs text-zinc-500 mt-1">GPT-4.1</div>
                     </div>
                     <div>
-                        <div className="text-2xl font-bold text-orange-400">$15/M tokens</div>
-                        <div className="text-xs text-zinc-500 mt-1">Claude 3.5</div>
+                        <div className="text-2xl font-bold text-orange-400">$18/M tokens</div>
+                        <div className="text-xs text-zinc-500 mt-1">Claude Sonnet 4.5</div>
                     </div>
                     <div>
-                        <div className="text-2xl font-bold text-green-400">$2.19/M tokens</div>
-                        <div className="text-xs text-zinc-500 mt-1">DeepSeek V3 ⭐</div>
+                        <div className="text-2xl font-bold text-green-400">$0.70/M tokens</div>
+                        <div className="text-xs text-zinc-500 mt-1">DeepSeek V3.2 ⭐</div>
                     </div>
                 </div>
             </div>
@@ -121,18 +121,18 @@ export default function CostOptimizationPage() {
                     <tbody className="text-zinc-300">
                         <tr className="border-b border-white/5">
                             <td className="py-2">Simple Q&A</td>
-                            <td>gpt-4o-mini</td>
-                            <td className="text-right text-green-400">$0.60</td>
+                            <td>gpt-4.1-mini</td>
+                            <td className="text-right text-green-400">$2.00</td>
                         </tr>
                         <tr className="border-b border-white/5">
                             <td className="py-2">Code generation</td>
-                            <td>deepseek-chat</td>
-                            <td className="text-right text-green-400">$2.19</td>
+                            <td>deepseek-chat (V3.2)</td>
+                            <td className="text-right text-green-400">$0.70</td>
                         </tr>
                         <tr className="border-b border-white/5">
                             <td className="py-2">Complex reasoning</td>
-                            <td>gpt-4o</td>
-                            <td className="text-right text-orange-400">$30.00</td>
+                            <td>gpt-4.1</td>
+                            <td className="text-right text-orange-400">$10.00</td>
                         </tr>
                     </tbody>
                 </table>
@@ -191,16 +191,16 @@ export default function CostOptimizationPage() {
                 <h4 className="text-white font-bold mb-3">Scenario: 100K tokens/day</h4>
                 <div className="space-y-2 text-sm text-zinc-300">
                     <div className="flex justify-between">
-                        <span>GPT-4o:</span>
-                        <span className="text-red-400 font-bold">$90/month</span>
+                        <span>GPT-4.1:</span>
+                        <span className="text-red-400 font-bold">$30/month</span>
                     </div>
                     <div className="flex justify-between">
-                        <span>Claude 3.5:</span>
-                        <span className="text-orange-400 font-bold">$45/month</span>
+                        <span>Claude Sonnet 4.5:</span>
+                        <span className="text-orange-400 font-bold">$54/month</span>
                     </div>
                     <div className="flex justify-between">
-                        <span>DeepSeek V3:</span>
-                        <span className="text-green-400 font-bold">$6.57/month</span>
+                        <span>DeepSeek V3.2:</span>
+                        <span className="text-green-400 font-bold">$2.10/month</span>
                     </div>
                 </div>
                 <p className="text-xs text-zinc-500 mt-4">

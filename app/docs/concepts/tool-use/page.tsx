@@ -38,7 +38,7 @@ export default function ToolUsePage() {
                 <div className="bg-black p-8 rounded-[calc(1rem-1px)]">
                     <h3 className="text-white font-bold mb-4">In OpenClaw, Every Tool is an MCP Skill</h3>
                     <p className="text-zinc-400 text-sm leading-relaxed">
-                        OpenClaw wraps all tools in the <strong>Model Context Protocol (MCP)</strong> standard. This means your tools work across any MCP-compatible client, and you can use community Skills without modification. Learn more in <Link href="/wiki/skill-system" className="text-orange-400 hover:text-orange-300">Skill System Design</Link>.
+                        OpenClaw wraps all tools in the <strong>Model Context Protocol (MCP)</strong> standard. This means your tools work across any MCP-compatible client, and you can use community Skills without modification. Learn more in <Link href="/docs/concepts/skill-system" className="text-orange-400 hover:text-orange-300">Skill System Design</Link>.
                     </p>
                 </div>
             </div>
@@ -185,10 +185,10 @@ export default function ToolUsePage() {
             </div>
 
             <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/wiki/goal-decomposition" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+                <Link href="/docs/concepts/goal-decomposition" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Goal Decomposition
                 </Link>
-                <Link href="/wiki/roadmap" className="inline-flex items-center gap-2 text-amber-400 font-bold hover:underline">
+                <Link href="/docs/roadmap" className="inline-flex items-center gap-2 text-amber-400 font-bold hover:underline">
                     Next: Project Roadmap <ChevronRight className="w-4 h-4" />
                 </Link>
             </div>
