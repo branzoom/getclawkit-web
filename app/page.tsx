@@ -227,7 +227,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Install &amp; Start</h3>
               <p className="text-sm text-zinc-400 leading-relaxed mb-4">Run two simple terminal commands. Your agent boots up locally.</p>
-              <Link href="/docs/getting-started" className="text-purple-400 text-sm font-medium inline-flex items-center hover:underline">
+              <Link href="/docs/getting-started/quick-start" className="text-purple-400 text-sm font-medium inline-flex items-center hover:underline">
                 View Guide <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
