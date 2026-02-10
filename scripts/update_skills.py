@@ -42,6 +42,9 @@ DRY_RUN = os.getenv('DRY_RUN', 'false').lower() == 'true'
 DEBUG_LIMIT = int(os.getenv('DEBUG_LIMIT', '0')) or None
 # Max chars for longDesc in output JSON (0 = no limit)
 LONG_DESC_MAX = int(os.getenv('LONG_DESC_MAX', '3000'))
+# --- DB Sync (direct write to database via API) ---
+SYNC_API_URL = os.getenv('SYNC_API_URL', '')  # e.g. https://getclawkit.com/api/skills/sync
+SYNC_API_KEY = os.getenv('SYNC_API_KEY', '')
 
 # --- Paths ---
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -704,6 +707,42 @@ def main():
         print(f"   ✅ Saved to {os.path.basename(SKILLS_FILE)}")
     else:
         print(f"   🔍 DRY RUN: Would save {len(final_list)} skills")
+
+    # ========================================
+    # Phase 5: Sync to database via API
+    # ========================================
+    if SYNC_API_URL and SYNC_API_KEY and not DRY_RUN:
+        print(f"\n🔄 Phase 5: Syncing {len(final_list)} skills to database...")
+        sync_batch_size = 200
+        sync_ok = 0
+        sync_err = 0
+
+        for i in range(0, len(final_list), sync_batch_size):
+            batch = final_list[i:i + sync_batch_size]
+            try:
+                resp = requests.post(
+                    SYNC_API_URL,
+                    headers={
+                        "Authorization": f"Bearer {SYNC_API_KEY}",
+                        "Content-Type": "application/json",
+                    },
+                    json={"skills": batch},
+                    timeout=120,
+                )
+                if resp.status_code == 200:
+                    result = resp.json()
+                    sync_ok += result.get('created', 0) + result.get('updated', 0)
+                    print(f"   [{i + len(batch)}/{len(final_list)}] +{result.get('created', 0)} new, ~{result.get('updated', 0)} updated")
+                else:
+                    sync_err += len(batch)
+                    print(f"   ❌ Batch {i}-{i + len(batch)} failed: {resp.status_code} {resp.text[:200]}")
+            except Exception as e:
+                sync_err += len(batch)
+                print(f"   ❌ Batch {i}-{i + len(batch)} error: {e}")
+
+        print(f"   ✅ DB sync: {sync_ok} synced, {sync_err} failed")
+    elif not SYNC_API_URL:
+        print(f"\n   ℹ️  SYNC_API_URL not set, skipping DB sync (file-only mode)")
 
     # Final report
     print(f"\n{'=' * 50}")
