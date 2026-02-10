@@ -27,6 +27,53 @@ export async function getSkillsIndex() {
     });
 }
 
+// Paginated skills with optional search
+const skillSelectFields = {
+    id: true,
+    name: true,
+    shortDesc: true,
+    tags: true,
+    author: true,
+    stars: true,
+    sourceRepo: true,
+} as const;
+
+export async function getSkillsPaginated({
+    page = 1,
+    pageSize = 30,
+    search = '',
+}: {
+    page?: number;
+    pageSize?: number;
+    search?: string;
+}) {
+    const skip = (page - 1) * pageSize;
+
+    const where = search.trim()
+        ? {
+              OR: [
+                  { name: { contains: search, mode: 'insensitive' as const } },
+                  { shortDesc: { contains: search, mode: 'insensitive' as const } },
+                  { author: { contains: search, mode: 'insensitive' as const } },
+                  { tags: { has: search.toLowerCase() } },
+              ],
+          }
+        : {};
+
+    const [skills, total] = await Promise.all([
+        prisma.skill.findMany({
+            where,
+            select: skillSelectFields,
+            orderBy: { stars: 'desc' },
+            skip,
+            take: pageSize,
+        }),
+        prisma.skill.count({ where }),
+    ]);
+
+    return { skills, total, page, pageSize };
+}
+
 // Total skill count for stats
 export const getSkillsCount = unstable_cache(
     async () => {

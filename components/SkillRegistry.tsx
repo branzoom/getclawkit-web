@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useTransition } from 'react';
 import Link from 'next/link';
-import Fuse from 'fuse.js';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Search, ArrowRight, Star, ChevronDown } from 'lucide-react';
+import { Search, ArrowRight, Star, ChevronDown, Loader2 } from 'lucide-react';
 
 export interface SkillIndexItem {
     id: string;
@@ -19,52 +18,109 @@ export interface SkillIndexItem {
     source_repo: string;
 }
 
+interface PaginatedResponse {
+    skills: Array<{
+        id: string;
+        name: string;
+        shortDesc: string;
+        tags: string[];
+        author: string;
+        stars: number;
+        sourceRepo: string | null;
+    }>;
+    total: number;
+    page: number;
+    pageSize: number;
+}
+
 const PAGE_SIZE = 30;
 
-export default function SkillRegistry({ skills }: { skills: SkillIndexItem[] }) {
+function mapSkill(s: PaginatedResponse['skills'][number]): SkillIndexItem {
+    return {
+        id: s.id,
+        name: String(s.name || ''),
+        shortDesc: String(s.shortDesc || ''),
+        tags: Array.isArray(s.tags) ? s.tags.filter((t): t is string => typeof t === 'string') : [],
+        author: s.author || '',
+        stars: s.stars || 0,
+        source_repo: s.sourceRepo || '',
+    };
+}
+
+export default function SkillRegistry({
+    initialSkills,
+    initialTotal,
+}: {
+    initialSkills: SkillIndexItem[];
+    initialTotal: number;
+}) {
+    const [skills, setSkills] = useState<SkillIndexItem[]>(initialSkills);
+    const [total, setTotal] = useState(initialTotal);
+    const [page, setPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedTerm, setDebouncedTerm] = useState('');
-    const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+    const [isPending, startTransition] = useTransition();
+    const [loading, setLoading] = useState(false);
 
-    // Build Fuse index once from props
-    const fuse = useMemo(
-        () => new Fuse(skills, {
-            keys: ['name', 'shortDesc', 'tags'],
-            threshold: 0.4,
-            includeScore: true,
-        }),
-        [skills]
-    );
-
-    // 300ms debounce for search
+    // Debounce search input 300ms
     useEffect(() => {
         const timer = setTimeout(() => setDebouncedTerm(searchTerm), 300);
         return () => clearTimeout(timer);
     }, [searchTerm]);
 
-    // Reset pagination when search changes
+    // Fetch when search term changes — reset to page 1
     useEffect(() => {
-        setVisibleCount(PAGE_SIZE);
+        let cancelled = false;
+        setLoading(true);
+
+        const params = new URLSearchParams({
+            page: '1',
+            pageSize: String(PAGE_SIZE),
+        });
+        if (debouncedTerm.trim()) params.set('search', debouncedTerm.trim());
+
+        fetch(`/api/skills?${params}`)
+            .then(r => r.json())
+            .then((data: PaginatedResponse) => {
+                if (cancelled) return;
+                setSkills(data.skills.map(mapSkill));
+                setTotal(data.total);
+                setPage(1);
+                setLoading(false);
+            })
+            .catch(() => {
+                if (!cancelled) setLoading(false);
+            });
+
+        return () => { cancelled = true; };
     }, [debouncedTerm]);
 
-    // Fuzzy search
-    const filteredSkills = useMemo(() => {
-        if (!debouncedTerm.trim()) return skills;
-        return fuse.search(debouncedTerm).map(result => result.item);
-    }, [debouncedTerm, skills, fuse]);
-
-    // Paginated slice
-    const visibleSkills = useMemo(
-        () => filteredSkills.slice(0, visibleCount),
-        [filteredSkills, visibleCount]
-    );
-
-    const hasMore = visibleCount < filteredSkills.length;
-    const remaining = filteredSkills.length - visibleCount;
-
+    // Load more
     const loadMore = useCallback(() => {
-        setVisibleCount(prev => prev + PAGE_SIZE);
-    }, []);
+        const nextPage = page + 1;
+        setLoading(true);
+
+        const params = new URLSearchParams({
+            page: String(nextPage),
+            pageSize: String(PAGE_SIZE),
+        });
+        if (debouncedTerm.trim()) params.set('search', debouncedTerm.trim());
+
+        startTransition(() => {
+            fetch(`/api/skills?${params}`)
+                .then(r => r.json())
+                .then((data: PaginatedResponse) => {
+                    setSkills(prev => [...prev, ...data.skills.map(mapSkill)]);
+                    setTotal(data.total);
+                    setPage(nextPage);
+                    setLoading(false);
+                })
+                .catch(() => setLoading(false));
+        });
+    }, [page, debouncedTerm, startTransition]);
+
+    const hasMore = skills.length < total;
+    const remaining = total - skills.length;
 
     return (
         <div className="space-y-8">
@@ -78,17 +134,24 @@ export default function SkillRegistry({ skills }: { skills: SkillIndexItem[] }) 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                {/* Result count */}
                 {debouncedTerm && (
                     <div className="text-center mt-3 text-sm text-muted-foreground">
-                        {filteredSkills.length} result{filteredSkills.length !== 1 ? 's' : ''} for &quot;{debouncedTerm}&quot;
+                        {loading ? (
+                            <span className="inline-flex items-center gap-1.5">
+                                <Loader2 className="w-3 h-3 animate-spin" /> Searching...
+                            </span>
+                        ) : (
+                            <>
+                                {total} result{total !== 1 ? 's' : ''} for &quot;{debouncedTerm}&quot;
+                            </>
+                        )}
                     </div>
                 )}
             </div>
 
             {/* Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {visibleSkills.map((skill) => (
+                {skills.map((skill) => (
                     <Card key={skill.id} className="bg-card/40 border-border hover:border-blue-500/30 transition-all hover:-translate-y-1 group flex flex-col relative overflow-hidden">
                         <Link href={`/skills/${skill.id}`} className="absolute inset-0 z-10" aria-label={`View details for ${skill.name}`} />
 
@@ -138,9 +201,14 @@ export default function SkillRegistry({ skills }: { skills: SkillIndexItem[] }) 
                         variant="outline"
                         size="lg"
                         onClick={loadMore}
+                        disabled={loading}
                         className="gap-2 text-muted-foreground hover:text-foreground border-border hover:border-border px-8"
                     >
-                        <ChevronDown className="w-4 h-4" />
+                        {loading ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                            <ChevronDown className="w-4 h-4" />
+                        )}
                         Load More ({remaining > PAGE_SIZE ? PAGE_SIZE : remaining} of {remaining.toLocaleString()} remaining)
                     </Button>
                 </div>
@@ -149,12 +217,12 @@ export default function SkillRegistry({ skills }: { skills: SkillIndexItem[] }) 
             {/* Total count footer */}
             {!debouncedTerm && (
                 <div className="text-center text-sm text-muted-foreground/70">
-                    Showing {visibleSkills.length.toLocaleString()} of {filteredSkills.length.toLocaleString()} skills
+                    Showing {skills.length.toLocaleString()} of {total.toLocaleString()} skills
                 </div>
             )}
 
             {/* Empty State */}
-            {filteredSkills.length === 0 && (
+            {!loading && skills.length === 0 && (
                 <div className="text-center py-20 bg-card/30 rounded-2xl border border-border border-dashed">
                     <p className="text-muted-foreground text-lg mb-4">No skills found matching &quot;{searchTerm}&quot;.</p>
                     <Button variant="link" className="text-blue-400" onClick={() => setSearchTerm('')}>

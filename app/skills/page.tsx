@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import { getSkillsIndex } from '@/lib/db/skills';
+import { getSkillsPaginated, getSkillsCount } from '@/lib/db/skills';
 
-export const dynamic = 'force-dynamic';
 import SkillRegistry from '@/components/SkillRegistry';
 import { Package, Zap } from 'lucide-react';
 
@@ -11,10 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default async function SkillsPage() {
-    const skillsIndex = await getSkillsIndex();
+    const [{ skills: rawSkills }, totalCount] = await Promise.all([
+        getSkillsPaginated({ page: 1, pageSize: 30 }),
+        getSkillsCount(),
+    ]);
 
-    // Map DB field names to what SkillRegistry expects
-    const skills = skillsIndex.map((s: { id: string; name: string; shortDesc: string; tags: string[]; author: string; stars: number; sourceRepo: string | null }) => ({
+    const skills = rawSkills.map((s) => ({
         id: s.id,
         name: String(s.name || ''),
         shortDesc: String(s.shortDesc || ''),
@@ -36,12 +37,12 @@ export default async function SkillsPage() {
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">Agent Capabilities.</span>
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                    Browse {skills.length.toLocaleString()}+ community-verified skills. From web browsing to image generation, find the tools to build your dream agent.
+                    Browse {totalCount.toLocaleString()}+ community-verified skills. From web browsing to image generation, find the tools to build your dream agent.
                 </p>
             </div>
 
-            {/* The Registry Component — receives lightweight data as props */}
-            <SkillRegistry skills={skills} />
+            {/* The Registry Component — receives first page via SSR, fetches rest on demand */}
+            <SkillRegistry initialSkills={skills} initialTotal={totalCount} />
 
             {/* SEO Content: Developer FAQ */}
             <div className="mt-24 border-t border-border pt-16">
