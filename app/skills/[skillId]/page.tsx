@@ -193,7 +193,7 @@ export default async function SkillDetailPage({ params }: Props) {
 
                                     <div className="flex justify-between items-center text-sm">
                                         <span className="text-muted-foreground flex items-center gap-2"><Calendar className="w-4 h-4" /> Updated</span>
-                                        <span className="text-foreground font-mono">{skill.lastUpdated.toISOString().split('T')[0]}</span>
+                                        <span className="text-foreground font-mono">{new Date(skill.lastUpdated).toISOString().split('T')[0]}</span>
                                     </div>
                                 </div>
                             </div>
