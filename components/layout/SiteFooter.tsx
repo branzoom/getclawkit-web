@@ -50,7 +50,7 @@ const footerNav = [
 
 export function SiteFooter() {
     return (
-        <footer className="border-t border-white/10 bg-black py-12">
+        <footer className="border-t border-border bg-background py-12">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
 
@@ -64,18 +64,18 @@ export function SiteFooter() {
                                 height={32}
                                 className="w-8 h-8 rounded-md"
                             />
-                            <span className="font-bold text-xl text-white">ClawKit</span>
+                            <span className="font-bold text-xl text-foreground">ClawKit</span>
                         </div>
-                        <p className="text-zinc-400 text-sm max-w-xs leading-relaxed">
+                        <p className="text-muted-foreground text-sm max-w-xs leading-relaxed">
                             The unofficial setup companion for OpenClaw.
                             Configure, debug, and deploy AI agents without the frustration.
                         </p>
                         <div className="pt-2">
-                            <p className="text-xs text-zinc-500 uppercase tracking-wider font-bold mb-2">Built By</p>
-                            <a href="https://github.com/branzoom" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white hover:text-blue-400 transition-colors">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-bold mb-2">Built By</p>
+                            <a href="https://github.com/branzoom" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-foreground hover:text-blue-400 transition-colors">
                                 <Github className="w-4 h-4" />
                                 <span className="font-medium">@branzoom</span>
-                                <span className="text-zinc-500 text-sm">(and the community)</span>
+                                <span className="text-muted-foreground text-sm">(and the community)</span>
                             </a>
                         </div>
                     </div>
@@ -83,11 +83,11 @@ export function SiteFooter() {
                     {/* Navigation Columns */}
                     {footerNav.map((section) => (
                         <div key={section.title}>
-                            <h3 className="font-bold text-white mb-4 text-sm">{section.title}</h3>
-                            <ul className="space-y-2 text-sm text-zinc-400">
+                            <h3 className="font-bold text-foreground mb-4 text-sm">{section.title}</h3>
+                            <ul className="space-y-2 text-sm text-muted-foreground">
                                 {section.links.map((link) => (
                                     <li key={link.href}>
-                                        <Link href={link.href} className="hover:text-white transition-colors">
+                                        <Link href={link.href} className="hover:text-foreground transition-colors">
                                             {link.label}
                                         </Link>
                                     </li>
@@ -98,12 +98,12 @@ export function SiteFooter() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-sm text-zinc-600">
+                <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-sm text-muted-foreground/70">
                         © {new Date().getFullYear()} ClawKit. Not affiliated with OpenClaw.
                     </p>
                     <div className="flex items-center gap-6">
-                        <a href="https://github.com/branzoom/getclawkit-web" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+                        <a href="https://github.com/branzoom/getclawkit-web" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                             <Github className="w-5 h-5" />
                             <span className="sr-only">GitHub</span>
                         </a>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from '@/components/ThemeProvider';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -89,22 +90,24 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="dark">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-black text-white selection:bg-blue-500/30`}>
-        {/* Inject Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-background text-foreground selection:bg-blue-500/30`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {/* Inject Schema */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
 
-        <SiteHeader />
-        <main className="flex-1 w-full">
-          {children}
-        </main>
-        <SiteFooter />
-        <ScrollToTop />
-        <GoogleAnalytics gaId="G-GYPRK39SQN" />
-        <script defer src="https://umami-i.brazom.com/script.js" data-website-id="035b3cc3-853b-440e-9130-a3a5f985cee4"></script>
+          <SiteHeader />
+          <main className="flex-1 w-full">
+            {children}
+          </main>
+          <SiteFooter />
+          <ScrollToTop />
+          <GoogleAnalytics gaId="G-GYPRK39SQN" />
+          <script defer src="https://umami-i.brazom.com/script.js" data-website-id="035b3cc3-853b-440e-9130-a3a5f985cee4"></script>
+        </ThemeProvider>
       </body>
     </html>
   );

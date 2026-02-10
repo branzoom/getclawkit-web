@@ -46,12 +46,12 @@ export default function CostPage() {
                     <Flame className="w-3 h-3" /> Burn Rate Simulator
                 </div>
 
-                <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+                <h1 className="text-4xl md:text-6xl font-bold text-foreground tracking-tighter">
                     Why your Agent might <br className="md:hidden" />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-600">Bankrupt You.</span>
                 </h1>
 
-                <p className="text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                     You aren't just running an agent; you are running an <strong>exponential function</strong>.
                     <br className="hidden md:inline" />
                     This tool simulates the <strong>worst-case scenario</strong> where context history spirals out of control.
@@ -76,18 +76,18 @@ export default function CostPage() {
 
                 {/* 1. Pre-calculated Scenarios (Keyword Rich) */}
                 <section>
-                    <h2 className="text-3xl font-bold text-white mb-8 text-center">Common Cost Scenarios</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Common Cost Scenarios</h2>
                     <div className="grid md:grid-cols-3 gap-6">
-                        <Card className="bg-zinc-900/50 border-white/5">
+                        <Card className="bg-card/50 border-border">
                             <CardContent className="p-6 space-y-4">
                                 <div className="p-3 bg-green-500/10 w-fit rounded-lg">
                                     <TrendingUp className="w-6 h-6 text-green-400" />
                                 </div>
-                                <h3 className="text-xl font-bold text-white">The "Local Dev"</h3>
-                                <p className="text-sm text-zinc-400">
+                                <h3 className="text-xl font-bold text-foreground">The "Local Dev"</h3>
+                                <p className="text-sm text-muted-foreground">
                                     Running Llama 3 locally via Ollama.
                                 </p>
-                                <ul className="text-sm space-y-2 text-zinc-300 pt-2 border-t border-white/5">
+                                <ul className="text-sm space-y-2 text-foreground/80 pt-2 border-t border-border">
                                     <li className="flex justify-between"><span>Model:</span> <span>Llama 3</span></li>
                                     <li className="flex justify-between"><span>Cost:</span> <span className="text-green-400 font-bold">$0 / mo</span></li>
                                     <li className="flex justify-between"><span>Privacy:</span> <span>100% Local</span></li>
@@ -95,16 +95,16 @@ export default function CostPage() {
                             </CardContent>
                         </Card>
 
-                        <Card className="bg-zinc-900/50 border-white/5">
+                        <Card className="bg-card/50 border-border">
                             <CardContent className="p-6 space-y-4">
                                 <div className="p-3 bg-blue-500/10 w-fit rounded-lg">
                                     <TrendingUp className="w-6 h-6 text-blue-400" />
                                 </div>
-                                <h3 className="text-xl font-bold text-white">The "Budget Agent"</h3>
-                                <p className="text-sm text-zinc-400">
+                                <h3 className="text-xl font-bold text-foreground">The "Budget Agent"</h3>
+                                <p className="text-sm text-muted-foreground">
                                     Using DeepSeek V3.2 with context caching enabled.
                                 </p>
-                                <ul className="text-sm space-y-2 text-zinc-300 pt-2 border-t border-white/5">
+                                <ul className="text-sm space-y-2 text-foreground/80 pt-2 border-t border-border">
                                     <li className="flex justify-between"><span>Model:</span> <span>DeepSeek V3.2</span></li>
                                     <li className="flex justify-between"><span>Est. Cost:</span> <span className="text-blue-400 font-bold">~$5 - $15 / mo</span></li>
                                     <li className="flex justify-between"><span>Value:</span> <span>High ROI</span></li>
@@ -112,16 +112,16 @@ export default function CostPage() {
                             </CardContent>
                         </Card>
 
-                        <Card className="bg-zinc-900/50 border-white/5">
+                        <Card className="bg-card/50 border-border">
                             <CardContent className="p-6 space-y-4">
                                 <div className="p-3 bg-purple-500/10 w-fit rounded-lg">
                                     <Flame className="w-6 h-6 text-purple-400" />
                                 </div>
-                                <h3 className="text-xl font-bold text-white">The "Bankruptcy"</h3>
-                                <p className="text-sm text-zinc-400">
+                                <h3 className="text-xl font-bold text-foreground">The "Bankruptcy"</h3>
+                                <p className="text-sm text-muted-foreground">
                                     Running GPT-4.1 without summarizing history.
                                 </p>
-                                <ul className="text-sm space-y-2 text-zinc-300 pt-2 border-t border-white/5">
+                                <ul className="text-sm space-y-2 text-foreground/80 pt-2 border-t border-border">
                                     <li className="flex justify-between"><span>Model:</span> <span>GPT-4.1</span></li>
                                     <li className="flex justify-between"><span>Est. Cost:</span> <span className="text-red-400 font-bold">$500+ / mo</span></li>
                                     <li className="flex justify-between"><span>Risk:</span> <span>Extreme</span></li>
@@ -132,31 +132,31 @@ export default function CostPage() {
                 </section>
 
                 {/* 2. Authority Links (E-E-A-T) */}
-                <section className="border-t border-white/10 pt-16">
-                    <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                        <BookOpen className="w-5 h-5 text-zinc-400" /> Data Sources & Verification
+                <section className="border-t border-border pt-16">
+                    <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                        <BookOpen className="w-5 h-5 text-muted-foreground" /> Data Sources & Verification
                     </h2>
-                    <div className="bg-zinc-900 p-6 rounded-xl border border-white/5">
-                        <p className="text-zinc-400 mb-4">
+                    <div className="bg-card p-6 rounded-xl border border-border">
+                        <p className="text-muted-foreground mb-4">
                             Our calculator uses the following official pricing data (verified Feb 2026).
                             We recommend checking official pages for the latest updates.
                         </p>
                         <div className="grid md:grid-cols-2 gap-4">
-                            <Link href="https://platform.openai.com/pricing" target="_blank" className="flex items-center justify-between p-3 bg-black rounded border border-white/10 hover:border-white/30 transition-colors group">
-                                <span className="text-zinc-300">OpenAI Pricing</span>
-                                <ExternalLink className="w-4 h-4 text-zinc-500 group-hover:text-white" />
+                            <Link href="https://platform.openai.com/pricing" target="_blank" className="flex items-center justify-between p-3 bg-card rounded border border-border hover:border-border transition-colors group">
+                                <span className="text-foreground/80">OpenAI Pricing</span>
+                                <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
                             </Link>
-                            <Link href="https://www.anthropic.com/pricing" target="_blank" className="flex items-center justify-between p-3 bg-black rounded border border-white/10 hover:border-white/30 transition-colors group">
-                                <span className="text-zinc-300">Anthropic Pricing</span>
-                                <ExternalLink className="w-4 h-4 text-zinc-500 group-hover:text-white" />
+                            <Link href="https://www.anthropic.com/pricing" target="_blank" className="flex items-center justify-between p-3 bg-card rounded border border-border hover:border-border transition-colors group">
+                                <span className="text-foreground/80">Anthropic Pricing</span>
+                                <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
                             </Link>
-                            <Link href="https://www.deepseek.com/" target="_blank" className="flex items-center justify-between p-3 bg-black rounded border border-white/10 hover:border-white/30 transition-colors group">
-                                <span className="text-zinc-300">DeepSeek API</span>
-                                <ExternalLink className="w-4 h-4 text-zinc-500 group-hover:text-white" />
+                            <Link href="https://www.deepseek.com/" target="_blank" className="flex items-center justify-between p-3 bg-card rounded border border-border hover:border-border transition-colors group">
+                                <span className="text-foreground/80">DeepSeek API</span>
+                                <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
                             </Link>
-                            <Link href="https://ollama.com/" target="_blank" className="flex items-center justify-between p-3 bg-black rounded border border-white/10 hover:border-white/30 transition-colors group">
-                                <span className="text-zinc-300">Ollama (Local AI)</span>
-                                <ExternalLink className="w-4 h-4 text-zinc-500 group-hover:text-white" />
+                            <Link href="https://ollama.com/" target="_blank" className="flex items-center justify-between p-3 bg-card rounded border border-border hover:border-border transition-colors group">
+                                <span className="text-foreground/80">Ollama (Local AI)</span>
+                                <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground" />
                             </Link>
                         </div>
                     </div>

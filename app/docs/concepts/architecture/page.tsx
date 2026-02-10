@@ -16,19 +16,19 @@ export default function ArchitecturePage() {
             </p>
 
             <div className="not-prose grid md:grid-cols-2 gap-6 my-12">
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
-                    <div className="flex items-center gap-2 text-white font-bold mb-4">
+                <div className="p-6 bg-card border border-border rounded-2xl">
+                    <div className="flex items-center gap-2 text-foreground font-bold mb-4">
                         <Zap className="w-5 h-5 text-yellow-400" /> Control Loop
                     </div>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                         OpenClaw uses a <strong>Reactive Planning</strong> loop. It doesn't plan the whole mission upfront; it observes the environment (DOM/Logs) and decides the next 100ms.
                     </p>
                 </div>
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
-                    <div className="flex items-center gap-2 text-white font-bold mb-4">
+                <div className="p-6 bg-card border border-border rounded-2xl">
+                    <div className="flex items-center gap-2 text-foreground font-bold mb-4">
                         <Box className="w-5 h-5 text-blue-400" /> MCP Integration
                     </div>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                         Every tool in OpenClaw is an <strong>MCP Server</strong> (Model Context Protocol). This allows the agent to treat your File System like its own memory.
                     </p>
                 </div>
@@ -51,11 +51,11 @@ export default function ArchitecturePage() {
             </ol>
 
             <div className="my-12 p-1 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-blue-500/20 rounded-2xl overflow-hidden">
-                <div className="bg-black p-8 rounded-[calc(1rem-1px)]">
-                    <h3 className="!mt-0 text-white font-bold flex items-center gap-2">
+                <div className="bg-card p-8 rounded-[calc(1rem-1px)]">
+                    <h3 className="!mt-0 text-foreground font-bold flex items-center gap-2">
                         <Lock className="w-5 h-5 text-green-400" /> Data Sovereignty
                     </h3>
-                    <p className="text-zinc-400 text-sm">
+                    <p className="text-muted-foreground text-sm">
                         Unlike cloud-based agents, OpenClaw architecture keeps the <strong>Signal Phase</strong> local. Only the reasoning prompt is sent to the LLM, while the raw DOM remains encrypted in your local memory.
                     </p>
                 </div>
@@ -66,8 +66,8 @@ export default function ArchitecturePage() {
                 OpenClaw v2 introduces a "Validator" layer. If the agent makes a potentially destructive action (like <code>rm -rf</code>), the architecture forces a secondary LLM check to verify intent against safety protocols.
             </p>
 
-            <div className="not-prose mt-16 p-8 border-t border-white/10 text-center">
-                <p className="text-zinc-500 mb-4 italic italic">"Architecture is what happens when you stop guessing and start measuring."</p>
+            <div className="not-prose mt-16 p-8 border-t border-border text-center">
+                <p className="text-muted-foreground mb-4 italic italic">"Architecture is what happens when you stop guessing and start measuring."</p>
                 <Link href="/docs/concepts/agent-theory" className="inline-flex items-center gap-2 text-orange-400 font-bold hover:underline">
                     Next: Understanding Agent Theory <ChevronRight className="w-4 h-4" />
                 </Link>

@@ -83,12 +83,12 @@ export default function DocsSearch() {
 
     return (
         <div ref={containerRef} className="relative max-w-xl mx-auto mb-12">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
                 ref={inputRef}
                 type="text"
                 placeholder="Search docs, guides, tools..."
-                className="pl-11 pr-10 py-5 bg-zinc-900/50 border-white/10 focus-visible:ring-blue-500 rounded-full text-white placeholder:text-zinc-500"
+                className="pl-11 pr-10 py-5 bg-card/50 border-border focus-visible:ring-blue-500 rounded-full text-foreground placeholder:text-muted-foreground"
                 value={query}
                 onChange={(e) => { setQuery(e.target.value); setIsOpen(true); }}
                 onFocus={() => setIsOpen(true)}
@@ -96,7 +96,7 @@ export default function DocsSearch() {
             {query && (
                 <button
                     onClick={() => { setQuery(''); setIsOpen(false); }}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                     <X className="w-4 h-4" />
                 </button>
@@ -104,18 +104,18 @@ export default function DocsSearch() {
 
             {/* Results Dropdown */}
             {isOpen && results.length > 0 && (
-                <div className="absolute top-full mt-2 w-full bg-zinc-900 border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden">
+                <div className="absolute top-full mt-2 w-full bg-card border border-border rounded-xl shadow-2xl z-50 overflow-hidden">
                     {results.map((doc) => (
                         <Link
                             key={doc.href}
                             href={doc.href}
                             onClick={() => { setIsOpen(false); setQuery(''); }}
-                            className="flex items-start gap-3 p-4 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
+                            className="flex items-start gap-3 p-4 hover:bg-muted transition-colors border-b border-border last:border-0"
                         >
                             <FileText className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
                             <div>
-                                <div className="text-sm font-medium text-white">{doc.title}</div>
-                                <div className="text-xs text-zinc-500 mt-0.5">{doc.category}</div>
+                                <div className="text-sm font-medium text-foreground">{doc.title}</div>
+                                <div className="text-xs text-muted-foreground mt-0.5">{doc.category}</div>
                             </div>
                         </Link>
                     ))}
@@ -124,8 +124,8 @@ export default function DocsSearch() {
 
             {/* No results */}
             {isOpen && query.trim() && results.length === 0 && (
-                <div className="absolute top-full mt-2 w-full bg-zinc-900 border border-white/10 rounded-xl shadow-2xl z-50 p-6 text-center">
-                    <p className="text-zinc-500 text-sm">No results for &quot;{query}&quot;</p>
+                <div className="absolute top-full mt-2 w-full bg-card border border-border rounded-xl shadow-2xl z-50 p-6 text-center">
+                    <p className="text-muted-foreground text-sm">No results for &quot;{query}&quot;</p>
                 </div>
             )}
         </div>

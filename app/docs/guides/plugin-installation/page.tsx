@@ -17,8 +17,8 @@ export default function PluginInstallationPage() {
                 <div className="flex items-start gap-3">
                     <Package className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
                     <div>
-                        <h3 className="text-lg font-bold text-white mb-2">Browse Verified Plugins</h3>
-                        <p className="text-zinc-300 mb-4">
+                        <h3 className="text-lg font-bold text-foreground mb-2">Browse Verified Plugins</h3>
+                        <p className="text-foreground/80 mb-4">
                             Our <Link href="/skills" className="text-purple-400 hover:text-purple-300">Skill Registry</Link> lists 45+ verified, v2-compatible plugins with installation instructions.
                         </p>
                         <Link
@@ -47,10 +47,10 @@ export default function PluginInstallationPage() {
 
             <h3>Method 1: Using Config Wizard (Recommended)</h3>
             <div className="not-prose bg-green-500/10 border border-green-500/20 rounded-lg p-6 my-4">
-                <p className="text-zinc-300 mb-4">
+                <p className="text-foreground/80 mb-4">
                     Our <Link href="/tools/config" className="text-green-400 hover:text-green-300">Config Wizard</Link> has a plugin selector with descriptions and auto-configuration.
                 </p>
-                <ol className="space-y-2 text-sm text-zinc-300">
+                <ol className="space-y-2 text-sm text-foreground/80">
                     <li>1. Open Config Wizard</li>
                     <li>2. Scroll to "Skills" section</li>
                     <li>3. Select plugins from dropdown</li>
@@ -63,8 +63,8 @@ export default function PluginInstallationPage() {
                 Add plugin IDs to your <code>clawhub.json</code>:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "llm": {
     "provider": "openai",
     "apiKey": "sk-..."
@@ -83,9 +83,9 @@ export default function PluginInstallationPage() {
                 <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
                         <Package className="w-5 h-5 text-blue-400" />
-                        <h3 className="text-white font-semibold">browser-use</h3>
+                        <h3 className="text-foreground font-semibold">browser-use</h3>
                     </div>
-                    <p className="text-sm text-zinc-400 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3">
                         Control Chrome/Firefox for web automation, scraping, and testing.
                     </p>
                     <Link href="/skills/browser-use" className="text-xs text-blue-400 hover:text-blue-300">
@@ -96,9 +96,9 @@ export default function PluginInstallationPage() {
                 <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
                         <Package className="w-5 h-5 text-green-400" />
-                        <h3 className="text-white font-semibold">memory-core</h3>
+                        <h3 className="text-foreground font-semibold">memory-core</h3>
                     </div>
-                    <p className="text-sm text-zinc-400 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3">
                         Persistent memory across conversations. Remembers user preferences and context.
                     </p>
                     <Link href="/skills/memory-core" className="text-xs text-green-400 hover:text-green-300">
@@ -109,9 +109,9 @@ export default function PluginInstallationPage() {
                 <div className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
                         <Package className="w-5 h-5 text-purple-400" />
-                        <h3 className="text-white font-semibold">crypto-tracker</h3>
+                        <h3 className="text-foreground font-semibold">crypto-tracker</h3>
                     </div>
-                    <p className="text-sm text-zinc-400 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3">
                         Real-time cryptocurrency prices, charts, and market data.
                     </p>
                     <Link href="/skills/crypto-tracker" className="text-xs text-purple-400 hover:text-purple-300">
@@ -122,9 +122,9 @@ export default function PluginInstallationPage() {
                 <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
                         <Package className="w-5 h-5 text-orange-400" />
-                        <h3 className="text-white font-semibold">email-sender</h3>
+                        <h3 className="text-foreground font-semibold">email-sender</h3>
                     </div>
-                    <p className="text-sm text-zinc-400 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3">
                         Send emails via SMTP. Supports Gmail, Outlook, and custom servers.
                     </p>
                     <Link href="/skills/email-sender" className="text-xs text-orange-400 hover:text-orange-300">
@@ -138,8 +138,8 @@ export default function PluginInstallationPage() {
                 Some plugins require additional config. Example for <code>browser-use</code>:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "skills": ["browser-use"],
   "skillConfig": {
     "browser-use": {
@@ -159,18 +159,18 @@ export default function PluginInstallationPage() {
                 After adding plugins, restart your agent:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <Terminal className="w-4 h-4 text-zinc-500" />
-                    <span className="text-xs text-zinc-500 uppercase tracking-wider">Terminal</span>
+                    <Terminal className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider">Terminal</span>
                 </div>
-                <pre className="text-sm text-zinc-300"><code>openclaw start --config clawhub.json</code></pre>
+                <pre className="text-sm text-foreground/80"><code>openclaw start --config clawhub.json</code></pre>
             </div>
 
             <p>
                 You should see:
             </p>
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <pre className="text-sm text-green-400"><code>{`✓ Loaded skill: browser-use
 ✓ Loaded skill: memory-core
 ✓ Agent started on http://127.0.0.1:3000`}</code></pre>
@@ -193,8 +193,8 @@ export default function PluginInstallationPage() {
                 Run our <Link href="/tools/doctor" className="text-blue-400 hover:text-blue-300">Local Doctor</Link> to validate:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300"><code>npx clawkit-doctor@latest</code></pre>
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80"><code>npx clawkit-doctor@latest</code></pre>
             </div>
 
             <h2>Best Practices</h2>
@@ -208,8 +208,8 @@ export default function PluginInstallationPage() {
                     <div key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-500">{item.desc}</p>
+                            <h4 className="text-foreground font-semibold text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
                         </div>
                     </div>
                 ))}
@@ -218,18 +218,18 @@ export default function PluginInstallationPage() {
             <h2>Next Steps</h2>
             <div className="not-prose grid md:grid-cols-2 gap-4 my-8">
                 <Link href="/skills" className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg hover:bg-purple-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">Browse All Plugins</h3>
-                    <p className="text-sm text-zinc-400">45+ verified plugins</p>
+                    <h3 className="text-foreground font-semibold mb-2">Browse All Plugins</h3>
+                    <p className="text-sm text-muted-foreground">45+ verified plugins</p>
                 </Link>
                 <Link href="/tools/config" className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg hover:bg-blue-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">Config Wizard</h3>
-                    <p className="text-sm text-zinc-400">Auto-configure plugins</p>
+                    <h3 className="text-foreground font-semibold mb-2">Config Wizard</h3>
+                    <p className="text-sm text-muted-foreground">Auto-configure plugins</p>
                 </Link>
             </div>
 
-            <hr className="my-8 border-white/10" />
+            <hr className="my-8 border-border" />
 
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-muted-foreground">
                 <strong>Last Updated:</strong> February 6, 2026 |
                 <strong> Available Plugins:</strong> 45+ verified
             </p>

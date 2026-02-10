@@ -18,8 +18,8 @@ export default function ConnectionErrorsPage() {
                 <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
                     <div>
-                        <h3 className="text-lg font-bold text-white mb-2">TL;DR - Quick Fix</h3>
-                        <p className="text-zinc-300 mb-4">
+                        <h3 className="text-lg font-bold text-foreground mb-2">TL;DR - Quick Fix</h3>
+                        <p className="text-foreground/80 mb-4">
                             Use our <Link href="/tools/doctor" className="text-green-400 hover:text-green-300">Local Doctor Tool</Link> to auto-diagnose this issue in 30 seconds.
                         </p>
                         <Link
@@ -57,8 +57,8 @@ export default function ConnectionErrorsPage() {
             <h2>Solution 1: Quick Fix (Recommended)</h2>
 
             <div className="not-prose bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 my-6">
-                <h3 className="text-lg font-bold text-white mb-3">Use ClawKit's Local Doctor</h3>
-                <p className="text-zinc-300 mb-4">
+                <h3 className="text-lg font-bold text-foreground mb-3">Use ClawKit's Local Doctor</h3>
+                <p className="text-foreground/80 mb-4">
                     Our diagnostic tool automatically checks for this issue and suggests fixes.
                 </p>
 
@@ -66,19 +66,19 @@ export default function ConnectionErrorsPage() {
                     <div className="flex items-start gap-3">
                         <span className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 text-black text-sm font-bold flex-shrink-0">1</span>
                         <div>
-                            <p className="text-white">Visit <Link href="/tools/doctor" className="text-blue-400 hover:text-blue-300">Local Doctor</Link></p>
+                            <p className="text-foreground">Visit <Link href="/tools/doctor" className="text-blue-400 hover:text-blue-300">Local Doctor</Link></p>
                         </div>
                     </div>
                     <div className="flex items-start gap-3">
                         <span className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 text-black text-sm font-bold flex-shrink-0">2</span>
                         <div>
-                            <p className="text-white">Run <code className="text-green-400">npx clawkit-doctor@latest</code></p>
+                            <p className="text-foreground">Run <code className="text-green-400">npx clawkit-doctor@latest</code></p>
                         </div>
                     </div>
                     <div className="flex items-start gap-3">
                         <span className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 text-black text-sm font-bold flex-shrink-0">3</span>
                         <div>
-                            <p className="text-white">Follow the auto-fix suggestions</p>
+                            <p className="text-foreground">Follow the auto-fix suggestions</p>
                         </div>
                     </div>
                 </div>
@@ -89,20 +89,20 @@ export default function ConnectionErrorsPage() {
             <h3>Step 1: Check if the Agent is Running</h3>
             <p>First, verify your agent is actually running:</p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <Terminal className="w-4 h-4 text-zinc-500" />
-                    <span className="text-xs text-zinc-500 uppercase tracking-wider">Terminal</span>
+                    <Terminal className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider">Terminal</span>
                 </div>
-                <pre className="text-sm text-zinc-300"><code>docker ps</code></pre>
+                <pre className="text-sm text-foreground/80"><code>docker ps</code></pre>
             </div>
 
             <p>
                 You should see a container named <code>openclaw</code> or similar. If not, start your agent:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300"><code>docker-compose up -d</code></pre>
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80"><code>docker-compose up -d</code></pre>
             </div>
 
             <h3>Step 2: Use 127.0.0.1 Instead of localhost</h3>
@@ -114,9 +114,9 @@ export default function ConnectionErrorsPage() {
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <AlertTriangle className="w-4 h-4 text-red-400" />
-                        <span className="text-sm font-bold text-white">❌ Before</span>
+                        <span className="text-sm font-bold text-foreground">❌ Before</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`{
+                    <pre className="text-sm text-foreground/80"><code>{`{
   "host": "localhost",
   "port": 3000
 }`}</code></pre>
@@ -124,9 +124,9 @@ export default function ConnectionErrorsPage() {
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <CheckCircle2 className="w-4 h-4 text-green-400" />
-                        <span className="text-sm font-bold text-white">✅ After</span>
+                        <span className="text-sm font-bold text-foreground">✅ After</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`{
+                    <pre className="text-sm text-foreground/80"><code>{`{
   "host": "127.0.0.1",
   "port": 3000
 }`}</code></pre>
@@ -153,36 +153,36 @@ export default function ConnectionErrorsPage() {
                 <li>Checks for common misconfigurations</li>
             </ul>
 
-            <div className="not-prose bg-zinc-900/50 border border-white/10 rounded-xl p-6 my-8">
-                <h3 className="text-lg font-bold text-white mb-4">Related Tools</h3>
+            <div className="not-prose bg-card/50 border border-border rounded-xl p-6 my-8">
+                <h3 className="text-lg font-bold text-foreground mb-4">Related Tools</h3>
                 <div className="grid md:grid-cols-3 gap-4">
-                    <Link href="/tools/doctor" className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                    <Link href="/tools/doctor" className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted transition-colors group">
                         <Wrench className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <div className="text-sm font-medium text-white group-hover:text-green-400">Local Doctor</div>
-                            <div className="text-xs text-zinc-500">Auto-diagnose issues</div>
+                            <div className="text-sm font-medium text-foreground group-hover:text-green-400">Local Doctor</div>
+                            <div className="text-xs text-muted-foreground">Auto-diagnose issues</div>
                         </div>
                     </Link>
-                    <Link href="/tools/config" className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                    <Link href="/tools/config" className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted transition-colors group">
                         <CheckCircle2 className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <div className="text-sm font-medium text-white group-hover:text-blue-400">Config Wizard</div>
-                            <div className="text-xs text-zinc-500">Generate valid configs</div>
+                            <div className="text-sm font-medium text-foreground group-hover:text-blue-400">Config Wizard</div>
+                            <div className="text-xs text-muted-foreground">Generate valid configs</div>
                         </div>
                     </Link>
-                    <Link href="/tools/cost" className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                    <Link href="/tools/cost" className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted transition-colors group">
                         <Terminal className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <div className="text-sm font-medium text-white group-hover:text-purple-400">Cost Estimator</div>
-                            <div className="text-xs text-zinc-500">Optimize API costs</div>
+                            <div className="text-sm font-medium text-foreground group-hover:text-purple-400">Cost Estimator</div>
+                            <div className="text-xs text-muted-foreground">Optimize API costs</div>
                         </div>
                     </Link>
                 </div>
             </div>
 
-            <hr className="my-8 border-white/10" />
+            <hr className="my-8 border-border" />
 
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-muted-foreground">
                 <strong>Last Updated:</strong> February 6, 2026 |
                 <strong> Time to Fix:</strong> 30 seconds (with Local Doctor) or 5-10 minutes (manual)
             </p>

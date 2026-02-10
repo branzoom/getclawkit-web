@@ -11,28 +11,28 @@ export default function PrivacyPage() {
         <div className="container mx-auto px-4 py-16 max-w-4xl">
             {/* Header */}
             <div className="mb-12">
-                <h1 className="text-4xl font-bold text-white mb-4">Privacy Policy</h1>
-                <p className="text-zinc-400">Last Updated: February 2026</p>
+                <h1 className="text-4xl font-bold text-foreground mb-4">Privacy Policy</h1>
+                <p className="text-muted-foreground">Last Updated: February 2026</p>
             </div>
 
             {/* TL;DR Summary Cards */}
             <div className="grid md:grid-cols-2 gap-6 mb-16">
                 <div className="p-6 bg-green-500/10 border border-green-500/20 rounded-xl">
                     <Shield className="w-8 h-8 text-green-500 mb-4" />
-                    <h3 className="font-bold text-white mb-2">Zero Data Collection</h3>
-                    <p className="text-sm text-zinc-400">We do not have a database. We do not track your IP, email, or usage patterns.</p>
+                    <h3 className="font-bold text-foreground mb-2">Zero Data Collection</h3>
+                    <p className="text-sm text-muted-foreground">We do not have a database. We do not track your IP, email, or usage patterns.</p>
                 </div>
                 <div className="p-6 bg-blue-500/10 border border-blue-500/20 rounded-xl">
                     <Lock className="w-8 h-8 text-blue-500 mb-4" />
-                    <h3 className="font-bold text-white mb-2">Local Storage Only</h3>
-                    <p className="text-sm text-zinc-400">Your API Keys and Configs are stored in your browser's LocalStorage and never leave your device.</p>
+                    <h3 className="font-bold text-foreground mb-2">Local Storage Only</h3>
+                    <p className="text-sm text-muted-foreground">Your API Keys and Configs are stored in your browser's LocalStorage and never leave your device.</p>
                 </div>
             </div>
 
             {/* Legal Content */}
-            <div className="prose prose-invert max-w-none space-y-12 text-zinc-300">
+            <div className="prose dark:prose-invert max-w-none space-y-12 text-muted-foreground">
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                    <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
                         <ServerOff className="w-5 h-5" /> 1. No Server-Side Storage
                     </h2>
                     <p>

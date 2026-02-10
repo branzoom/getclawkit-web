@@ -17,8 +17,8 @@ export default function WindowsIssuesPage() {
                 <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
                     <div>
-                        <h3 className="text-lg font-bold text-white mb-2">Windows Auto-Fix</h3>
-                        <p className="text-zinc-300 mb-4">
+                        <h3 className="text-lg font-bold text-foreground mb-2">Windows Auto-Fix</h3>
+                        <p className="text-foreground/80 mb-4">
                             Our <Link href="/tools/config" className="text-blue-400 hover:text-blue-300">Config Wizard</Link> automatically fixes Windows path escaping and other Windows-specific issues.
                         </p>
                         <Link
@@ -42,17 +42,17 @@ export default function WindowsIssuesPage() {
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <AlertTriangle className="w-4 h-4 text-red-400" />
-                        <span className="text-sm font-bold text-white">❌ Wrong</span>
+                        <span className="text-sm font-bold text-foreground">❌ Wrong</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`"workDir": "C:\\Users\\name\\project"`}</code></pre>
+                    <pre className="text-sm text-foreground/80"><code>{`"workDir": "C:\\Users\\name\\project"`}</code></pre>
                     <p className="text-xs text-red-400 mt-2">Causes JSON parse error</p>
                 </div>
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <CheckCircle2 className="w-4 h-4 text-green-400" />
-                        <span className="text-sm font-bold text-white">✅ Correct</span>
+                        <span className="text-sm font-bold text-foreground">✅ Correct</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`"workDir": "C:\\\\Users\\\\name\\\\project"`}</code></pre>
+                    <pre className="text-sm text-foreground/80"><code>{`"workDir": "C:\\\\Users\\\\name\\\\project"`}</code></pre>
                     <p className="text-xs text-green-400 mt-2">Valid JSON</p>
                 </div>
             </div>
@@ -66,8 +66,8 @@ export default function WindowsIssuesPage() {
                 <p className="text-sm text-yellow-300 mb-3">
                     <strong>⚠️ Solution:</strong> Run PowerShell as Administrator, then:
                 </p>
-                <div className="bg-zinc-900 border border-white/10 rounded-lg p-3">
-                    <pre className="text-sm text-zinc-300"><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
+                <div className="bg-card border border-border rounded-lg p-3">
+                    <pre className="text-sm text-foreground/80"><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
                 </div>
             </div>
 
@@ -76,9 +76,9 @@ export default function WindowsIssuesPage() {
                 Port 3000 might be blocked by default.
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <h4 className="text-white font-semibold mb-3">Steps to Allow Port 3000:</h4>
-                <ol className="space-y-2 text-sm text-zinc-300">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <h4 className="text-foreground font-semibold mb-3">Steps to Allow Port 3000:</h4>
+                <ol className="space-y-2 text-sm text-foreground/80">
                     <li>1. Open Windows Defender Firewall</li>
                     <li>2. Click "Advanced settings"</li>
                     <li>3. Click "Inbound Rules" → "New Rule"</li>
@@ -93,12 +93,12 @@ export default function WindowsIssuesPage() {
                 After installing Node.js, you might need to restart your terminal.
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <Terminal className="w-4 h-4 text-zinc-500" />
-                    <span className="text-xs text-zinc-500 uppercase tracking-wider">PowerShell</span>
+                    <Terminal className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider">PowerShell</span>
                 </div>
-                <pre className="text-sm text-zinc-300"><code>node --version</code></pre>
+                <pre className="text-sm text-foreground/80"><code>node --version</code></pre>
             </div>
 
             <p>
@@ -116,15 +116,15 @@ export default function WindowsIssuesPage() {
                 Requires WSL 2 on Windows 10/11.
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <Terminal className="w-4 h-4 text-zinc-500" />
-                    <span className="text-xs text-zinc-500 uppercase tracking-wider">PowerShell (Admin)</span>
+                    <Terminal className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider">PowerShell (Admin)</span>
                 </div>
-                <pre className="text-sm text-zinc-300"><code>wsl --install</code></pre>
+                <pre className="text-sm text-foreground/80"><code>wsl --install</code></pre>
             </div>
 
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-muted-foreground">
                 Then restart your computer and start Docker Desktop.
             </p>
 
@@ -139,8 +139,8 @@ export default function WindowsIssuesPage() {
                     <div key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-500">{item.desc}</p>
+                            <h4 className="text-foreground font-semibold text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
                         </div>
                     </div>
                 ))}
@@ -151,25 +151,25 @@ export default function WindowsIssuesPage() {
                 Run our <Link href="/tools/doctor" className="text-blue-400 hover:text-blue-300">Local Doctor</Link> to check for Windows-specific issues:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300"><code>npx clawkit-doctor@latest</code></pre>
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80"><code>npx clawkit-doctor@latest</code></pre>
             </div>
 
             <h2>Still Having Issues?</h2>
             <div className="not-prose grid md:grid-cols-2 gap-4 my-8">
                 <Link href="/docs/troubleshooting/connection-errors" className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg hover:bg-green-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">Connection Errors</h3>
-                    <p className="text-sm text-zinc-400">Fix ECONNREFUSED issues</p>
+                    <h3 className="text-foreground font-semibold mb-2">Connection Errors</h3>
+                    <p className="text-sm text-muted-foreground">Fix ECONNREFUSED issues</p>
                 </Link>
                 <Link href="/docs/troubleshooting/json-parse-errors" className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg hover:bg-orange-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">JSON Parse Errors</h3>
-                    <p className="text-sm text-zinc-400">Fix config syntax issues</p>
+                    <h3 className="text-foreground font-semibold mb-2">JSON Parse Errors</h3>
+                    <p className="text-sm text-muted-foreground">Fix config syntax issues</p>
                 </Link>
             </div>
 
-            <hr className="my-8 border-white/10" />
+            <hr className="my-8 border-border" />
 
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-muted-foreground">
                 <strong>Last Updated:</strong> February 6, 2026 |
                 <strong> Platform:</strong> Windows 10/11
             </p>

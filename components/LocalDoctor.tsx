@@ -84,16 +84,16 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
             <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-2xl p-8 text-center relative overflow-hidden group">
                 <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:32px_32px]" />
                 <div className="relative z-10 space-y-6">
-                    <h2 className="text-2xl font-bold text-white">
+                    <h2 className="text-2xl font-bold text-foreground">
                         Run Instant Diagnosis
                     </h2>
-                    <p className="text-zinc-400 max-w-lg mx-auto">
+                    <p className="text-muted-foreground max-w-lg mx-auto">
                         No installation required. Just copy and paste this command into your terminal to start the interactive doctor.
                     </p>
 
-                    <div className="bg-[#0d1117] border border-white/10 rounded-xl p-4 max-w-xl mx-auto flex items-center gap-4 shadow-2xl">
+                    <div className="bg-card border border-border rounded-xl p-4 max-w-xl mx-auto flex items-center gap-4 shadow-2xl">
                         <span className="text-pink-500 font-mono select-none">$</span>
-                        <code className="flex-1 font-mono text-white text-left overflow-x-auto whitespace-nowrap">
+                        <code className="flex-1 font-mono text-foreground text-left overflow-x-auto whitespace-nowrap">
                             npx clawkit-doctor@latest
                         </code>
                         <Button
@@ -102,14 +102,14 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
                                 setCopied(true);
                                 setTimeout(() => setCopied(false), 2000);
                             }}
-                            className={`${copied ? 'bg-green-500 text-black' : 'bg-white text-black hover:bg-zinc-200'}`}
+                            className={`${copied ? 'bg-green-500 text-primary-foreground' : 'bg-primary text-primary-foreground hover:bg-primary/90'}`}
                         >
                             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                         </Button>
                     </div>
 
                     <div className="text-center pt-2">
-                        <p className="text-xs text-zinc-500">
+                        <p className="text-xs text-muted-foreground">
                             Supported on macOS, Windows, and Linux · Requires Node.js 18+
                         </p>
                     </div>
@@ -117,9 +117,9 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
             </div>
 
             {/* Secondary Option: Manual Script (Collapsible) */}
-            <div className="mt-12 pt-8 border-t border-white/5">
+            <div className="mt-12 pt-8 border-t border-border">
                 <details className="group">
-                    <summary className="flex items-center justify-center gap-2 text-sm text-zinc-500 hover:text-white cursor-pointer transition-colors select-none">
+                    <summary className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground cursor-pointer transition-colors select-none">
                         <span>Show manual script (Legacy)</span>
                         <svg className="w-4 h-4 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" />
@@ -133,7 +133,7 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
                                 onClick={() => setOs('windows')}
                                 className={`px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2 ${os === 'windows'
                                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25 scale-105'
-                                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                                    : 'bg-card text-muted-foreground hover:bg-muted'
                                     }`}
                             >
                                 <svg className="w-5 h-5" viewBox="0 0 88 88" fill="currentColor"><path d="M0 12.402l35.687-4.86.016 34.423-35.67.203L0 12.402zM35.67 49.329l-.016 34.693L0 79.128V49.532l35.67-.203zM43.229 3.208L88 0v41.79l-44.771.18V3.208zM88 49.12v41.65l-44.771-6.198V49.302l44.771-.182z" /></svg>
@@ -143,7 +143,7 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
                                 onClick={() => setOs('unix')}
                                 className={`px-6 py-3 rounded-full font-medium transition-all flex items-center gap-2 ${os === 'unix'
                                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25 scale-105'
-                                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                                    : 'bg-card text-muted-foreground hover:bg-muted'
                                     }`}
                             >
                                 <Terminal className="w-5 h-5" />
@@ -152,20 +152,20 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
                         </div>
 
                         {/* Script Display */}
-                        <div className="relative group rounded-xl overflow-hidden border border-white/10 bg-[#0d1117]">
-                            <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/5">
+                        <div className="relative group rounded-xl overflow-hidden border border-border bg-card">
+                            <div className="flex items-center justify-between px-4 py-3 bg-muted border-b border-border">
                                 <div className="flex gap-2">
                                     <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
                                     <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
                                     <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
                                 </div>
-                                <div className="text-xs text-zinc-500 font-mono">
+                                <div className="text-xs text-muted-foreground font-mono">
                                     {os === 'windows' ? 'Step 1: Open PowerShell -> Paste' : 'Step 1: Open Terminal -> Paste'}
                                 </div>
                             </div>
 
                             <div className="relative">
-                                <pre className="p-6 overflow-x-auto text-sm font-mono leading-relaxed text-zinc-300">
+                                <pre className="p-6 overflow-x-auto text-sm font-mono leading-relaxed text-foreground/80">
                                     <code>{activeScript}</code>
                                 </pre>
 
@@ -173,7 +173,7 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
                                 <div className="absolute top-4 right-4">
                                     <Button
                                         onClick={handleCopy}
-                                        className={`transition-all duration-300 ${copied ? 'bg-green-500 text-black hover:bg-green-400' : 'bg-white text-black hover:bg-zinc-200'
+                                        className={`transition-all duration-300 ${copied ? 'bg-green-500 text-primary-foreground hover:bg-green-400' : 'bg-primary text-primary-foreground hover:bg-primary/90'
                                             }`}
                                     >
                                         {copied ? (
@@ -195,20 +195,20 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
 
             {/* Trust Badges */}
             <div className="grid md:grid-cols-3 gap-4 text-center">
-                <div className="p-4 rounded-lg bg-zinc-900/50 border border-white/5">
+                <div className="p-4 rounded-lg bg-card/50 border border-border">
                     <Shield className="w-6 h-6 text-green-500 mx-auto mb-2" />
-                    <h3 className="font-bold text-white text-sm">100% Read-Only</h3>
-                    <p className="text-xs text-zinc-500 mt-1">Never modifies your system files.</p>
+                    <h3 className="font-bold text-foreground text-sm">100% Read-Only</h3>
+                    <p className="text-xs text-muted-foreground mt-1">Never modifies your system files.</p>
                 </div>
-                <div className="p-4 rounded-lg bg-zinc-900/50 border border-white/5">
+                <div className="p-4 rounded-lg bg-card/50 border border-border">
                     <AlertTriangle className="w-6 h-6 text-yellow-500 mx-auto mb-2" />
-                    <h3 className="font-bold text-white text-sm">No Data Upload</h3>
-                    <p className="text-xs text-zinc-500 mt-1">Logs stay on your screen only.</p>
+                    <h3 className="font-bold text-foreground text-sm">No Data Upload</h3>
+                    <p className="text-xs text-muted-foreground mt-1">Logs stay on your screen only.</p>
                 </div>
-                <div className="p-4 rounded-lg bg-zinc-900/50 border border-white/5">
+                <div className="p-4 rounded-lg bg-card/50 border border-border">
                     <Terminal className="w-6 h-6 text-blue-500 mx-auto mb-2" />
-                    <h3 className="font-bold text-white text-sm">Open Source</h3>
-                    <p className="text-xs text-zinc-500 mt-1">What you see is what you run.</p>
+                    <h3 className="font-bold text-foreground text-sm">Open Source</h3>
+                    <p className="text-xs text-muted-foreground mt-1">What you see is what you run.</p>
                 </div>
             </div>
         </div>

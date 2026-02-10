@@ -13,25 +13,25 @@ export default function ContactPage() {
     return (
         <div className="container mx-auto px-4 py-16 max-w-5xl">
             <div className="text-center mb-16 space-y-4">
-                <h1 className="text-4xl font-bold text-white">Get in Touch</h1>
-                <p className="text-zinc-400 max-w-xl mx-auto">
+                <h1 className="text-4xl font-bold text-foreground">Get in Touch</h1>
+                <p className="text-muted-foreground max-w-xl mx-auto">
                     We are building in public. Whether you found a bug or just want to say hi, we'd love to hear from you.
                 </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
                 {/* 1. GitHub Support */}
-                <Card className="bg-zinc-900 border-white/10 hover:border-white/20 transition-colors">
+                <Card className="bg-card border-border hover:border-border transition-colors">
                     <CardHeader>
-                        <Github className="w-8 h-8 text-white mb-2" />
+                        <Github className="w-8 h-8 text-foreground mb-2" />
                         <CardTitle>Bug Reports</CardTitle>
                         <CardDescription>Found a glitch? Open an issue on GitHub.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-sm text-zinc-400 mb-6 min-h-[40px]">
+                        <p className="text-sm text-muted-foreground mb-6 min-h-[40px]">
                             The fastest way to get technical help or report broken scripts.
                         </p>
-                        <Button asChild className="w-full bg-white text-black hover:bg-zinc-200">
+                        <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
                             <Link href="https://github.com/branzoom/getclawkit-web/issues" target="_blank">
                                 Open GitHub Issue
                             </Link>
@@ -40,14 +40,14 @@ export default function ContactPage() {
                 </Card>
 
                 {/* 2. Twitter/X */}
-                <Card className="bg-zinc-900 border-white/10 hover:border-blue-500/20 transition-colors">
+                <Card className="bg-card border-border hover:border-blue-500/20 transition-colors">
                     <CardHeader>
                         <Twitter className="w-8 h-8 text-blue-400 mb-2" />
                         <CardTitle>Quick Chat</CardTitle>
                         <CardDescription>Follow us for updates & tips.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-sm text-zinc-400 mb-6 min-h-[40px]">
+                        <p className="text-sm text-muted-foreground mb-6 min-h-[40px]">
                             Ideal for quick questions, feature requests, or just sharing your setup.
                         </p>
                         <Button asChild variant="outline" className="w-full border-blue-500/20 text-blue-400 hover:bg-blue-500/10">
@@ -66,7 +66,7 @@ export default function ContactPage() {
                         <CardDescription>For partnerships or private inquiries.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-sm text-zinc-400 mb-6 min-h-[40px]">
+                        <p className="text-sm text-muted-foreground mb-6 min-h-[40px]">
                             We usually respond within 24-48 hours.
                         </p>
                         <Button asChild variant="outline" className="w-full border-green-500/20 text-green-400 hover:bg-green-500/10">

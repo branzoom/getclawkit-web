@@ -17,8 +17,8 @@ export default function CostOptimizationPage() {
                 <div className="flex items-start gap-3">
                     <DollarSign className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
                     <div>
-                        <h3 className="text-lg font-bold text-white mb-2">Compare Costs Before You Commit</h3>
-                        <p className="text-zinc-300 mb-4">
+                        <h3 className="text-lg font-bold text-foreground mb-2">Compare Costs Before You Commit</h3>
+                        <p className="text-foreground/80 mb-4">
                             Our <Link href="/tools/cost" className="text-green-400 hover:text-green-300">Cost Estimator</Link> compares pricing across OpenAI, DeepSeek, Claude, and more.
                         </p>
                         <Link
@@ -38,19 +38,19 @@ export default function CostOptimizationPage() {
                 DeepSeek V3.2 offers GPT-4-level performance at 1/10th the cost.
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <div className="grid md:grid-cols-3 gap-4 text-center">
                     <div>
                         <div className="text-2xl font-bold text-red-400">$10/M tokens</div>
-                        <div className="text-xs text-zinc-500 mt-1">GPT-4.1</div>
+                        <div className="text-xs text-muted-foreground mt-1">GPT-4.1</div>
                     </div>
                     <div>
                         <div className="text-2xl font-bold text-orange-400">$18/M tokens</div>
-                        <div className="text-xs text-zinc-500 mt-1">Claude Sonnet 4.5</div>
+                        <div className="text-xs text-muted-foreground mt-1">Claude Sonnet 4.5</div>
                     </div>
                     <div>
                         <div className="text-2xl font-bold text-green-400">$0.70/M tokens</div>
-                        <div className="text-xs text-zinc-500 mt-1">DeepSeek V3.2 ⭐</div>
+                        <div className="text-xs text-muted-foreground mt-1">DeepSeek V3.2 ⭐</div>
                     </div>
                 </div>
             </div>
@@ -59,8 +59,8 @@ export default function CostOptimizationPage() {
                 Update your config:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "llm": {
     "provider": "deepseek",
     "apiKey": "sk-...",
@@ -79,9 +79,9 @@ export default function CostOptimizationPage() {
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <AlertTriangle className="w-4 h-4 text-red-400" />
-                        <span className="text-sm font-bold text-white">❌ Risky</span>
+                        <span className="text-sm font-bold text-foreground">❌ Risky</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`{
+                    <pre className="text-sm text-foreground/80"><code>{`{
   "llm": {
     "model": "gpt-4o"
     // No limit!
@@ -92,9 +92,9 @@ export default function CostOptimizationPage() {
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <CheckCircle2 className="w-4 h-4 text-green-400" />
-                        <span className="text-sm font-bold text-white">✅ Safe</span>
+                        <span className="text-sm font-bold text-foreground">✅ Safe</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`{
+                    <pre className="text-sm text-foreground/80"><code>{`{
   "llm": {
     "model": "gpt-4o",
     "maxTokens": 4000
@@ -109,27 +109,27 @@ export default function CostOptimizationPage() {
                 Not every task needs GPT-4. Use cheaper models when possible.
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <table className="w-full text-sm">
                     <thead>
-                        <tr className="border-b border-white/10">
-                            <th className="text-left text-white py-2">Task Type</th>
-                            <th className="text-left text-white py-2">Recommended Model</th>
-                            <th className="text-right text-white py-2">Cost/M Tokens</th>
+                        <tr className="border-b border-border">
+                            <th className="text-left text-foreground py-2">Task Type</th>
+                            <th className="text-left text-foreground py-2">Recommended Model</th>
+                            <th className="text-right text-foreground py-2">Cost/M Tokens</th>
                         </tr>
                     </thead>
-                    <tbody className="text-zinc-300">
-                        <tr className="border-b border-white/5">
+                    <tbody className="text-foreground/80">
+                        <tr className="border-b border-border">
                             <td className="py-2">Simple Q&A</td>
                             <td>gpt-4.1-mini</td>
                             <td className="text-right text-green-400">$2.00</td>
                         </tr>
-                        <tr className="border-b border-white/5">
+                        <tr className="border-b border-border">
                             <td className="py-2">Code generation</td>
                             <td>deepseek-chat (V3.2)</td>
                             <td className="text-right text-green-400">$0.70</td>
                         </tr>
-                        <tr className="border-b border-white/5">
+                        <tr className="border-b border-border">
                             <td className="py-2">Complex reasoning</td>
                             <td>gpt-4.1</td>
                             <td className="text-right text-orange-400">$10.00</td>
@@ -151,8 +151,8 @@ export default function CostOptimizationPage() {
                     <div key={i} className="flex items-start gap-3">
                         <TrendingDown className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-500">{item.desc}</p>
+                            <h4 className="text-foreground font-semibold text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
                         </div>
                     </div>
                 ))}
@@ -188,8 +188,8 @@ export default function CostOptimizationPage() {
 
             <h2>Real-World Example</h2>
             <div className="not-prose bg-blue-500/10 border border-blue-500/20 rounded-lg p-6 my-6">
-                <h4 className="text-white font-bold mb-3">Scenario: 100K tokens/day</h4>
-                <div className="space-y-2 text-sm text-zinc-300">
+                <h4 className="text-foreground font-bold mb-3">Scenario: 100K tokens/day</h4>
+                <div className="space-y-2 text-sm text-foreground/80">
                     <div className="flex justify-between">
                         <span>GPT-4.1:</span>
                         <span className="text-red-400 font-bold">$30/month</span>
@@ -203,7 +203,7 @@ export default function CostOptimizationPage() {
                         <span className="text-green-400 font-bold">$2.10/month</span>
                     </div>
                 </div>
-                <p className="text-xs text-zinc-500 mt-4">
+                <p className="text-xs text-muted-foreground mt-4">
                     💡 Switching to DeepSeek saves $83.43/month (93% reduction)
                 </p>
             </div>
@@ -219,16 +219,16 @@ export default function CostOptimizationPage() {
                     <div key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-500">{item.desc}</p>
+                            <h4 className="text-foreground font-semibold text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
-            <hr className="my-8 border-white/10" />
+            <hr className="my-8 border-border" />
 
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-muted-foreground">
                 <strong>Last Updated:</strong> February 6, 2026 |
                 <strong> Potential Savings:</strong> Up to 93% by switching to DeepSeek
             </p>

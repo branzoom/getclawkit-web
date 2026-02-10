@@ -56,8 +56,8 @@ export default function StatusWidget() {
     };
 
     const getIcon = (type: string) => {
-        if (type === 'github') return <Server className="w-4 h-4 text-zinc-400" />;
-        return <Globe className="w-4 h-4 text-zinc-400" />;
+        if (type === 'github') return <Server className="w-4 h-4 text-muted-foreground" />;
+        return <Globe className="w-4 h-4 text-muted-foreground" />;
     };
 
     // 计算整体状态颜色
@@ -67,7 +67,7 @@ export default function StatusWidget() {
         <div className="grid gap-8 max-w-4xl mx-auto">
             {/* Top Stats Cards */}
             <div className="grid md:grid-cols-3 gap-4">
-                <Card className="bg-zinc-900/50 border-white/10">
+                <Card className="bg-card/50 border-border">
                     <CardHeader className="pb-2">
                         <CardDescription>Services Checked</CardDescription>
                         <CardTitle className="text-3xl text-green-400 font-mono tracking-tighter">
@@ -75,31 +75,31 @@ export default function StatusWidget() {
                         </CardTitle>
                     </CardHeader>
                     <CardFooter>
-                        <Progress value={uptime ?? 0} className="h-1 bg-zinc-800" indicatorClassName="bg-green-500" />
+                        <Progress value={uptime ?? 0} className="h-1 bg-muted" indicatorClassName="bg-green-500" />
                     </CardFooter>
                 </Card>
 
-                <Card className="bg-zinc-900/50 border-white/10">
+                <Card className="bg-card/50 border-border">
                     <CardHeader className="pb-2">
                         <CardDescription>Active Incidents</CardDescription>
-                        <CardTitle className="text-3xl text-white font-mono tracking-tighter">
+                        <CardTitle className="text-3xl text-foreground font-mono tracking-tighter">
                             0
                         </CardTitle>
                     </CardHeader>
-                    <CardFooter className="text-xs text-zinc-500">
+                    <CardFooter className="text-xs text-muted-foreground">
                         <CheckCircle2 className="w-3 h-3 mr-1 text-green-500" />
                         No active issues reported.
                     </CardFooter>
                 </Card>
 
-                <Card className="bg-zinc-900/50 border-white/10">
+                <Card className="bg-card/50 border-border">
                     <CardHeader className="pb-2">
                         <CardDescription>Last Checked</CardDescription>
-                        <CardTitle className="text-xl text-white font-mono tracking-tighter truncate">
+                        <CardTitle className="text-xl text-foreground font-mono tracking-tighter truncate">
                             {lastUpdated || '--:--:--'}
                         </CardTitle>
                     </CardHeader>
-                    <CardFooter className="text-xs text-zinc-500">
+                    <CardFooter className="text-xs text-muted-foreground">
                         <Radio className="w-3 h-3 mr-1 text-blue-500 animate-pulse" />
                         Monitoring in real-time.
                     </CardFooter>
@@ -107,7 +107,7 @@ export default function StatusWidget() {
             </div>
 
             {/* Main Status List */}
-            <Card className="border-white/10 bg-[#0d1117]">
+            <Card className="border-border bg-card">
                 <CardHeader>
                     <div className="flex items-center justify-between">
                         <div>
@@ -130,7 +130,7 @@ export default function StatusWidget() {
                     {loading && services.length === 0 ? (
                         // Loading State
                         [1, 2, 3].map(i => (
-                            <div key={i} className="h-16 w-full bg-zinc-800/50 rounded-lg animate-pulse" />
+                            <div key={i} className="h-16 w-full bg-muted/50 rounded-lg animate-pulse" />
                         ))
                     ) : (
                         services.map((service, index) => (
@@ -145,11 +145,11 @@ export default function StatusWidget() {
                                             )}
                                         </div>
                                         <div>
-                                            <h3 className="font-medium text-white flex items-center gap-2">
+                                            <h3 className="font-medium text-foreground flex items-center gap-2">
                                                 {service.name}
                                                 {getIcon(service.type)}
                                             </h3>
-                                            <p className="text-xs text-zinc-500">
+                                            <p className="text-xs text-muted-foreground">
                                                 {service.type === 'github' ? 'API Response' : 'HTTP Head'} • {service.latency}ms latency
                                             </p>
                                         </div>
@@ -174,18 +174,18 @@ export default function StatusWidget() {
                                         })}
                                     </div>
                                 </div>
-                                {index < services.length - 1 && <Separator className="my-2 bg-white/5" />}
+                                {index < services.length - 1 && <Separator className="my-2 bg-muted" />}
                             </div>
                         ))
                     )}
                 </CardContent>
-                <CardFooter className="bg-white/5 border-t border-white/5 p-6">
+                <CardFooter className="bg-muted border-t border-border p-6">
                     <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4">
-                        <div className="text-xs text-zinc-500 flex items-center gap-2">
+                        <div className="text-xs text-muted-foreground flex items-center gap-2">
                             <Activity className="w-4 h-4" />
                             <span>This page refreshes automatically every 60 seconds.</span>
                         </div>
-                        <Button onClick={handleShare} className="w-full md:w-auto bg-white text-black hover:bg-zinc-200 font-bold">
+                        <Button onClick={handleShare} className="w-full md:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-bold">
                             <Share2 className="w-4 h-4 mr-2" />
                             Share Status Report
                         </Button>
@@ -195,19 +195,19 @@ export default function StatusWidget() {
 
             {/* Incident History (Updated for veracity) */}
             <div className="space-y-4">
-                <h3 className="text-lg font-bold text-white pl-1">Past Incidents</h3>
-                <div className="border-l-2 border-white/10 pl-6 py-2 space-y-8">
+                <h3 className="text-lg font-bold text-foreground pl-1">Past Incidents</h3>
+                <div className="border-l-2 border-border pl-6 py-2 space-y-8">
                     <div className="relative">
-                        <div className="absolute -left-[29px] top-1 h-3 w-3 rounded-full bg-zinc-700 border-2 border-black"></div>
-                        <p className="text-sm text-zinc-500 mb-1">Feb 06, 2026</p>
-                        <h4 className="text-white font-medium">All Systems Operational</h4>
-                        <p className="text-sm text-zinc-500">No incidents reported in the last 24 hours.</p>
+                        <div className="absolute -left-[29px] top-1 h-3 w-3 rounded-full bg-muted border-2 border-background"></div>
+                        <p className="text-sm text-muted-foreground mb-1">Feb 06, 2026</p>
+                        <h4 className="text-foreground font-medium">All Systems Operational</h4>
+                        <p className="text-sm text-muted-foreground">No incidents reported in the last 24 hours.</p>
                     </div>
                     <div className="relative">
-                        <div className="absolute -left-[29px] top-1 h-3 w-3 rounded-full bg-zinc-700 border-2 border-black"></div>
-                        <p className="text-sm text-zinc-500 mb-1">Feb 01, 2026</p>
-                        <h4 className="text-white font-medium">ClawHub Registry Latency</h4>
-                        <p className="text-sm text-zinc-500">
+                        <div className="absolute -left-[29px] top-1 h-3 w-3 rounded-full bg-muted border-2 border-background"></div>
+                        <p className="text-sm text-muted-foreground mb-1">Feb 01, 2026</p>
+                        <h4 className="text-foreground font-medium">ClawHub Registry Latency</h4>
+                        <p className="text-sm text-muted-foreground">
                             We observed elevated latency on the registry API for 15 minutes.
                             <span className="text-green-400 block mt-1">Resolved - 10:45 AM UTC</span>
                         </p>

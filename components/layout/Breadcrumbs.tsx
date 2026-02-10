@@ -13,10 +13,10 @@ export function Breadcrumbs() {
     if (segments.length === 0) return null;
 
     return (
-        <nav className="flex items-center gap-2 text-xs text-zinc-500 mb-6 font-medium overflow-x-auto whitespace-nowrap pb-2 scrollbar-none">
+        <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6 font-medium overflow-x-auto whitespace-nowrap pb-2 scrollbar-none">
             <Link
                 href="/"
-                className="flex items-center gap-1 hover:text-white transition-colors"
+                className="flex items-center gap-1 hover:text-foreground transition-colors"
             >
                 <Home className="w-3 h-3" />
                 <span>Home</span>
@@ -34,13 +34,13 @@ export function Breadcrumbs() {
 
                 return (
                     <div key={href} className="flex items-center gap-2">
-                        <ChevronRight className="w-3 h-3 text-zinc-700" />
+                        <ChevronRight className="w-3 h-3 text-muted-foreground" />
                         {isLast ? (
-                            <span className="text-white font-bold">{label}</span>
+                            <span className="text-foreground font-bold">{label}</span>
                         ) : (
                             <Link
                                 href={href}
-                                className="hover:text-white transition-colors capitalize"
+                                className="hover:text-foreground transition-colors capitalize"
                             >
                                 {label}
                             </Link>

@@ -17,8 +17,8 @@ export default function JsonParseErrorsPage() {
                 <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
                     <div>
-                        <h3 className="text-lg font-bold text-white mb-2">Prevent JSON Errors Forever</h3>
-                        <p className="text-zinc-300 mb-4">
+                        <h3 className="text-lg font-bold text-foreground mb-2">Prevent JSON Errors Forever</h3>
+                        <p className="text-foreground/80 mb-4">
                             Our <Link href="/tools/config" className="text-green-400 hover:text-green-300">Config Wizard</Link> validates syntax in real-time and auto-fixes common mistakes.
                         </p>
                         <Link
@@ -51,9 +51,9 @@ export default function JsonParseErrorsPage() {
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <AlertTriangle className="w-4 h-4 text-red-400" />
-                        <span className="text-sm font-bold text-white">❌ Wrong</span>
+                        <span className="text-sm font-bold text-foreground">❌ Wrong</span>
                     </div>
-                    <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+                    <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "llm": {
     "provider": "openai",
     "model": "gpt-4o",  ← Extra comma!
@@ -63,9 +63,9 @@ export default function JsonParseErrorsPage() {
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <CheckCircle2 className="w-4 h-4 text-green-400" />
-                        <span className="text-sm font-bold text-white">✅ Correct</span>
+                        <span className="text-sm font-bold text-foreground">✅ Correct</span>
                     </div>
-                    <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+                    <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "llm": {
     "provider": "openai",
     "model": "gpt-4o"
@@ -83,16 +83,16 @@ export default function JsonParseErrorsPage() {
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <AlertTriangle className="w-4 h-4 text-red-400" />
-                        <span className="text-sm font-bold text-white">❌ Wrong</span>
+                        <span className="text-sm font-bold text-foreground">❌ Wrong</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`"path": "C:\\Users\\name"`}</code></pre>
+                    <pre className="text-sm text-foreground/80"><code>{`"path": "C:\\Users\\name"`}</code></pre>
                 </div>
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <CheckCircle2 className="w-4 h-4 text-green-400" />
-                        <span className="text-sm font-bold text-white">✅ Correct</span>
+                        <span className="text-sm font-bold text-foreground">✅ Correct</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`"path": "C:\\\\Users\\\\name"`}</code></pre>
+                    <pre className="text-sm text-foreground/80"><code>{`"path": "C:\\\\Users\\\\name"`}</code></pre>
                 </div>
             </div>
 
@@ -105,18 +105,18 @@ export default function JsonParseErrorsPage() {
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <AlertTriangle className="w-4 h-4 text-red-400" />
-                        <span className="text-sm font-bold text-white">❌ Wrong</span>
+                        <span className="text-sm font-bold text-foreground">❌ Wrong</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`{
+                    <pre className="text-sm text-foreground/80"><code>{`{
   provider: 'openai'
 }`}</code></pre>
                 </div>
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
                         <CheckCircle2 className="w-4 h-4 text-green-400" />
-                        <span className="text-sm font-bold text-white">✅ Correct</span>
+                        <span className="text-sm font-bold text-foreground">✅ Correct</span>
                     </div>
-                    <pre className="text-sm text-zinc-300"><code>{`{
+                    <pre className="text-sm text-foreground/80"><code>{`{
   "provider": "openai"
 }`}</code></pre>
                 </div>
@@ -128,7 +128,7 @@ export default function JsonParseErrorsPage() {
             </p>
 
             <div className="not-prose bg-red-500/10 border border-red-500/20 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300"><code>{`{
+                <pre className="text-sm text-foreground/80"><code>{`{
   "model": "gpt-4o"  // This is my preferred model ← ERROR!
 }`}</code></pre>
             </div>
@@ -142,10 +142,10 @@ export default function JsonParseErrorsPage() {
 
             <h3>Option 1: Use Config Wizard (Recommended)</h3>
             <div className="not-prose bg-blue-500/10 border border-blue-500/20 rounded-lg p-6 my-4">
-                <p className="text-zinc-300 mb-4">
+                <p className="text-foreground/80 mb-4">
                     Paste your broken config into our <Link href="/tools/config" className="text-blue-400 hover:text-blue-300">Config Wizard</Link>. It will:
                 </p>
-                <ul className="space-y-2 text-sm text-zinc-300">
+                <ul className="space-y-2 text-sm text-foreground/80">
                     <li className="flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
                         <span>Auto-remove trailing commas</span>
@@ -167,14 +167,14 @@ export default function JsonParseErrorsPage() {
             </p>
 
             <h3>Option 3: Manual Debugging</h3>
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <Terminal className="w-4 h-4 text-zinc-500" />
-                    <span className="text-xs text-zinc-500 uppercase tracking-wider">Terminal</span>
+                    <Terminal className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider">Terminal</span>
                 </div>
-                <pre className="text-sm text-zinc-300"><code>node -e "JSON.parse(require('fs').readFileSync('clawhub.json'))"</code></pre>
+                <pre className="text-sm text-foreground/80"><code>node -e "JSON.parse(require('fs').readFileSync('clawhub.json'))"</code></pre>
             </div>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-muted-foreground">
                 This will show the exact line number of the error.
             </p>
 
@@ -189,8 +189,8 @@ export default function JsonParseErrorsPage() {
                     <div key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-500">{item.desc}</p>
+                            <h4 className="text-foreground font-semibold text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
                         </div>
                     </div>
                 ))}
@@ -201,13 +201,13 @@ export default function JsonParseErrorsPage() {
                 Run our <Link href="/tools/doctor" className="text-blue-400 hover:text-blue-300">Local Doctor</Link> for automated diagnosis:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300"><code>npx clawkit-doctor@latest</code></pre>
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80"><code>npx clawkit-doctor@latest</code></pre>
             </div>
 
-            <hr className="my-8 border-white/10" />
+            <hr className="my-8 border-border" />
 
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-muted-foreground">
                 <strong>Last Updated:</strong> February 6, 2026 |
                 <strong> Time to Fix:</strong> 30 seconds (with Config Wizard) or 5 minutes (manual)
             </p>

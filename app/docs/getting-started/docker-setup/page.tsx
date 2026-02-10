@@ -27,7 +27,7 @@ export default function DockerSetupPage() {
             </p>
 
             <div className="not-prose bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 my-4">
-                <p className="text-sm text-zinc-300">
+                <p className="text-sm text-foreground/80">
                     <strong>Required:</strong> Docker Desktop installed (<a href="https://www.docker.com/get-started" target="_blank" rel="noopener" className="text-blue-400 hover:text-blue-300">Download here</a>)
                 </p>
             </div>
@@ -37,8 +37,8 @@ export default function DockerSetupPage() {
                 Create this file in your project directory:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`version: '3.8'
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`version: '3.8'
 
 services:
   openclaw:
@@ -62,30 +62,30 @@ services:
             </p>
 
             <div className="not-prose bg-green-500/10 border border-green-500/20 rounded-lg p-4 my-4">
-                <p className="text-sm text-zinc-300">
+                <p className="text-sm text-foreground/80">
                     <strong>Don't have a config yet?</strong> Use our <Link href="/tools/config" className="text-green-400 hover:text-green-300">Config Wizard</Link> to generate one in 30 seconds.
                 </p>
             </div>
 
             <h2>Step 3: Start the Container</h2>
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <Terminal className="w-4 h-4 text-zinc-500" />
-                    <span className="text-xs text-zinc-500 uppercase tracking-wider">Terminal</span>
+                    <Terminal className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider">Terminal</span>
                 </div>
-                <pre className="text-sm text-zinc-300"><code>docker-compose up -d</code></pre>
+                <pre className="text-sm text-foreground/80"><code>docker-compose up -d</code></pre>
             </div>
 
             <p>
                 You should see:
             </p>
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
                 <pre className="text-sm text-green-400"><code>✓ Container openclaw-agent  Started</code></pre>
             </div>
 
             <h2>Step 4: Verify It's Running</h2>
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300"><code>docker ps</code></pre>
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80"><code>docker ps</code></pre>
             </div>
 
             <p>
@@ -94,17 +94,17 @@ services:
 
             <h2>Useful Docker Commands</h2>
             <div className="not-prose space-y-3 my-6">
-                <div className="p-3 bg-zinc-900 border border-white/10 rounded-lg">
-                    <code className="text-sm text-zinc-300">docker-compose logs -f</code>
-                    <p className="text-xs text-zinc-500 mt-1">View live logs</p>
+                <div className="p-3 bg-card border border-border rounded-lg">
+                    <code className="text-sm text-foreground/80">docker-compose logs -f</code>
+                    <p className="text-xs text-muted-foreground mt-1">View live logs</p>
                 </div>
-                <div className="p-3 bg-zinc-900 border border-white/10 rounded-lg">
-                    <code className="text-sm text-zinc-300">docker-compose restart</code>
-                    <p className="text-xs text-zinc-500 mt-1">Restart the agent</p>
+                <div className="p-3 bg-card border border-border rounded-lg">
+                    <code className="text-sm text-foreground/80">docker-compose restart</code>
+                    <p className="text-xs text-muted-foreground mt-1">Restart the agent</p>
                 </div>
-                <div className="p-3 bg-zinc-900 border border-white/10 rounded-lg">
-                    <code className="text-sm text-zinc-300">docker-compose down</code>
-                    <p className="text-xs text-zinc-500 mt-1">Stop and remove container</p>
+                <div className="p-3 bg-card border border-border rounded-lg">
+                    <code className="text-sm text-foreground/80">docker-compose down</code>
+                    <p className="text-xs text-muted-foreground mt-1">Stop and remove container</p>
                 </div>
             </div>
 
@@ -113,8 +113,8 @@ services:
                 If you see errors, run our <Link href="/tools/doctor" className="text-blue-400 hover:text-blue-300">Local Doctor</Link>:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300"><code>npx clawkit-doctor@latest</code></pre>
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80"><code>npx clawkit-doctor@latest</code></pre>
             </div>
 
             <p>
@@ -137,8 +137,8 @@ services:
                     <div key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-500">{item.desc}</p>
+                            <h4 className="text-foreground font-semibold text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
                         </div>
                     </div>
                 ))}
@@ -147,18 +147,18 @@ services:
             <h2>Next Steps</h2>
             <div className="not-prose grid md:grid-cols-2 gap-4 my-8">
                 <Link href="/skills" className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg hover:bg-orange-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">Install Plugins</h3>
-                    <p className="text-sm text-zinc-400">Add browser control, memory, and more</p>
+                    <h3 className="text-foreground font-semibold mb-2">Install Plugins</h3>
+                    <p className="text-sm text-muted-foreground">Add browser control, memory, and more</p>
                 </Link>
                 <Link href="/docs/guides/cost-optimization" className="p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-lg hover:bg-cyan-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">Cost Optimization</h3>
-                    <p className="text-sm text-zinc-400">Reduce API costs with caching and model routing</p>
+                    <h3 className="text-foreground font-semibold mb-2">Cost Optimization</h3>
+                    <p className="text-sm text-muted-foreground">Reduce API costs with caching and model routing</p>
                 </Link>
             </div>
 
-            <hr className="my-8 border-white/10" />
+            <hr className="my-8 border-border" />
 
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-muted-foreground">
                 <strong>Last Updated:</strong> February 6, 2026 |
                 <strong> Setup Time:</strong> 5 minutes
             </p>

@@ -48,7 +48,7 @@ export default function ConfigGenerator() {
     const [activePreset, setActivePreset] = useState<string>('openai');
 
     // Connection State
-    const [connectionStatus, setConnectionStatus] = useState<'idle' | 'testing' | 'success' | 'error'>('idle');
+    const [connectionStatus, setConnectionStatus] = useState<'idle' | 'testing' | 'success' | 'warning' | 'error'>('idle');
     const [connectionMsg, setConnectionMsg] = useState('');
 
     // Derived State: Validation Errors (memoized)
@@ -156,7 +156,7 @@ export default function ConfigGenerator() {
             let errorMsg = 'Unknown Error';
             if (err instanceof Error) {
                 if (err.message === 'Network/CORS Error') {
-                    setConnectionStatus('success');
+                    setConnectionStatus('warning');
                     setConnectionMsg("URL format looks correct. Browser CORS blocks direct API testing — this is normal. Your CLI/agent will connect fine.");
                     return;
                 }
@@ -301,6 +301,14 @@ export default function ConfigGenerator() {
                                     </AlertDescription>
                                 </Alert>
                             )}
+                            {connectionStatus === 'warning' && (
+                                <Alert className="py-2 mt-2 bg-yellow-900/10 border-yellow-900/20 text-yellow-400">
+                                    <AlertCircle className="h-4 w-4 stroke-yellow-500" />
+                                    <AlertDescription className="text-xs ml-2">
+                                        {connectionMsg}
+                                    </AlertDescription>
+                                </Alert>
+                            )}
                             {connectionStatus === 'success' && (
                                 <Alert className="py-2 mt-2 bg-green-900/10 border-green-900/20 text-green-400">
                                     <CheckCircle2 className="h-4 w-4 stroke-green-500" />
@@ -343,8 +351,8 @@ export default function ConfigGenerator() {
 
             {/* 右侧：JSON 预览 */}
             <div className="lg:sticky lg:top-24 space-y-4">
-                <Card className="bg-[#0d1117] border-zinc-800 overflow-hidden shadow-2xl">
-                    <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/5">
+                <Card className="bg-[#0d1117] border-border overflow-hidden shadow-2xl">
+                    <div className="flex items-center justify-between px-4 py-3 bg-muted border-b border-border">
                         <div className="flex gap-2">
                             <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
                             <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
@@ -356,7 +364,7 @@ export default function ConfigGenerator() {
                                     <AlertCircle className="w-3 h-3 px-0" /> Invalid Config
                                 </span>
                             )}
-                            <div className="text-xs text-zinc-500 font-mono">clawhub.json</div>
+                            <div className="text-xs text-muted-foreground font-mono">clawhub.json</div>
                         </div>
                     </div>
                     <CardContent className="p-0">
@@ -364,7 +372,7 @@ export default function ConfigGenerator() {
                             {jsonOutput}
                         </pre>
                     </CardContent>
-                    <CardFooter className="bg-white/5 border-t border-white/5 p-4 flex gap-3">
+                    <CardFooter className="bg-muted border-t border-border p-4 flex gap-3">
                         <Button
                             onClick={handleCopy}
                             className={`flex-1 font-bold transition-all ${copied ? 'bg-green-600 hover:bg-green-700' : ''}`}
@@ -393,14 +401,14 @@ export default function ConfigGenerator() {
                 </div>
 
                 {/* Cross-Link: Recommended Skills & Doctor */}
-                <div className="pt-6 border-t border-white/5 space-y-4">
+                <div className="pt-6 border-t border-border space-y-4">
                     <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
                         <h4 className="text-xs font-bold text-blue-400 uppercase tracking-wider mb-2 flex items-center gap-2">
                             <Shield className="w-3 h-3" /> Quick Test
                         </h4>
-                        <p className="text-[10px] text-zinc-400 mb-3">Run the diagnostic tool to ensure your environment is ready.</p>
-                        <div className="flex items-center gap-2 bg-black/50 rounded p-2 border border-white/5">
-                            <code className="text-[10px] font-mono text-white flex-1 truncate">npx clawkit-doctor@latest</code>
+                        <p className="text-[10px] text-muted-foreground mb-3">Run the diagnostic tool to ensure your environment is ready.</p>
+                        <div className="flex items-center gap-2 bg-background/50 rounded p-2 border border-border">
+                            <code className="text-[10px] font-mono text-foreground flex-1 truncate">npx clawkit-doctor@latest</code>
                             <Button
                                 size="sm"
                                 variant="ghost"
@@ -415,26 +423,26 @@ export default function ConfigGenerator() {
                         </div>
                     </div>
 
-                    <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2">
+                    <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
                         Next Steps: Install Plugins
                     </h3>
                     <div className="grid grid-cols-1 gap-2">
-                        <a href="/skills/official-jfrux-browser-use-api" target="_blank" className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors group">
+                        <a href="/skills/official-jfrux-browser-use-api" target="_blank" className="flex items-center gap-3 p-3 rounded-lg border border-border bg-muted hover:bg-muted transition-colors group">
                             <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400">
                                 <Monitor className="w-4 h-4" />
                             </div>
                             <div className="flex-1">
-                                <div className="text-sm font-bold text-white group-hover:text-blue-400">Browser Use</div>
-                                <div className="text-[10px] text-zinc-500">Let agent control browser</div>
+                                <div className="text-sm font-bold text-foreground group-hover:text-blue-400">Browser Use</div>
+                                <div className="text-[10px] text-muted-foreground">Let agent control browser</div>
                             </div>
                         </a>
-                        <a href="/skills/official-nextfrontierbuilds-elite-longterm-memory" target="_blank" className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors group">
+                        <a href="/skills/official-nextfrontierbuilds-elite-longterm-memory" target="_blank" className="flex items-center gap-3 p-3 rounded-lg border border-border bg-muted hover:bg-muted transition-colors group">
                             <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400">
                                 <CheckCircle2 className="w-4 h-4" />
                             </div>
                             <div className="flex-1">
-                                <div className="text-sm font-bold text-white group-hover:text-blue-400">Memory Core</div>
-                                <div className="text-[10px] text-zinc-500">Long-term vector memory</div>
+                                <div className="text-sm font-bold text-foreground group-hover:text-blue-400">Memory Core</div>
+                                <div className="text-[10px] text-muted-foreground">Long-term vector memory</div>
                             </div>
                         </a>
                     </div>

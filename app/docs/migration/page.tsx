@@ -17,9 +17,9 @@ export default function MigrationPage() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-4">
                     <ArrowRightLeft className="w-3 h-3" /> Upgrade Path
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
                     Migrating from <br />
-                    <span className="text-zinc-500 line-through decoration-red-500 decoration-4">ClawdBot v1</span> to <span className="text-blue-400">OpenClaw v2</span>
+                    <span className="text-muted-foreground line-through decoration-red-500 decoration-4">ClawdBot v1</span> to <span className="text-blue-400">OpenClaw v2</span>
                 </h1>
                 <p className="text-lg text-zinc-400 max-w-2xl">
                     OpenClaw v2 introduces a new plugin architecture and switches from YAML to JSON configs. Here is what you need to change.
@@ -28,31 +28,31 @@ export default function MigrationPage() {
 
             {/* Key Changes Grid */}
             <div className="grid md:grid-cols-2 gap-6 mb-16">
-                <Card className="bg-zinc-900 border-white/10">
+                <Card className="bg-card border-border">
                     <CardContent className="pt-6">
                         <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center mb-4">
                             <Settings className="w-5 h-5 text-red-400" />
                         </div>
-                        <h3 className="text-lg font-bold text-white mb-2">Config Format</h3>
+                        <h3 className="text-lg font-bold text-foreground mb-2">Config Format</h3>
                         <p className="text-zinc-400 text-sm mb-4">
                             <code>agent.yaml</code> is deprecated. You must now use <code>clawhub.json</code>.
                         </p>
-                        <div className="bg-black p-3 rounded border border-white/5 font-mono text-xs text-zinc-500">
+                        <div className="bg-card p-3 rounded border border-border font-mono text-xs text-muted-foreground">
                             - model: gpt-3.5<br />
                             + "model": "gpt-4o"
                         </div>
                     </CardContent>
                 </Card>
-                <Card className="bg-zinc-900 border-white/10">
+                <Card className="bg-card border-border">
                     <CardContent className="pt-6">
                         <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-4">
                             <FileJson className="w-5 h-5 text-green-400" />
                         </div>
-                        <h3 className="text-lg font-bold text-white mb-2">Skill Loading</h3>
+                        <h3 className="text-lg font-bold text-foreground mb-2">Skill Loading</h3>
                         <p className="text-zinc-400 text-sm mb-4">
                             Skills are no longer hardcoded python files. They are installed via NPM-style packages.
                         </p>
-                        <div className="bg-black p-3 rounded border border-white/5 font-mono text-xs text-zinc-500">
+                        <div className="bg-card p-3 rounded border border-border font-mono text-xs text-muted-foreground">
                             - import my_skill<br />
                             + clawhub install @skill/web
                         </div>
@@ -62,29 +62,29 @@ export default function MigrationPage() {
 
             {/* Comparison Table (For Google Snippets) */}
             <div className="mb-16">
-                <h2 className="text-2xl font-bold text-white mb-6">Version Comparison</h2>
-                <div className="overflow-hidden rounded-xl border border-white/10">
+                <h2 className="text-2xl font-bold text-foreground mb-6">Version Comparison</h2>
+                <div className="overflow-hidden rounded-xl border border-border">
                     <table className="w-full text-sm text-left">
-                        <thead className="bg-white/5 text-white font-bold uppercase text-xs">
+                        <thead className="bg-muted text-foreground font-bold uppercase text-xs">
                             <tr>
                                 <th className="px-6 py-4">Feature</th>
-                                <th className="px-6 py-4 text-zinc-500">ClawdBot v1 (Legacy)</th>
+                                <th className="px-6 py-4 text-muted-foreground">ClawdBot v1 (Legacy)</th>
                                 <th className="px-6 py-4 text-blue-400">OpenClaw v2 (Current)</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/5 bg-zinc-900/50">
+                        <tbody className="divide-y divide-border bg-card/50">
                             <tr>
-                                <td className="px-6 py-4 text-white font-medium">Config File</td>
+                                <td className="px-6 py-4 text-foreground font-medium">Config File</td>
                                 <td className="px-6 py-4 text-zinc-400">YAML</td>
                                 <td className="px-6 py-4 text-green-400">Strict JSON</td>
                             </tr>
                             <tr>
-                                <td className="px-6 py-4 text-white font-medium">Memory</td>
+                                <td className="px-6 py-4 text-foreground font-medium">Memory</td>
                                 <td className="px-6 py-4 text-zinc-400">Local .txt files</td>
                                 <td className="px-6 py-4 text-green-400">Vector DB (Chroma/Lance)</td>
                             </tr>
                             <tr>
-                                <td className="px-6 py-4 text-white font-medium">Models</td>
+                                <td className="px-6 py-4 text-foreground font-medium">Models</td>
                                 <td className="px-6 py-4 text-zinc-400">OpenAI Only</td>
                                 <td className="px-6 py-4 text-green-400">OpenAI, Anthropic, DeepSeek, Local</td>
                             </tr>
@@ -95,7 +95,7 @@ export default function MigrationPage() {
 
             {/* CTA */}
             <div className="p-8 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/20 rounded-2xl text-center">
-                <h2 className="text-2xl font-bold text-white mb-4">Ready to upgrade?</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-4">Ready to upgrade?</h2>
                 <p className="text-zinc-400 mb-6">
                     Don't convert your config files manually. Our wizard can generate a v2-compliant JSON file for you in seconds.
                 </p>

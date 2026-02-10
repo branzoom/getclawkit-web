@@ -27,19 +27,19 @@ export default function SkillSystemPage() {
             </ul>
 
             <div className="not-prose grid md:grid-cols-2 gap-6 my-12">
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
-                    <div className="flex items-center gap-2 text-white font-bold mb-4">
+                <div className="p-6 bg-card border border-border rounded-2xl">
+                    <div className="flex items-center gap-2 text-foreground font-bold mb-4">
                         <Box className="w-5 h-5 text-blue-400" /> MCP-Based
                     </div>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                         Skills are exposed as <strong>MCP Tools</strong>. This means any MCP-compatible client (Claude Desktop, Cursor, etc.) can use OpenClaw Skills natively.
                     </p>
                 </div>
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
-                    <div className="flex items-center gap-2 text-white font-bold mb-4">
+                <div className="p-6 bg-card border border-border rounded-2xl">
+                    <div className="flex items-center gap-2 text-foreground font-bold mb-4">
                         <Shield className="w-5 h-5 text-green-400" /> Sandboxed
                     </div>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                         Each Skill runs in its own execution context. A misbehaving Skill cannot crash the agent core or leak data to other Skills.
                     </p>
                 </div>
@@ -71,13 +71,13 @@ export default function SkillSystemPage() {
                     { icon: <FileJson className="w-5 h-5" />, title: 'File Operations', items: ['read_file', 'write_file', 'list_dir', 'search_files'], color: 'text-green-400' },
                     { icon: <Code2 className="w-5 h-5" />, title: 'System Tools', items: ['run_command', 'http_request', 'extract_text', 'wait'], color: 'text-purple-400' },
                 ].map((cat, idx) => (
-                    <div key={idx} className="p-5 bg-zinc-900 border border-white/10 rounded-xl">
+                    <div key={idx} className="p-5 bg-card border border-border rounded-xl">
                         <div className={`flex items-center gap-2 ${cat.color} font-bold mb-3`}>
                             {cat.icon} {cat.title}
                         </div>
                         <ul className="space-y-1">
                             {cat.items.map((item, i) => (
-                                <li key={i} className="text-xs text-zinc-500 font-mono">{item}</li>
+                                <li key={i} className="text-xs text-muted-foreground font-mono">{item}</li>
                             ))}
                         </ul>
                     </div>
@@ -89,8 +89,8 @@ export default function SkillSystemPage() {
                 You can extend OpenClaw by writing your own Skills. A custom Skill is just an MCP tool definition:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-6">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-6">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "name": "my_custom_skill",
   "description": "Fetches the current weather for a given city",
   "inputSchema": {
@@ -118,8 +118,8 @@ export default function SkillSystemPage() {
             <div className="not-prose flex flex-wrap items-center gap-2 my-6 text-sm">
                 {['navigate', 'wait', 'click (input)', 'type (value)', 'click (submit)', 'screenshot (verify)'].map((step, i) => (
                     <span key={i} className="flex items-center gap-1">
-                        <span className="px-3 py-1 bg-zinc-800 border border-white/10 rounded-lg text-zinc-300 font-mono text-xs">{step}</span>
-                        {i < 5 && <ChevronRight className="w-3 h-3 text-zinc-600" />}
+                        <span className="px-3 py-1 bg-card border border-border rounded-lg text-foreground/80 font-mono text-xs">{step}</span>
+                        {i < 5 && <ChevronRight className="w-3 h-3 text-muted-foreground/70" />}
                     </span>
                 ))}
             </div>
@@ -127,8 +127,8 @@ export default function SkillSystemPage() {
                 The LLM decides each step dynamically — it doesn&apos;t follow a pre-programmed sequence. This makes agents resilient to unexpected UI changes.
             </p>
 
-            <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/docs/concepts/architecture" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+            <div className="not-prose mt-16 p-8 border-t border-border flex items-center justify-between">
+                <Link href="/docs/concepts/architecture" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Architecture Overview
                 </Link>
                 <Link href="/docs/concepts/data-privacy" className="inline-flex items-center gap-2 text-orange-400 font-bold hover:underline">

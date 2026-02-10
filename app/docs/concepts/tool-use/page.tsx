@@ -35,9 +35,9 @@ export default function ToolUsePage() {
             </ol>
 
             <div className="not-prose my-12 p-1 bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-red-500/20 rounded-2xl">
-                <div className="bg-black p-8 rounded-[calc(1rem-1px)]">
-                    <h3 className="text-white font-bold mb-4">In OpenClaw, Every Tool is an MCP Skill</h3>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
+                <div className="bg-card p-8 rounded-[calc(1rem-1px)]">
+                    <h3 className="text-foreground font-bold mb-4">In OpenClaw, Every Tool is an MCP Skill</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                         OpenClaw wraps all tools in the <strong>Model Context Protocol (MCP)</strong> standard. This means your tools work across any MCP-compatible client, and you can use community Skills without modification. Learn more in <Link href="/docs/concepts/skill-system" className="text-orange-400 hover:text-orange-300">Skill System Design</Link>.
                     </p>
                 </div>
@@ -46,14 +46,14 @@ export default function ToolUsePage() {
             <h2>Common Tool Patterns</h2>
 
             <div className="not-prose space-y-6 my-8">
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <div className="flex items-center gap-2 text-blue-400 font-bold mb-3">
                         <MousePointer className="w-5 h-5" /> Pattern 1: Observe-Act
                     </div>
-                    <p className="text-sm text-zinc-400 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3">
                         The most basic pattern. The agent observes the environment (e.g., takes a screenshot), then acts on it (e.g., clicks a button).
                     </p>
-                    <div className="bg-black/50 rounded-lg p-3 text-xs font-mono text-zinc-500 space-y-1">
+                    <div className="bg-card/50 rounded-lg p-3 text-xs font-mono text-muted-foreground space-y-1">
                         <div><span className="text-blue-400">screenshot()</span> → &quot;I see a login form&quot;</div>
                         <div><span className="text-yellow-400">type()</span> → Enter username</div>
                         <div><span className="text-yellow-400">type()</span> → Enter password</div>
@@ -62,14 +62,14 @@ export default function ToolUsePage() {
                     </div>
                 </div>
 
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <div className="flex items-center gap-2 text-green-400 font-bold mb-3">
                         <FileJson className="w-5 h-5" /> Pattern 2: Extract-Transform
                     </div>
-                    <p className="text-sm text-zinc-400 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3">
                         Read data from one source, process it, and write it to another. Common for data collection and report generation.
                     </p>
-                    <div className="bg-black/50 rounded-lg p-3 text-xs font-mono text-zinc-500 space-y-1">
+                    <div className="bg-card/50 rounded-lg p-3 text-xs font-mono text-muted-foreground space-y-1">
                         <div><span className="text-blue-400">navigate()</span> → Open data source</div>
                         <div><span className="text-blue-400">extract_text()</span> → Pull table data</div>
                         <div><span className="text-purple-400">LLM reasoning</span> → Summarize findings</div>
@@ -77,14 +77,14 @@ export default function ToolUsePage() {
                     </div>
                 </div>
 
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <div className="flex items-center gap-2 text-purple-400 font-bold mb-3">
                         <Globe className="w-5 h-5" /> Pattern 3: Multi-Source Aggregation
                     </div>
-                    <p className="text-sm text-zinc-400 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3">
                         Visit multiple sites, gather information, and synthesize. Useful for research and comparison tasks.
                     </p>
-                    <div className="bg-black/50 rounded-lg p-3 text-xs font-mono text-zinc-500 space-y-1">
+                    <div className="bg-card/50 rounded-lg p-3 text-xs font-mono text-muted-foreground space-y-1">
                         <div><span className="text-blue-400">navigate(site_1)</span> → Get price A</div>
                         <div><span className="text-blue-400">navigate(site_2)</span> → Get price B</div>
                         <div><span className="text-blue-400">navigate(site_3)</span> → Get price C</div>
@@ -105,12 +105,12 @@ export default function ToolUsePage() {
                     { title: 'Strict schemas', desc: 'Use JSON Schema with required fields, enums, and descriptions. Vague schemas cause tool call errors.', icon: <FileJson className="w-4 h-4 text-green-400" /> },
                     { title: 'Safe defaults', desc: 'Tools that modify state should require explicit confirmation parameters. Never auto-delete without a flag.', icon: <Shield className="w-4 h-4 text-red-400" /> },
                 ].map((item, i) => (
-                    <div key={i} className="p-5 bg-zinc-900 border border-white/10 rounded-xl">
+                    <div key={i} className="p-5 bg-card border border-border rounded-xl">
                         <div className="flex items-center gap-2 mb-2">
                             {item.icon}
-                            <h4 className="text-white font-bold text-sm">{item.title}</h4>
+                            <h4 className="text-foreground font-bold text-sm">{item.title}</h4>
                         </div>
-                        <p className="text-xs text-zinc-500">{item.desc}</p>
+                        <p className="text-xs text-muted-foreground">{item.desc}</p>
                     </div>
                 ))}
             </div>
@@ -127,8 +127,8 @@ export default function ToolUsePage() {
                     <div key={i} className="flex items-start gap-3">
                         <AlertTriangle className="w-4 h-4 text-orange-400 flex-shrink-0 mt-1" />
                         <div>
-                            <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-500">{item.desc}</p>
+                            <h4 className="text-foreground font-semibold text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
                         </div>
                     </div>
                 ))}
@@ -139,53 +139,53 @@ export default function ToolUsePage() {
                 Not all LLMs handle tool use equally. Here&apos;s how they compare for agent workloads:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-6">
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-6">
                 <table className="w-full text-sm">
                     <thead>
-                        <tr className="border-b border-white/10">
-                            <th className="text-left text-white py-2">Provider</th>
-                            <th className="text-left text-white py-2">Parallel Tools</th>
-                            <th className="text-left text-white py-2">Reliability</th>
-                            <th className="text-right text-white py-2">Notes</th>
+                        <tr className="border-b border-border">
+                            <th className="text-left text-foreground py-2">Provider</th>
+                            <th className="text-left text-foreground py-2">Parallel Tools</th>
+                            <th className="text-left text-foreground py-2">Reliability</th>
+                            <th className="text-right text-foreground py-2">Notes</th>
                         </tr>
                     </thead>
-                    <tbody className="text-zinc-300">
-                        <tr className="border-b border-white/5">
+                    <tbody className="text-foreground/80">
+                        <tr className="border-b border-border">
                             <td className="py-2">GPT-4.1</td>
                             <td className="text-green-400">Yes</td>
                             <td className="text-green-400">High</td>
-                            <td className="text-right text-xs text-zinc-500">Best schema adherence</td>
+                            <td className="text-right text-xs text-muted-foreground">Best schema adherence</td>
                         </tr>
-                        <tr className="border-b border-white/5">
+                        <tr className="border-b border-border">
                             <td className="py-2">Claude Sonnet 4.5</td>
                             <td className="text-green-400">Yes</td>
                             <td className="text-green-400">High</td>
-                            <td className="text-right text-xs text-zinc-500">Strong reasoning</td>
+                            <td className="text-right text-xs text-muted-foreground">Strong reasoning</td>
                         </tr>
-                        <tr className="border-b border-white/5">
+                        <tr className="border-b border-border">
                             <td className="py-2">DeepSeek V3.2</td>
                             <td className="text-yellow-400">Limited</td>
                             <td className="text-yellow-400">Medium</td>
-                            <td className="text-right text-xs text-zinc-500">Great value for cost</td>
+                            <td className="text-right text-xs text-muted-foreground">Great value for cost</td>
                         </tr>
-                        <tr className="border-b border-white/5">
+                        <tr className="border-b border-border">
                             <td className="py-2">Gemini 2.5 Flash</td>
                             <td className="text-green-400">Yes</td>
                             <td className="text-yellow-400">Medium</td>
-                            <td className="text-right text-xs text-zinc-500">Fast, budget-friendly</td>
+                            <td className="text-right text-xs text-muted-foreground">Fast, budget-friendly</td>
                         </tr>
                         <tr>
                             <td className="py-2">Llama 3.3 (Ollama)</td>
                             <td className="text-red-400">No</td>
                             <td className="text-yellow-400">Medium</td>
-                            <td className="text-right text-xs text-zinc-500">Fully local / free</td>
+                            <td className="text-right text-xs text-muted-foreground">Fully local / free</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/docs/concepts/goal-decomposition" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+            <div className="not-prose mt-16 p-8 border-t border-border flex items-center justify-between">
+                <Link href="/docs/concepts/goal-decomposition" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Goal Decomposition
                 </Link>
                 <Link href="/docs/roadmap" className="inline-flex items-center gap-2 text-amber-400 font-bold hover:underline">

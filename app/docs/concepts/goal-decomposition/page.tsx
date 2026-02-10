@@ -29,14 +29,14 @@ export default function GoalDecompositionPage() {
             <h2>Decomposition Strategies</h2>
 
             <div className="not-prose grid md:grid-cols-2 gap-6 my-12">
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <div className="flex items-center gap-2 text-blue-400 font-bold mb-4">
                         <Workflow className="w-5 h-5" /> Top-Down (Hierarchical)
                     </div>
-                    <p className="text-sm text-zinc-400 leading-relaxed mb-3">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                         Break the goal into 3-5 major sub-goals, then recursively decompose each until reaching atomic actions the agent can execute directly.
                     </p>
-                    <div className="bg-black/50 rounded-lg p-3 text-xs font-mono text-zinc-500 space-y-1">
+                    <div className="bg-card/50 rounded-lg p-3 text-xs font-mono text-muted-foreground space-y-1">
                         <div>Book flight to Tokyo</div>
                         <div className="pl-4">1. Search available flights</div>
                         <div className="pl-8">1.1 Open airline website</div>
@@ -46,21 +46,21 @@ export default function GoalDecompositionPage() {
                         <div className="pl-4">3. Complete booking</div>
                     </div>
                 </div>
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <div className="flex items-center gap-2 text-purple-400 font-bold mb-4">
                         <Target className="w-5 h-5" /> Reactive (Step-by-Step)
                     </div>
-                    <p className="text-sm text-zinc-400 leading-relaxed mb-3">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                         Don&apos;t plan ahead. At each step, look at the current state and decide the single next action that brings you closer to the goal.
                     </p>
-                    <div className="bg-black/50 rounded-lg p-3 text-xs font-mono text-zinc-500 space-y-1">
+                    <div className="bg-card/50 rounded-lg p-3 text-xs font-mono text-muted-foreground space-y-1">
                         <div className="text-green-400">State: Empty browser</div>
                         <div>Action: Navigate to airline.com</div>
                         <div className="text-green-400 mt-2">State: Airline homepage</div>
                         <div>Action: Click search field</div>
                         <div className="text-green-400 mt-2">State: Search focused</div>
                         <div>Action: Type &quot;Tokyo&quot;</div>
-                        <div className="text-zinc-600">... continues</div>
+                        <div className="text-muted-foreground/70">... continues</div>
                     </div>
                 </div>
             </div>
@@ -70,8 +70,8 @@ export default function GoalDecompositionPage() {
                 OpenClaw uses a <strong>hybrid strategy</strong>: reactive planning at the execution layer, with optional high-level goal hints. The user provides the top-level mission, and the agent decomposes reactively:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-6">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`// User's mission (high-level goal)
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-6">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`// User's mission (high-level goal)
 "Go to github.com/openai/openai-python and star the repo"
 
 // Agent's internal decomposition (reactive):
@@ -88,30 +88,30 @@ export default function GoalDecompositionPage() {
             </p>
 
             <div className="not-prose grid md:grid-cols-3 gap-4 my-8">
-                <div className="p-5 bg-zinc-900 border border-white/10 rounded-xl">
+                <div className="p-5 bg-card border border-border rounded-xl">
                     <div className="flex items-center gap-2 mb-3">
                         <CheckCircle2 className="w-4 h-4 text-green-400" />
-                        <h4 className="text-white font-bold text-sm">Retry</h4>
+                        <h4 className="text-foreground font-bold text-sm">Retry</h4>
                     </div>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-muted-foreground">
                         Re-attempt the same sub-goal. Useful for transient failures like network timeouts or slow page loads.
                     </p>
                 </div>
-                <div className="p-5 bg-zinc-900 border border-white/10 rounded-xl">
+                <div className="p-5 bg-card border border-border rounded-xl">
                     <div className="flex items-center gap-2 mb-3">
                         <AlertTriangle className="w-4 h-4 text-yellow-400" />
-                        <h4 className="text-white font-bold text-sm">Re-Plan</h4>
+                        <h4 className="text-foreground font-bold text-sm">Re-Plan</h4>
                     </div>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-muted-foreground">
                         Discard the current plan and re-decompose from the current state. Handles unexpected UI changes or navigation errors.
                     </p>
                 </div>
-                <div className="p-5 bg-zinc-900 border border-white/10 rounded-xl">
+                <div className="p-5 bg-card border border-border rounded-xl">
                     <div className="flex items-center gap-2 mb-3">
                         <XCircle className="w-4 h-4 text-red-400" />
-                        <h4 className="text-white font-bold text-sm">Abort</h4>
+                        <h4 className="text-foreground font-bold text-sm">Abort</h4>
                     </div>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-muted-foreground">
                         Stop execution and report the failure. Used when the goal is impossible given current constraints (e.g., login required but no credentials).
                     </p>
                 </div>
@@ -131,16 +131,16 @@ export default function GoalDecompositionPage() {
                 <div className="flex items-start gap-3">
                     <Lightbulb className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                     <div>
-                        <h4 className="text-white font-bold text-sm mb-1">Research Note</h4>
-                        <p className="text-xs text-zinc-400">
+                        <h4 className="text-foreground font-bold text-sm mb-1">Research Note</h4>
+                        <p className="text-xs text-muted-foreground">
                             Goal decomposition in LLM agents is an active area of research. Techniques like Tree-of-Thought (ToT), ReAct, and Reflexion all address different aspects of this problem. OpenClaw&apos;s reactive approach is closest to the ReAct pattern.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/docs/concepts/agent-theory" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+            <div className="not-prose mt-16 p-8 border-t border-border flex items-center justify-between">
+                <Link href="/docs/concepts/agent-theory" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Agent Fundamentals
                 </Link>
                 <Link href="/docs/concepts/tool-use" className="inline-flex items-center gap-2 text-amber-400 font-bold hover:underline">

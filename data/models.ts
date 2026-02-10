@@ -1,5 +1,5 @@
 // Centralized LLM model data & pricing
-// Single source of truth for ConfigGenerator, CostEstimator, and Compare pages
+// Single source of truth for ConfigGenerator, CostEstimator, Compare pages, and Model Matrix
 
 export const PRICING_LAST_UPDATED = '2026-02-06';
 
@@ -225,5 +225,97 @@ export const COST_ESTIMATOR_MODELS: CostEstimatorModel[] = [
         stroke: '#64748b',
         badge: 'Custom',
         isEditable: true,
+    },
+];
+
+// --- Model Compatibility Matrix ---
+
+export interface ModelMatrixEntry {
+    id: string;
+    name: string;
+    provider: string;
+    autonomy: 'full' | 'limited' | 'none';
+    rateLimitRisk: 'low' | 'medium' | 'high';
+    bestFor: string;
+    notes?: string;
+}
+
+export const MODEL_MATRIX: ModelMatrixEntry[] = [
+    {
+        id: 'gpt-4.1',
+        name: 'GPT-4.1',
+        provider: 'OpenAI',
+        autonomy: 'full',
+        rateLimitRisk: 'low',
+        bestFor: 'General-purpose agent tasks, complex reasoning',
+    },
+    {
+        id: 'gpt-4.1-mini',
+        name: 'GPT-4.1 Mini',
+        provider: 'OpenAI',
+        autonomy: 'limited',
+        rateLimitRisk: 'low',
+        bestFor: 'Simple Q&A, lightweight automation',
+        notes: 'Lower capability ceiling; best as a cost-saving fallback',
+    },
+    {
+        id: 'deepseek-chat',
+        name: 'DeepSeek V3.2',
+        provider: 'DeepSeek',
+        autonomy: 'full',
+        rateLimitRisk: 'medium',
+        bestFor: 'Cost-optimized coding agents, long-context tasks',
+        notes: 'Rate limits during peak hours; use off-peak for reliability',
+    },
+    {
+        id: 'claude-sonnet-4-5',
+        name: 'Claude Sonnet 4.5',
+        provider: 'Anthropic',
+        autonomy: 'full',
+        rateLimitRisk: 'low',
+        bestFor: 'Nuanced reasoning, safety-critical workflows',
+    },
+    {
+        id: 'claude-haiku-4-5',
+        name: 'Claude Haiku 4.5',
+        provider: 'Anthropic',
+        autonomy: 'limited',
+        rateLimitRisk: 'low',
+        bestFor: 'Fast classification, low-latency sub-tasks',
+    },
+    {
+        id: 'gemini-2.5-flash',
+        name: 'Gemini 2.5 Flash',
+        provider: 'Google',
+        autonomy: 'full',
+        rateLimitRisk: 'low',
+        bestFor: 'Budget-friendly agents, multimodal input',
+    },
+    {
+        id: 'gemini-2.5-pro',
+        name: 'Gemini 2.5 Pro',
+        provider: 'Google',
+        autonomy: 'full',
+        rateLimitRisk: 'medium',
+        bestFor: 'Complex reasoning with large context windows',
+        notes: 'Higher latency than Flash; use for quality-critical tasks',
+    },
+    {
+        id: 'ollama-local',
+        name: 'Ollama Local',
+        provider: 'Ollama',
+        autonomy: 'limited',
+        rateLimitRisk: 'low',
+        bestFor: 'Privacy-first, offline, zero-cost experimentation',
+        notes: 'Capability depends on hardware and chosen model',
+    },
+    {
+        id: 'grok-4',
+        name: 'Grok 4',
+        provider: 'xAI',
+        autonomy: 'limited',
+        rateLimitRisk: 'high',
+        bestFor: 'Experimental, real-time knowledge tasks',
+        notes: 'Strict rate limits; not officially supported by OpenClaw',
     },
 ];

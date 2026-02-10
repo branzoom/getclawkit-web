@@ -25,7 +25,7 @@ export default function CommunityPage() {
                     <div className="flex items-center gap-2 text-green-400 font-bold mb-4">
                         <CheckCircle2 className="w-5 h-5" /> Encouraged
                     </div>
-                    <ul className="space-y-2 text-sm text-zinc-400">
+                    <ul className="space-y-2 text-sm text-muted-foreground">
                         <li>Constructive feedback on code and ideas</li>
                         <li>Helping newcomers with setup issues</li>
                         <li>Sharing your use cases and configurations</li>
@@ -37,7 +37,7 @@ export default function CommunityPage() {
                     <div className="flex items-center gap-2 text-red-400 font-bold mb-4">
                         <AlertTriangle className="w-5 h-5" /> Not Acceptable
                     </div>
-                    <ul className="space-y-2 text-sm text-zinc-400">
+                    <ul className="space-y-2 text-sm text-muted-foreground">
                         <li>Personal attacks or hostile language</li>
                         <li>Spam, self-promotion, or off-topic content</li>
                         <li>Sharing others&apos; private information</li>
@@ -50,14 +50,14 @@ export default function CommunityPage() {
             <h2>How to Contribute</h2>
 
             <div className="not-prose space-y-6 my-8">
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <div className="flex items-center gap-2 text-blue-400 font-bold mb-3">
                         <GitPullRequest className="w-5 h-5" /> Pull Requests
                     </div>
-                    <p className="text-sm text-zinc-400 mb-4">
+                    <p className="text-sm text-muted-foreground mb-4">
                         We welcome PRs of all sizes — from typo fixes to new features.
                     </p>
-                    <ol className="space-y-2 text-sm text-zinc-400">
+                    <ol className="space-y-2 text-sm text-muted-foreground">
                         <li><strong>1. Fork</strong> the repository and create a feature branch</li>
                         <li><strong>2. Develop</strong> your changes with clear, focused commits</li>
                         <li><strong>3. Test</strong> locally — run <code>npm run build</code> and verify no errors</li>
@@ -66,25 +66,25 @@ export default function CommunityPage() {
                     </ol>
                 </div>
 
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <div className="flex items-center gap-2 text-green-400 font-bold mb-3">
                         <MessageSquare className="w-5 h-5" /> Issues & Discussions
                     </div>
-                    <p className="text-sm text-zinc-400 mb-4">
+                    <p className="text-sm text-muted-foreground mb-4">
                         Found a bug or have an idea? Open a GitHub Issue:
                     </p>
-                    <ul className="space-y-2 text-sm text-zinc-400">
+                    <ul className="space-y-2 text-sm text-muted-foreground">
                         <li><strong>Bug reports:</strong> Include your OS, Node version, error messages, and steps to reproduce</li>
                         <li><strong>Feature requests:</strong> Describe the problem you&apos;re solving, not just the solution you want</li>
                         <li><strong>Questions:</strong> Check existing issues and the <Link href="/docs" className="text-blue-400 hover:text-blue-300">documentation</Link> first</li>
                     </ul>
                 </div>
 
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <div className="flex items-center gap-2 text-purple-400 font-bold mb-3">
                         <BookOpen className="w-5 h-5" /> Wiki & Documentation
                     </div>
-                    <p className="text-sm text-zinc-400">
+                    <p className="text-sm text-muted-foreground">
                         Spotted an error in the wiki or docs? Know something that should be documented? Documentation contributions are just as valuable as code changes. Follow the same PR process.
                     </p>
                 </div>
@@ -106,8 +106,8 @@ export default function CommunityPage() {
                 <div className="flex items-start gap-3">
                     <Shield className="w-5 h-5 text-orange-400 flex-shrink-0 mt-0.5" />
                     <div>
-                        <h4 className="text-white font-bold text-sm mb-1">Security Policy</h4>
-                        <p className="text-xs text-zinc-400">
+                        <h4 className="text-foreground font-bold text-sm mb-1">Security Policy</h4>
+                        <p className="text-xs text-muted-foreground">
                             If you discover a security vulnerability, please <strong>do not</strong> open a public issue. Instead, report it privately via GitHub&apos;s security advisory feature or email the maintainers directly. We take security seriously and will respond within 48 hours.
                         </p>
                     </div>
@@ -124,16 +124,16 @@ export default function CommunityPage() {
                     { icon: <GitPullRequest className="w-5 h-5" />, title: 'PR Credits', desc: 'Every merged PR is credited in the changelog with your GitHub handle.', color: 'text-blue-400' },
                     { icon: <CheckCircle2 className="w-5 h-5" />, title: 'Skill Authors', desc: 'Skills in the registry display the author name and link to their profile.', color: 'text-green-400' },
                 ].map((item, i) => (
-                    <div key={i} className="p-5 bg-zinc-900 border border-white/10 rounded-xl text-center">
+                    <div key={i} className="p-5 bg-card border border-border rounded-xl text-center">
                         <div className={`flex justify-center mb-3 ${item.color}`}>{item.icon}</div>
-                        <h4 className="text-white font-bold text-sm mb-1">{item.title}</h4>
-                        <p className="text-xs text-zinc-500">{item.desc}</p>
+                        <h4 className="text-foreground font-bold text-sm mb-1">{item.title}</h4>
+                        <p className="text-xs text-muted-foreground">{item.desc}</p>
                     </div>
                 ))}
             </div>
 
-            <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/docs/roadmap" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+            <div className="not-prose mt-16 p-8 border-t border-border flex items-center justify-between">
+                <Link href="/docs/roadmap" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Project Roadmap
                 </Link>
                 <Link href="/docs" className="inline-flex items-center gap-2 text-red-400 font-bold hover:underline">

@@ -110,7 +110,7 @@ export default function CostEstimator() {
 
             <Tabs defaultValue="simulator" className="w-full">
                 <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
-                    <TabsList className="bg-zinc-900 border border-white/10">
+                    <TabsList className="bg-card border border-border">
                         <TabsTrigger value="simulator" className="flex items-center gap-2">
                             <Flame className="w-4 h-4 text-red-500" /> Explosion Simulator {/* 图标换成火，名字改得更刺激 */}
                         </TabsTrigger>
@@ -120,7 +120,7 @@ export default function CostEstimator() {
                     </TabsList>
 
                     <div className="flex items-center gap-3">
-                        <div className="hidden md:flex text-xs text-zinc-500 items-center gap-2 bg-zinc-900/50 px-3 py-1 rounded-full border border-white/5">
+                        <div className="hidden md:flex text-xs text-muted-foreground items-center gap-2 bg-card/50 px-3 py-1 rounded-full border border-border">
                             <HelpCircle className="w-3 h-3" />
                             <span>Scenario: 30-Day simulation</span>
                         </div>
@@ -138,7 +138,7 @@ export default function CostEstimator() {
                 {/* Tab 1: Simulator (可视化部分) */}
                 <TabsContent value="simulator" className="space-y-6">
                     {/* Top Controls Grid */}
-                    <Card className="bg-zinc-900 border-white/10">
+                    <Card className="bg-card border-border">
                         <CardHeader className="pb-4">
                             <CardTitle className="flex items-center gap-2 text-lg">
                                 <Settings2 className="w-5 h-5 text-blue-400" />
@@ -180,7 +180,7 @@ export default function CostEstimator() {
                                                 <TooltipTrigger asChild>
                                                     <Label className="text-orange-400 cursor-help border-b border-dashed border-orange-500/30">History Growth %</Label>
                                                 </TooltipTrigger>
-                                                <TooltipContent className="bg-zinc-900 border-white/10 text-zinc-300">
+                                                <TooltipContent className="bg-card border-border text-foreground/80">
                                                     Exponential growth! Context accumulates with every step.
                                                 </TooltipContent>
                                             </UiTooltip>
@@ -200,7 +200,7 @@ export default function CostEstimator() {
                                                 <TooltipTrigger asChild>
                                                     <Label className="text-green-400 cursor-help border-b border-dashed border-green-500/30">Cache Hit Rate %</Label>
                                                 </TooltipTrigger>
-                                                <TooltipContent className="bg-zinc-900 border-white/10 text-zinc-300">
+                                                <TooltipContent className="bg-card border-border text-foreground/80">
                                                     How much of your prompt is cached? (DeepSeek/Anthropic feature)
                                                 </TooltipContent>
                                             </UiTooltip>
@@ -208,7 +208,7 @@ export default function CostEstimator() {
                                         <span className="text-green-400 font-mono font-bold">{cacheHitRate}%</span>
                                     </div>
                                     <Slider value={cacheHitRate} onValueChange={setCacheHitRate} max={100} step={10} />
-                                    <p className="text-[10px] text-zinc-500 pt-1">
+                                    <p className="text-[10px] text-muted-foreground pt-1">
                                         Higher cache rate = Lower costs for supported models.
                                     </p>
                                 </div>
@@ -219,9 +219,9 @@ export default function CostEstimator() {
                     {/* Chart & Results */}
                     <div className="grid lg:grid-cols-3 gap-6">
                         {/* Main Chart */}
-                        <Card className="lg:col-span-2 bg-[#0d1117] border-zinc-800 flex flex-col">
+                        <Card className="lg:col-span-2 bg-card border-border flex flex-col">
                             <CardHeader>
-                                <CardTitle className="text-white">Monthly Cost Projection</CardTitle>
+                                <CardTitle className="text-foreground">Monthly Cost Projection</CardTitle>
                                 <CardDescription>Estimated cost based on exponential context growth.</CardDescription>
                             </CardHeader>
                             <CardContent className="flex-1 min-h-[400px]">
@@ -256,22 +256,22 @@ export default function CostEstimator() {
                         {/* Summary Cards */}
                         <div className="space-y-4">
                             {models.map(model => (
-                                <div key={model.id} className="relative group overflow-hidden rounded-xl border bg-zinc-900 p-4 transition-all hover:border-white/20" style={{ borderColor: `${model.color}30` }}>
+                                <div key={model.id} className="relative group overflow-hidden rounded-xl border bg-card p-4 transition-all hover:border-border" style={{ borderColor: `${model.color}30` }}>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity" style={{ backgroundColor: model.color }} />
                                     <div className="flex justify-between items-start mb-2">
                                         <div>
-                                            <div className="font-bold text-white text-sm">{model.name}</div>
-                                            <div className="text-[10px] text-zinc-500">{model.provider}</div>
+                                            <div className="font-bold text-foreground text-sm">{model.name}</div>
+                                            <div className="text-[10px] text-muted-foreground">{model.provider}</div>
                                         </div>
-                                        <Badge variant="secondary" className="text-[10px] bg-black/40 border-0" style={{ color: model.color }}>
+                                        <Badge variant="secondary" className="text-[10px] bg-background/40 border-0" style={{ color: model.color }}>
                                             {model.badge}
                                         </Badge>
                                     </div>
                                     <div className="flex items-end gap-1">
-                                        <span className="text-2xl font-mono font-bold text-white">
+                                        <span className="text-2xl font-mono font-bold text-foreground">
                                             ${finalMonthlyCosts[model.id].toFixed(2)}
                                         </span>
-                                        <span className="text-xs text-zinc-500 mb-1">/mo</span>
+                                        <span className="text-xs text-muted-foreground mb-1">/mo</span>
                                     </div>
                                 </div>
                             ))}
@@ -281,7 +281,7 @@ export default function CostEstimator() {
 
                 {/* Tab 2: Pricing Table (Editable) */}
                 <TabsContent value="pricing" className="mt-6">
-                    <Card className="bg-zinc-900 border-white/10">
+                    <Card className="bg-card border-border">
                         <CardHeader className="flex flex-row items-center justify-between">
                             <div>
                                 <CardTitle>Model Price Configuration</CardTitle>
@@ -294,32 +294,32 @@ export default function CostEstimator() {
                         <CardContent>
                             <Table>
                                 <TableHeader>
-                                    <TableRow className="border-white/10 hover:bg-transparent">
-                                        <TableHead className="text-zinc-400">Model Name</TableHead>
-                                        <TableHead className="text-zinc-400">Input Price <span className="text-[10px] opacity-50">($/1M)</span></TableHead>
-                                        <TableHead className="text-zinc-400">Output Price <span className="text-[10px] opacity-50">($/1M)</span></TableHead>
-                                        <TableHead className="text-zinc-400">Cache Read <span className="text-[10px] opacity-50">($/1M)</span></TableHead>
+                                    <TableRow className="border-border hover:bg-transparent">
+                                        <TableHead className="text-muted-foreground">Model Name</TableHead>
+                                        <TableHead className="text-muted-foreground">Input Price <span className="text-[10px] opacity-50">($/1M)</span></TableHead>
+                                        <TableHead className="text-muted-foreground">Output Price <span className="text-[10px] opacity-50">($/1M)</span></TableHead>
+                                        <TableHead className="text-muted-foreground">Cache Read <span className="text-[10px] opacity-50">($/1M)</span></TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {models.map((model) => (
-                                        <TableRow key={model.id} className="border-white/5 hover:bg-white/5 group">
-                                            <TableCell className="font-medium text-white flex items-center gap-2">
+                                        <TableRow key={model.id} className="border-border hover:bg-muted group">
+                                            <TableCell className="font-medium text-foreground flex items-center gap-2">
                                                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: model.color }} />
                                                 {model.name}
-                                                {model.id === 'custom' && <Badge variant="outline" className="text-[10px] border-white/10 ml-2">Editable</Badge>}
+                                                {model.id === 'custom' && <Badge variant="outline" className="text-[10px] border-border ml-2">Editable</Badge>}
                                             </TableCell>
                                             <TableCell>
                                                 {model.isEditable ? (
                                                     <Input
                                                         type="number"
                                                         step="0.01"
-                                                        className="h-8 w-24 bg-black border-white/10 font-mono text-xs"
+                                                        className="h-8 w-24 bg-background border-border font-mono text-xs"
                                                         value={model.inputPrice}
                                                         onChange={(e) => handlePriceChange(model.id, 'inputPrice', e.target.value)}
                                                     />
                                                 ) : (
-                                                    <span className="font-mono text-zinc-400 text-sm">$0.00</span>
+                                                    <span className="font-mono text-muted-foreground text-sm">$0.00</span>
                                                 )}
                                             </TableCell>
                                             <TableCell>
@@ -327,15 +327,15 @@ export default function CostEstimator() {
                                                     <Input
                                                         type="number"
                                                         step="0.01"
-                                                        className="h-8 w-24 bg-black border-white/10 font-mono text-xs"
+                                                        className="h-8 w-24 bg-background border-border font-mono text-xs"
                                                         value={model.outputPrice}
                                                         onChange={(e) => handlePriceChange(model.id, 'outputPrice', e.target.value)}
                                                     />
                                                 ) : (
-                                                    <span className="font-mono text-zinc-400 text-sm">$0.00</span>
+                                                    <span className="font-mono text-muted-foreground text-sm">$0.00</span>
                                                 )}
                                             </TableCell>
-                                            <TableCell className="text-zinc-500 font-mono text-sm">
+                                            <TableCell className="text-muted-foreground font-mono text-sm">
                                                 ${model.cachePrice}
                                             </TableCell>
                                         </TableRow>

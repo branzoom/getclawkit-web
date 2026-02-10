@@ -11,7 +11,7 @@ export default function DeepSeekSetupPage() {
                     <Zap className="w-6 h-6 flex-shrink-0 mt-1" />
                     <div>
                         <h3 className="text-lg font-bold mb-2">The Economy King</h3>
-                        <p className="text-zinc-300">
+                        <p className="text-foreground/80">
                             DeepSeek V3.2 provides GPT-4.1 level performance at a fraction of the cost. It is the highly recommended model for budget-conscious agent workflows.
                         </p>
                     </div>
@@ -33,7 +33,7 @@ export default function DeepSeekSetupPage() {
             </p>
 
             <h3>Step 2: Update clawhub.json</h3>
-            <div className="not-prose bg-zinc-900 rounded-lg p-4 my-4 font-mono text-xs text-zinc-300 border border-white/10">
+            <div className="not-prose bg-card rounded-lg p-4 my-4 font-mono text-xs text-foreground/80 border border-border">
                 {`{
   "provider": "deepseek",
   "apiKey": "sk-xxxxxx",
@@ -46,7 +46,7 @@ export default function DeepSeekSetupPage() {
                 <h4 className="text-green-400 font-bold mb-2 flex items-center gap-2">
                     <ShieldCheck className="w-5 h-5" /> Recommended: Use the Wizard
                 </h4>
-                <p className="text-zinc-300 mb-4 text-sm">
+                <p className="text-foreground/80 mb-4 text-sm">
                     Manual JSON edits can lead to parse errors. Our <Link href="/tools/config" className="text-green-400 underline">Config Wizard</Link> has a one-click "DeepSeek Optimized" template.
                 </p>
                 <Link href="/tools/config" className="inline-flex items-center px-4 py-2 bg-green-500 text-black font-bold rounded-lg text-sm">
@@ -56,12 +56,12 @@ export default function DeepSeekSetupPage() {
 
             <h2>Common Issues</h2>
             <p><strong>403 Forbidden:</strong> DeepSeek has regional restrictions in some areas. Ensure your server/IP is located in a supported region.</p>
-            <p><strong>Timeouts:</strong> DeepSeek can be busy during peak hours. Increase your <code className="text-zinc-300">timeout</code> setting in the config to 60000ms.</p>
+            <p><strong>Timeouts:</strong> DeepSeek can be busy during peak hours. Increase your <code className="text-foreground/80">timeout</code> setting in the config to 60000ms.</p>
 
-            <div className="not-prose mt-16 p-8 border-t border-white/10">
-                <h4 className="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-4">Compare Before You Buy</h4>
-                <p className="text-sm text-zinc-400 mb-4">Wondering exactly how much more you save with DeepSeek?</p>
-                <Link href="/tools/cost" className="inline-flex items-center gap-2 text-blue-400 hover:text-white font-bold transition-all">
+            <div className="not-prose mt-16 p-8 border-t border-border">
+                <h4 className="text-muted-foreground font-bold uppercase tracking-widest text-xs mb-4">Compare Before You Buy</h4>
+                <p className="text-sm text-muted-foreground mb-4">Wondering exactly how much more you save with DeepSeek?</p>
+                <Link href="/tools/cost" className="inline-flex items-center gap-2 text-blue-400 hover:text-foreground font-bold transition-all">
                     <DollarSign className="w-4 h-4" /> Open Cost Simulator
                 </Link>
             </div>

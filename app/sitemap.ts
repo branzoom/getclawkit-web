@@ -1,11 +1,10 @@
 import { MetadataRoute } from 'next';
-// 确保 tsconfig 允许读取 json，或者用 fs 读取
-import skills from '@/data/skills.json';
+import { getSitemapSkills } from '@/lib/db/skills';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://getclawkit.com';
 
-    // 1. 静态核心页面 (权重高)
+    // 1. Static core pages
     const staticRoutes = [
         '',
         '/status',
@@ -25,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/docs/guides/cost-optimization',
         '/docs/guides/deepseek-setup',
         '/docs/guides/plugin-installation',
+        '/docs/guides/security-checklist',
         '/docs/concepts/architecture',
         '/docs/concepts/skill-system',
         '/docs/concepts/data-privacy',
@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/docs/migration',
         '/docs/troubleshooting',
         '/compare/deepseek-vs-gpt4o',
+        '/compare/model-matrix',
         '/errors/econnrefused',
         '/contact',
         '/privacy',
@@ -46,13 +47,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: route === '' ? 1.0 : (route === '/docs' ? 0.9 : 0.8),
     }));
 
-    // 2. 动态 pSEO 页面 (Skills)
-    // 自动为每一个 Skill 生成一个 Sitemap 条目
-    const skillRoutes = skills.map((skill) => ({
+    // 2. Dynamic pSEO pages (Skills) — from DB
+    const skills = await getSitemapSkills();
+    const skillRoutes = skills.map((skill: { id: string; lastUpdated: Date }) => ({
         url: `${baseUrl}/skills/${skill.id}`,
-        lastModified: new Date(skill.lastUpdated), // 告诉 Google 这是什么时候更新的
+        lastModified: new Date(skill.lastUpdated),
         changeFrequency: 'weekly' as const,
-        priority: 0.6, // 权重略低于核心页，但依然重要
+        priority: 0.6,
     }));
 
     return [...staticRoutes, ...skillRoutes];

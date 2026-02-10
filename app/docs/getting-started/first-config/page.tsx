@@ -17,8 +17,8 @@ export default function FirstConfigPage() {
                 <div className="flex items-start gap-3">
                     <Zap className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
                     <div>
-                        <h3 className="text-lg font-bold text-white mb-2">Skip the Learning Curve</h3>
-                        <p className="text-zinc-300 mb-4">
+                        <h3 className="text-lg font-bold text-foreground mb-2">Skip the Learning Curve</h3>
+                        <p className="text-foreground/80 mb-4">
                             Our <Link href="/tools/config" className="text-green-400 hover:text-green-300">Config Wizard</Link> generates production-ready configs in 30 seconds. No YAML knowledge required.
                         </p>
                         <Link
@@ -48,8 +48,8 @@ export default function FirstConfigPage() {
                 Here's the simplest possible config:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "llm": {
     "provider": "openai",
     "apiKey": "sk-...",
@@ -63,8 +63,8 @@ export default function FirstConfigPage() {
                 For real-world use, add these fields:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "llm": {
     "provider": "openai",
     "apiKey": "sk-...",
@@ -90,8 +90,8 @@ export default function FirstConfigPage() {
                 DeepSeek V3.2 offers GPT-4-level performance at 1/10th the cost:
             </p>
 
-            <div className="not-prose bg-zinc-900 border border-white/10 rounded-lg p-4 my-4">
-                <pre className="text-sm text-zinc-300 overflow-x-auto"><code>{`{
+            <div className="not-prose bg-card border border-border rounded-lg p-4 my-4">
+                <pre className="text-sm text-foreground/80 overflow-x-auto"><code>{`{
   "llm": {
     "provider": "deepseek",
     "apiKey": "sk-...",
@@ -109,18 +109,18 @@ export default function FirstConfigPage() {
 
             <div className="not-prose space-y-4 my-6">
                 <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                    <h3 className="text-white font-semibold mb-2">❌ Trailing Commas</h3>
-                    <p className="text-sm text-zinc-400">JSON doesn't support trailing commas. Our <Link href="/tools/config" className="text-red-400 hover:text-red-300">Config Wizard</Link> handles this automatically.</p>
+                    <h3 className="text-foreground font-semibold mb-2">❌ Trailing Commas</h3>
+                    <p className="text-sm text-muted-foreground">JSON doesn't support trailing commas. Our <Link href="/tools/config" className="text-red-400 hover:text-red-300">Config Wizard</Link> handles this automatically.</p>
                 </div>
 
                 <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                    <h3 className="text-white font-semibold mb-2">❌ Windows Path Escaping</h3>
-                    <p className="text-sm text-zinc-400">Use <code>C:\\\\Users</code> not <code>C:\\Users</code>. The wizard auto-fixes this.</p>
+                    <h3 className="text-foreground font-semibold mb-2">❌ Windows Path Escaping</h3>
+                    <p className="text-sm text-muted-foreground">Use <code>C:\\\\Users</code> not <code>C:\\Users</code>. The wizard auto-fixes this.</p>
                 </div>
 
                 <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                    <h3 className="text-white font-semibold mb-2">❌ Hardcoded API Keys</h3>
-                    <p className="text-sm text-zinc-400">Never commit API keys to Git. Use environment variables instead.</p>
+                    <h3 className="text-foreground font-semibold mb-2">❌ Hardcoded API Keys</h3>
+                    <p className="text-sm text-muted-foreground">Never commit API keys to Git. Use environment variables instead.</p>
                 </div>
             </div>
 
@@ -135,8 +135,8 @@ export default function FirstConfigPage() {
                     <div key={i} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h4 className="text-white font-semibold text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-500">{item.desc}</p>
+                            <h4 className="text-foreground font-semibold text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground">{item.desc}</p>
                         </div>
                     </div>
                 ))}
@@ -145,18 +145,18 @@ export default function FirstConfigPage() {
             <h2>Next Steps</h2>
             <div className="not-prose grid md:grid-cols-2 gap-4 my-8">
                 <Link href="/docs/getting-started/docker-setup" className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg hover:bg-purple-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">Docker Setup</h3>
-                    <p className="text-sm text-zinc-400">Deploy with Docker Compose</p>
+                    <h3 className="text-foreground font-semibold mb-2">Docker Setup</h3>
+                    <p className="text-sm text-muted-foreground">Deploy with Docker Compose</p>
                 </Link>
                 <Link href="/skills" className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg hover:bg-orange-500/20 transition-colors">
-                    <h3 className="text-white font-semibold mb-2">Browse Plugins</h3>
-                    <p className="text-sm text-zinc-400">Add capabilities to your agent</p>
+                    <h3 className="text-foreground font-semibold mb-2">Browse Plugins</h3>
+                    <p className="text-sm text-muted-foreground">Add capabilities to your agent</p>
                 </Link>
             </div>
 
-            <hr className="my-8 border-white/10" />
+            <hr className="my-8 border-border" />
 
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-muted-foreground">
                 <strong>Last Updated:</strong> February 6, 2026 |
                 <strong> Time to Create:</strong> 30 seconds (with Config Wizard) or 10 minutes (manual)
             </p>

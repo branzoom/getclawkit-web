@@ -8,20 +8,20 @@ export default function NotFound() {
             {/* Icon & Glitch Effect */}
             <div className="relative">
                 <div className="absolute -inset-4 bg-blue-500/20 rounded-full blur-xl animate-pulse"></div>
-                <div className="relative p-6 bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl transform rotate-3">
+                <div className="relative p-6 bg-card border border-border rounded-2xl shadow-2xl transform rotate-3">
                     <FileQuestion className="w-16 h-16 text-blue-400" />
                 </div>
             </div>
 
             {/* Text Content */}
             <div className="space-y-4 max-w-lg">
-                <h1 className="text-6xl font-bold tracking-tighter text-white">
+                <h1 className="text-6xl font-bold tracking-tighter text-foreground">
                     404
                 </h1>
-                <h2 className="text-2xl font-semibold text-zinc-300">
+                <h2 className="text-2xl font-semibold text-foreground/80">
                     Signal Lost
                 </h2>
-                <p className="text-zinc-500 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                     The page you are looking for might have been moved, deleted, or is just hiding in the OpenClaw matrix.
                 </p>
             </div>
@@ -34,7 +34,7 @@ export default function NotFound() {
                         Return to Base
                     </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="gap-2 border-white/10 hover:bg-zinc-800 text-zinc-400 hover:text-white">
+                <Button asChild variant="outline" size="lg" className="gap-2 border-border hover:bg-muted text-muted-foreground hover:text-foreground">
                     <Link href="/status">
                         <ArrowLeft className="w-4 h-4" />
                         Check System Status
@@ -43,7 +43,7 @@ export default function NotFound() {
             </div>
 
             {/* Footer Hint */}
-            <p className="text-xs text-zinc-600 pt-8 font-mono">
+            <p className="text-xs text-muted-foreground/70 pt-8 font-mono">
                 Error Code: ERR_PAGE_NOT_FOUND // CLAWKIT_V2
             </p>
         </div>

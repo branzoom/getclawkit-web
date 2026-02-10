@@ -34,6 +34,8 @@ const docNav = [
             { title: 'Cost Optimization', href: '/docs/guides/cost-optimization' },
             { title: 'DeepSeek Setup', href: '/docs/guides/deepseek-setup' },
             { title: 'Plugin Installation', href: '/docs/guides/plugin-installation' },
+            { title: 'Security Checklist', href: '/docs/guides/security-checklist' },
+            { title: 'Model Matrix', href: '/compare/model-matrix' },
         ]
     },
     {
@@ -62,7 +64,7 @@ export default function DocsLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="min-h-screen bg-black">
+        <div className="min-h-screen bg-background">
             <div className="container mx-auto px-4 py-8">
                 <div className="flex gap-8">
                     {/* Sidebar Navigation */}
@@ -70,7 +72,7 @@ export default function DocsLayout({
                         <div className="sticky top-8">
                             <Link
                                 href="/docs"
-                                className="flex items-center gap-2 text-sm font-bold text-white mb-6 hover:text-blue-400 transition-colors"
+                                className="flex items-center gap-2 text-sm font-bold text-foreground mb-6 hover:text-blue-400 transition-colors"
                             >
                                 <Home className="w-4 h-4" />
                                 Documentation Home
@@ -79,7 +81,7 @@ export default function DocsLayout({
                             <nav>
                                 {docNav.map((section: { title: string; items: { title: string; href: string }[] }, index: number) => (
                                     <div key={index} className="mb-6">
-                                        <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
+                                        <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
                                             {section.title}
                                         </h4>
                                         <ul>
@@ -87,7 +89,7 @@ export default function DocsLayout({
                                                 <li key={itemIndex} className="mb-2">
                                                     <Link
                                                         href={item.href}
-                                                        className="text-sm text-zinc-300 hover:text-blue-400 transition-colors"
+                                                        className="text-sm text-foreground/80 hover:text-blue-400 transition-colors"
                                                     >
                                                         {item.title}
                                                     </Link>
@@ -104,14 +106,14 @@ export default function DocsLayout({
                     <main className="flex-1 min-w-0 animate-in fade-in slide-in-from-bottom-2 duration-700">
                         <Breadcrumbs />
 
-                        <article className="prose prose-invert prose-zinc max-w-none">
+                        <article className="prose dark:prose-invert prose-zinc max-w-none">
                             {children}
                         </article>
 
                         {/* Footer CTA */}
                         <div className="mt-16 p-6 bg-blue-500/10 border border-blue-500/20 rounded-xl">
-                            <h3 className="text-lg font-bold text-white mb-2">Need Help?</h3>
-                            <p className="text-sm text-zinc-400 mb-4">
+                            <h3 className="text-lg font-bold text-foreground mb-2">Need Help?</h3>
+                            <p className="text-sm text-muted-foreground mb-4">
                                 Try our automated tools to solve common issues instantly.
                             </p>
                             <div className="flex flex-wrap gap-3">
@@ -123,7 +125,7 @@ export default function DocsLayout({
                                 </Link>
                                 <Link
                                     href="/tools/config"
-                                    className="px-4 py-2 bg-white/10 text-white text-sm font-medium rounded-lg hover:bg-white/20 transition-colors"
+                                    className="px-4 py-2 bg-muted text-foreground text-sm font-medium rounded-lg hover:bg-muted transition-colors"
                                 >
                                     Config Wizard
                                 </Link>

@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { TrendingUp, Package, Users } from 'lucide-react';
-import { skills } from '@/data/skills';
 
-export default function LiveStats() {
+interface LiveStatsProps {
+    skillCount: number;
+}
+
+export default function LiveStats({ skillCount }: LiveStatsProps) {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -20,7 +23,7 @@ export default function LiveStats() {
         },
         {
             icon: <Package className="w-5 h-5" />,
-            value: skills.length.toString(),
+            value: skillCount.toString(),
             label: 'Skills Available',
             color: 'text-orange-400'
         },

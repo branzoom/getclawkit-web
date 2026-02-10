@@ -31,14 +31,14 @@ export default function AgentTheoryPage() {
                         <div key={i} className="flex items-center gap-3">
                             <div className={`p-4 rounded-xl border ${step.color} text-center min-w-[120px]`}>
                                 <div className="flex justify-center mb-2">{step.icon}</div>
-                                <div className="font-bold text-white text-sm">{step.label}</div>
-                                <div className="text-xs text-zinc-500 mt-1">{step.desc}</div>
+                                <div className="font-bold text-foreground text-sm">{step.label}</div>
+                                <div className="text-xs text-muted-foreground mt-1">{step.desc}</div>
                             </div>
-                            {i < 3 && <ChevronRight className="w-4 h-4 text-zinc-600 hidden md:block" />}
+                            {i < 3 && <ChevronRight className="w-4 h-4 text-muted-foreground/70 hidden md:block" />}
                         </div>
                     ))}
                 </div>
-                <p className="text-center text-xs text-zinc-600 mt-4">This loop repeats until the goal is achieved or the agent runs out of steps.</p>
+                <p className="text-center text-xs text-muted-foreground/70 mt-4">This loop repeats until the goal is achieved or the agent runs out of steps.</p>
             </div>
 
             <h2>The Three Pillars</h2>
@@ -47,33 +47,33 @@ export default function AgentTheoryPage() {
             </p>
 
             <div className="not-prose grid md:grid-cols-3 gap-6 my-12">
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <MemoryStick className="w-8 h-8 text-blue-400 mb-4" />
-                    <h3 className="text-lg font-bold text-white mb-2">Memory</h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <h3 className="text-lg font-bold text-foreground mb-2">Memory</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                         Agents need context to make good decisions. <strong>Short-term memory</strong> is the conversation history within a session. <strong>Long-term memory</strong> persists across sessions using vector databases or file storage.
                     </p>
-                    <p className="text-xs text-zinc-600 mt-3">
+                    <p className="text-xs text-muted-foreground/70 mt-3">
                         OpenClaw uses in-context history (short-term) and plans local vector DB support for v3 (long-term).
                     </p>
                 </div>
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <Target className="w-8 h-8 text-purple-400 mb-4" />
-                    <h3 className="text-lg font-bold text-white mb-2">Planning</h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <h3 className="text-lg font-bold text-foreground mb-2">Planning</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                         Given a complex goal, the agent must break it into achievable sub-tasks. This can be done <strong>upfront</strong> (plan-then-execute) or <strong>reactively</strong> (decide one step at a time based on the current state).
                     </p>
-                    <p className="text-xs text-zinc-600 mt-3">
+                    <p className="text-xs text-muted-foreground/70 mt-3">
                         OpenClaw uses reactive planning by default, with optional goal decomposition for complex tasks.
                     </p>
                 </div>
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-2xl">
+                <div className="p-6 bg-card border border-border rounded-2xl">
                     <Layers className="w-8 h-8 text-orange-400 mb-4" />
-                    <h3 className="text-lg font-bold text-white mb-2">Tool Use</h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <h3 className="text-lg font-bold text-foreground mb-2">Tool Use</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                         An LLM alone can only generate text. <strong>Tool use</strong> gives it the ability to interact with the world — clicking buttons, reading files, calling APIs. This is what transforms a chatbot into an agent.
                     </p>
-                    <p className="text-xs text-zinc-600 mt-3">
+                    <p className="text-xs text-muted-foreground/70 mt-3">
                         OpenClaw&apos;s entire Skill System is built around tool use via MCP.
                     </p>
                 </div>
@@ -85,9 +85,9 @@ export default function AgentTheoryPage() {
             </p>
 
             <div className="not-prose grid md:grid-cols-2 gap-6 my-8">
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-xl">
-                    <h4 className="text-white font-bold mb-2">Reactive (OpenClaw Default)</h4>
-                    <p className="text-sm text-zinc-400 mb-3">
+                <div className="p-6 bg-card border border-border rounded-xl">
+                    <h4 className="text-foreground font-bold mb-2">Reactive (OpenClaw Default)</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
                         The agent observes the current state and decides the very next action. No upfront plan. Highly adaptable to dynamic environments like web pages.
                     </p>
                     <div className="text-xs space-y-1">
@@ -97,9 +97,9 @@ export default function AgentTheoryPage() {
                         <div className="text-red-400">- Less efficient for long tasks</div>
                     </div>
                 </div>
-                <div className="p-6 bg-zinc-900 border border-white/10 rounded-xl">
-                    <h4 className="text-white font-bold mb-2">Deliberative (Plan-Then-Execute)</h4>
-                    <p className="text-sm text-zinc-400 mb-3">
+                <div className="p-6 bg-card border border-border rounded-xl">
+                    <h4 className="text-foreground font-bold mb-2">Deliberative (Plan-Then-Execute)</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
                         The agent creates a full plan first, then follows it step by step. More efficient but brittle when the environment changes mid-execution.
                     </p>
                     <div className="text-xs space-y-1">
@@ -129,16 +129,16 @@ export default function AgentTheoryPage() {
                 <div className="flex items-start gap-3">
                     <Lightbulb className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                     <div>
-                        <h4 className="text-white font-bold text-sm mb-1">Key Insight</h4>
-                        <p className="text-xs text-zinc-400">
+                        <h4 className="text-foreground font-bold text-sm mb-1">Key Insight</h4>
+                        <p className="text-xs text-muted-foreground">
                             The best agents are not the ones with the most powerful LLM — they&apos;re the ones with the best <strong>observation compression</strong>. OpenClaw&apos;s DOM-to-text compressor reduces a 500KB webpage to ~2KB of relevant signal.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div className="not-prose mt-16 p-8 border-t border-white/10 flex items-center justify-between">
-                <Link href="/docs/concepts/data-privacy" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors">
+            <div className="not-prose mt-16 p-8 border-t border-border flex items-center justify-between">
+                <Link href="/docs/concepts/data-privacy" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Data Sovereignty
                 </Link>
                 <Link href="/docs/concepts/goal-decomposition" className="inline-flex items-center gap-2 text-amber-400 font-bold hover:underline">

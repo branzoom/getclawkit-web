@@ -11,7 +11,7 @@ export default function ApiKeyProblemsPage() {
                     <AlertCircle className="w-6 h-6 flex-shrink-0 mt-1" />
                     <div>
                         <h3 className="text-lg font-bold mb-2">Security Warning</h3>
-                        <p className="text-zinc-300">
+                        <p className="text-foreground/80">
                             Never share your <code className="text-red-300">clawhub.json</code> or API keys in public Discord channels or GitHub issues.
                         </p>
                     </div>
@@ -25,23 +25,23 @@ export default function ApiKeyProblemsPage() {
             <h2>Top 3 Common Errors</h2>
 
             <div className="grid md:grid-cols-3 gap-4 my-8">
-                <div className="p-4 bg-zinc-900 border border-white/5 rounded-xl">
+                <div className="p-4 bg-card border border-border rounded-xl">
                     <div className="text-red-400 mb-2 font-bold flex items-center gap-2">
                         <Lock className="w-4 h-4" /> 401 Unauthorized
                     </div>
-                    <p className="text-xs text-zinc-400">Invalid key or expired session. Check for leading/trailing spaces.</p>
+                    <p className="text-xs text-muted-foreground">Invalid key or expired session. Check for leading/trailing spaces.</p>
                 </div>
-                <div className="p-4 bg-zinc-900 border border-white/5 rounded-xl">
+                <div className="p-4 bg-card border border-border rounded-xl">
                     <div className="text-yellow-400 mb-2 font-bold flex items-center gap-2">
                         <AlertCircle className="w-4 h-4" /> 429 Rate Limit
                     </div>
-                    <p className="text-xs text-zinc-400">Zero balance or tier limits. Check provider dashboard.</p>
+                    <p className="text-xs text-muted-foreground">Zero balance or tier limits. Check provider dashboard.</p>
                 </div>
-                <div className="p-4 bg-zinc-900 border border-white/5 rounded-xl">
+                <div className="p-4 bg-card border border-border rounded-xl">
                     <div className="text-blue-400 mb-2 font-bold flex items-center gap-2">
                         <HelpCircle className="w-4 h-4" /> 404 No Model
                     </div>
-                    <p className="text-xs text-zinc-400">Key doesn't have access to specific model (e.g. GPT-4o).</p>
+                    <p className="text-xs text-muted-foreground">Key doesn't have access to specific model (e.g. GPT-4o).</p>
                 </div>
             </div>
 
@@ -54,10 +54,10 @@ export default function ApiKeyProblemsPage() {
 
             <h3>2. Verify Environment Variables</h3>
             <p>
-                If you are using Docker, ensure variables are passed correctly in <code className="text-zinc-300">docker-compose.yml</code>.
+                If you are using Docker, ensure variables are passed correctly in <code className="text-foreground/80">docker-compose.yml</code>.
             </p>
 
-            <div className="not-prose bg-zinc-900 rounded-lg p-4 my-4 font-mono text-xs text-zinc-300 border border-white/10">
+            <div className="not-prose bg-card rounded-lg p-4 my-4 font-mono text-xs text-foreground/80 border border-border">
                 {`environment:
   - OPENAI_API_KEY=\${OPENAI_API_KEY}
   - DEEPSEEK_API_KEY=sk-xxxxxx # Manual way`}
@@ -68,8 +68,8 @@ export default function ApiKeyProblemsPage() {
                 <div className="flex items-center gap-3">
                     <ShieldCheck className="w-6 h-6 text-blue-400" />
                     <div>
-                        <h4 className="font-bold text-white mb-1">Instant Validation</h4>
-                        <p className="text-sm text-zinc-300 mb-4">
+                        <h4 className="font-bold text-foreground mb-1">Instant Validation</h4>
+                        <p className="text-sm text-foreground/80 mb-4">
                             Our <Link href="/tools/config" className="text-blue-400 underline">Config Wizard</Link> validates your API key format in real-time.
                         </p>
                         <Link href="/tools/config" className="inline-flex items-center px-4 py-2 bg-blue-500 text-black font-bold rounded-lg text-sm">
@@ -83,15 +83,15 @@ export default function ApiKeyProblemsPage() {
             <p>
                 Run our diagnostic tool to see if the issue is with the key itself or your network connectivity to the provider.
             </p>
-            <code className="block bg-zinc-900 p-4 rounded-lg border border-white/10 text-green-400 mb-8">
+            <code className="block bg-card p-4 rounded-lg border border-border text-green-400 mb-8">
                 npx clawkit-doctor@latest
             </code>
 
-            <div className="not-prose mt-16 p-8 border-t border-white/10">
-                <h4 className="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-4">Related Guides</h4>
+            <div className="not-prose mt-16 p-8 border-t border-border">
+                <h4 className="text-muted-foreground font-bold uppercase tracking-widest text-xs mb-4">Related Guides</h4>
                 <div className="flex flex-wrap gap-4">
-                    <Link href="/docs/guides/cost-optimization" className="text-sm text-blue-400 hover:text-white transition-colors">Cost Optimization</Link>
-                    <Link href="/docs/troubleshooting/connection-errors" className="text-sm text-blue-400 hover:text-white transition-colors">Connection Errors</Link>
+                    <Link href="/docs/guides/cost-optimization" className="text-sm text-blue-400 hover:text-foreground transition-colors">Cost Optimization</Link>
+                    <Link href="/docs/troubleshooting/connection-errors" className="text-sm text-blue-400 hover:text-foreground transition-colors">Connection Errors</Link>
                 </div>
             </div>
         </>

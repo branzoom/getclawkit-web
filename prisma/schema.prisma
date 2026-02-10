@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Skill {
+  id          String   @id                    // skill.id 如 "official-openclaw-1password"，与 URL 路由一致
+  name        String
+  shortDesc   String   @db.Text
+  longDesc    String   @db.Text
+  author      String
+  authorUrl   String?
+  stars       Int      @default(0)
+  lastUpdated DateTime
+  command     String
+  tags        String[]                        // PostgreSQL 原生数组
+  fileSha     String?
+  seoTitle    String?
+  seoDesc     String?  @db.Text
+  downloadUrl String?
+  sourceRepo  String?
+  sourcePath  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([name])
+  @@index([author])
+  @@index([stars(sort: Desc)])
+}

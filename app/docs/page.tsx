@@ -68,6 +68,8 @@ export default function DocsIndexPage() {
                 { title: 'Cost Optimization Guide', href: '/docs/guides/cost-optimization' },
                 { title: 'DeepSeek Setup Guide', href: '/docs/guides/deepseek-setup' },
                 { title: 'Plugin Installation', href: '/docs/guides/plugin-installation' },
+                { title: 'Security Checklist', href: '/docs/guides/security-checklist' },
+                { title: 'Model Compatibility Matrix', href: '/compare/model-matrix' },
                 { title: 'v1 to v2 Migration', href: '/docs/guides/v1-to-v2-migration' },
             ],
         },
@@ -100,7 +102,7 @@ export default function DocsIndexPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-black">
+        <div className="min-h-screen bg-background">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -114,10 +116,10 @@ export default function DocsIndexPage() {
                             <BookOpen className="w-3 h-3" />
                             Documentation
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                        <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
                             OpenClaw Setup Guides
                         </h1>
-                        <p className="text-xl text-zinc-400 max-w-2xl mx-auto mb-8">
+                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
                             Complete guides, tutorials, and troubleshooting for OpenClaw. Fix errors in minutes, not hours.
                         </p>
 
@@ -133,9 +135,9 @@ export default function DocsIndexPage() {
                         >
                             <div className="flex items-center gap-3 mb-2">
                                 <Wrench className="w-5 h-5 text-green-400" />
-                                <h3 className="font-bold text-white group-hover:text-green-400">Most Popular</h3>
+                                <h3 className="font-bold text-foreground group-hover:text-green-400">Most Popular</h3>
                             </div>
-                            <p className="text-sm text-zinc-400">Fix &quot;Connection Refused&quot; Errors</p>
+                            <p className="text-sm text-muted-foreground">Fix &quot;Connection Refused&quot; Errors</p>
                             <div className="flex items-center gap-2 mt-3 text-green-400 text-sm">
                                 Read Guide <ArrowRight className="w-4 h-4" />
                             </div>
@@ -147,9 +149,9 @@ export default function DocsIndexPage() {
                         >
                             <div className="flex items-center gap-3 mb-2">
                                 <Wrench className="w-5 h-5 text-blue-400" />
-                                <h3 className="font-bold text-white group-hover:text-blue-400">Quick Fix</h3>
+                                <h3 className="font-bold text-foreground group-hover:text-blue-400">Quick Fix</h3>
                             </div>
-                            <p className="text-sm text-zinc-400">Auto-diagnose with Local Doctor</p>
+                            <p className="text-sm text-muted-foreground">Auto-diagnose with Local Doctor</p>
                             <div className="flex items-center gap-2 mt-3 text-blue-400 text-sm">
                                 Run Tool <ArrowRight className="w-4 h-4" />
                             </div>
@@ -161,9 +163,9 @@ export default function DocsIndexPage() {
                         >
                             <div className="flex items-center gap-3 mb-2">
                                 <Rocket className="w-5 h-5 text-purple-400" />
-                                <h3 className="font-bold text-white group-hover:text-purple-400">Start Fresh</h3>
+                                <h3 className="font-bold text-foreground group-hover:text-purple-400">Start Fresh</h3>
                             </div>
-                            <p className="text-sm text-zinc-400">Generate error-free configs</p>
+                            <p className="text-sm text-muted-foreground">Generate error-free configs</p>
                             <div className="flex items-center gap-2 mt-3 text-purple-400 text-sm">
                                 Open Wizard <ArrowRight className="w-4 h-4" />
                             </div>
@@ -179,8 +181,8 @@ export default function DocsIndexPage() {
                                         {category.icon}
                                     </div>
                                     <div>
-                                        <h2 className="text-2xl font-bold text-white">{category.title}</h2>
-                                        <p className="text-sm text-zinc-500">{category.description}</p>
+                                        <h2 className="text-2xl font-bold text-foreground">{category.title}</h2>
+                                        <p className="text-sm text-muted-foreground">{category.description}</p>
                                     </div>
                                 </div>
 
@@ -192,7 +194,7 @@ export default function DocsIndexPage() {
                                             className={`p-4 border rounded-xl ${category.bg} hover:scale-[1.02] transition-transform group`}
                                         >
                                             <div className="flex items-start justify-between">
-                                                <h3 className="font-semibold text-white mb-1">
+                                                <h3 className="font-semibold text-foreground mb-1">
                                                     {article.title}
                                                 </h3>
                                                 <ArrowRight className={`w-5 h-5 ${category.color} opacity-0 group-hover:opacity-100 transition-opacity shrink-0`} />
@@ -205,19 +207,19 @@ export default function DocsIndexPage() {
                     </div>
 
                     {/* FAQ Section */}
-                    <div className="mt-20 pt-16 border-t border-white/10">
+                    <div className="mt-20 pt-16 border-t border-border">
                         <div className="flex items-center gap-3 mb-8">
                             <HelpCircle className="w-6 h-6 text-yellow-400" />
-                            <h2 className="text-2xl font-bold text-white">Frequently Asked Questions</h2>
+                            <h2 className="text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
                         </div>
 
                         <Accordion type="single" collapsible className="w-full max-w-3xl">
                             {FAQ_ITEMS.map((item, i) => (
-                                <AccordionItem key={i} value={`faq-${i}`} className="border-white/10">
-                                    <AccordionTrigger className="text-white hover:text-blue-400 text-left">
+                                <AccordionItem key={i} value={`faq-${i}`} className="border-border">
+                                    <AccordionTrigger className="text-foreground hover:text-blue-400 text-left">
                                         {item.q}
                                     </AccordionTrigger>
-                                    <AccordionContent className="text-zinc-400">
+                                    <AccordionContent className="text-muted-foreground">
                                         {item.a}
                                     </AccordionContent>
                                 </AccordionItem>
@@ -226,9 +228,9 @@ export default function DocsIndexPage() {
                     </div>
 
                     {/* CTA Footer */}
-                    <div className="mt-16 p-8 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10 rounded-2xl text-center">
-                        <h3 className="text-2xl font-bold text-white mb-3">Can&apos;t Find What You&apos;re Looking For?</h3>
-                        <p className="text-zinc-400 mb-6">
+                    <div className="mt-16 p-8 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-border rounded-2xl text-center">
+                        <h3 className="text-2xl font-bold text-foreground mb-3">Can&apos;t Find What You&apos;re Looking For?</h3>
+                        <p className="text-muted-foreground mb-6">
                             Try our automated tools to solve common issues instantly.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
@@ -240,13 +242,13 @@ export default function DocsIndexPage() {
                             </Link>
                             <Link
                                 href="/tools/config"
-                                className="px-6 py-3 bg-white/10 text-white font-medium rounded-lg hover:bg-white/20 transition-colors"
+                                className="px-6 py-3 bg-muted text-foreground font-medium rounded-lg hover:bg-muted transition-colors"
                             >
                                 Config Wizard
                             </Link>
                             <Link
                                 href="/skills"
-                                className="px-6 py-3 bg-white/10 text-white font-medium rounded-lg hover:bg-white/20 transition-colors"
+                                className="px-6 py-3 bg-muted text-foreground font-medium rounded-lg hover:bg-muted transition-colors"
                             >
                                 Browse Plugins
                             </Link>
