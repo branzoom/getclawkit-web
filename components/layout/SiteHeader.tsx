@@ -47,6 +47,8 @@ export function SiteHeader() {
                         <Link
                             key={item.href}
                             href={item.href}
+                            data-umami-event="nav-click"
+                            data-umami-event-item={item.name}
                             className={`transition-colors hover:text-foreground ${pathname === item.href || pathname.startsWith(item.href + '/')
                                 ? 'text-foreground font-bold'
                                 : 'text-muted-foreground'

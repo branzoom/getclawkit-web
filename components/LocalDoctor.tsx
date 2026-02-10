@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Terminal, Copy, Check, Shield, AlertTriangle } from 'lucide-react';
+import { trackEvent } from '@/lib/umami';
 
 export default function LocalDoctor() {
     const [os, setOs] = useState<'windows' | 'unix'>('windows');
@@ -76,6 +77,7 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
         navigator.clipboard.writeText(activeScript);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+        trackEvent('doctor-copy-script');
     };
 
     return (
@@ -101,6 +103,7 @@ echo "✅ Diagnosis Complete. Screenshot this if you need help!"
                                 navigator.clipboard.writeText('npx clawkit-doctor@latest');
                                 setCopied(true);
                                 setTimeout(() => setCopied(false), 2000);
+                                trackEvent('doctor-copy-npx');
                             }}
                             className={`${copied ? 'bg-green-500 text-primary-foreground' : 'bg-primary text-primary-foreground hover:bg-primary/90'}`}
                         >

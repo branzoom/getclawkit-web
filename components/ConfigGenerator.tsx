@@ -11,6 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Copy, Check, RefreshCw, Terminal, Monitor, AlertCircle, Play, CheckCircle2, XCircle, Shield } from 'lucide-react';
 import { z } from 'zod';
 import { CONFIG_PRESETS } from '@/data/models';
+import { trackEvent } from '@/lib/umami';
 
 
 // --- Zod Schema Definitions ---
@@ -89,6 +90,7 @@ export default function ConfigGenerator() {
         navigator.clipboard.writeText(jsonOutput);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+        trackEvent('config-copy-json');
     };
 
     const updateConfig = (section: keyof ConfigState, key: string, value: string) => {
@@ -108,6 +110,7 @@ export default function ConfigGenerator() {
             ...prev,
             llm: { ...PRESETS[presetKey].config }
         }));
+        trackEvent('config-preset-select', { provider: presetKey });
     };
 
     const validateConnection = async () => {
@@ -142,8 +145,10 @@ export default function ConfigGenerator() {
             if (res.ok) {
                 setConnectionStatus('success');
                 setConnectionMsg("Connection Verified! API responded with 200 OK.");
+                trackEvent('config-test-connection', { status: 'success' });
             } else {
                 setConnectionStatus('error');
+                trackEvent('config-test-connection', { status: 'error' });
                 if (res.status === 401) {
                     setConnectionMsg("Authentication Failed (401). Check API Key.");
                 } else if (res.status === 404) {
@@ -158,6 +163,7 @@ export default function ConfigGenerator() {
                 if (err.message === 'Network/CORS Error') {
                     setConnectionStatus('warning');
                     setConnectionMsg("URL format looks correct. Browser CORS blocks direct API testing — this is normal. Your CLI/agent will connect fine.");
+                    trackEvent('config-test-connection', { status: 'warning' });
                     return;
                 }
                 errorMsg = err.message;
@@ -172,7 +178,7 @@ export default function ConfigGenerator() {
         <div className="grid lg:grid-cols-2 gap-8 items-start">
             {/* 左侧：配置表单 */}
             <div className="space-y-6">
-                <Tabs defaultValue="unix" value={os} onValueChange={(v) => setOs(v as 'unix' | 'windows')} className="w-full">
+                <Tabs defaultValue="unix" value={os} onValueChange={(v) => { setOs(v as 'unix' | 'windows'); trackEvent('config-os-select', { os: v }); }} className="w-full">
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="unix" className="flex items-center gap-2">
                             <Terminal className="w-4 h-4" /> macOS / Linux

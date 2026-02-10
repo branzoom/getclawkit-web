@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Search, ArrowRight, Star, ChevronDown, Loader2 } from 'lucide-react';
+import { trackEvent } from '@/lib/umami';
 
 export interface SkillIndexItem {
     id: string;
@@ -77,7 +78,10 @@ export default function SkillRegistry({
             page: '1',
             pageSize: String(PAGE_SIZE),
         });
-        if (debouncedTerm.trim()) params.set('search', debouncedTerm.trim());
+        if (debouncedTerm.trim()) {
+            params.set('search', debouncedTerm.trim());
+            trackEvent('skill-search', { query: debouncedTerm.trim() });
+        }
 
         fetch(`/api/skills?${params}`)
             .then(r => r.json())
@@ -202,6 +206,7 @@ export default function SkillRegistry({
                         size="lg"
                         onClick={loadMore}
                         disabled={loading}
+                        data-umami-event="skill-load-more"
                         className="gap-2 text-muted-foreground hover:text-foreground border-border hover:border-border px-8"
                     >
                         {loading ? (

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Check, Copy, FileJson } from 'lucide-react';
+import { trackEvent } from '@/lib/umami';
 
 interface SkillConfigSnippetProps {
     skillId: string;
@@ -28,6 +29,7 @@ export default function SkillConfigSnippet({ skillId, skillName }: SkillConfigSn
         navigator.clipboard.writeText(configSnippet);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+        trackEvent('skill-copy-config', { skillId });
     };
 
     return (

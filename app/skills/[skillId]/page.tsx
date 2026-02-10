@@ -114,7 +114,7 @@ export default async function SkillDetailPage({ params }: Props) {
                                     <code className="flex-1 bg-card border border-border rounded p-3 text-green-400 font-mono text-sm overflow-x-auto">
                                         {skill.command}
                                     </code>
-                                    <CopyButton text={skill.command} />
+                                    <CopyButton text={skill.command} eventName="skill-copy-install" eventData={{ skillId: skill.id }} />
                                 </div>
                             </div>
                             <div className="relative">
@@ -123,7 +123,7 @@ export default async function SkillDetailPage({ params }: Props) {
                             </div>
                             <div>
                                 <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold" size="lg">
-                                    <Link href={skill.downloadUrl || skill.authorUrl || '#'} target="_blank">
+                                    <Link href={skill.downloadUrl || skill.authorUrl || '#'} target="_blank" data-umami-event="skill-download-source">
                                         <FileDown className="w-4 h-4 mr-2" />
                                         Download Source Code (.zip)
                                     </Link>
@@ -157,7 +157,7 @@ export default async function SkillDetailPage({ params }: Props) {
 
                     <div className="mt-8 pt-6 border-t border-border text-center">
                         <Button variant="outline" className="gap-2 text-muted-foreground hover:text-foreground border-border hover:border-border" asChild>
-                            <Link href={skill.downloadUrl || skill.authorUrl || '#'} target="_blank">
+                            <Link href={skill.downloadUrl || skill.authorUrl || '#'} target="_blank" data-umami-event="skill-view-github">
                                 <Github className="w-4 h-4" />
                                 Read Full Documentation on GitHub
                             </Link>

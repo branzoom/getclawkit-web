@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Fuse from 'fuse.js';
 import { Search, FileText, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { trackEvent } from '@/lib/umami';
 
 export interface DocEntry {
     title: string;
@@ -67,7 +68,9 @@ export default function DocsSearch() {
 
     const results = useMemo(() => {
         if (!query.trim()) return [];
-        return fuse.search(query).slice(0, 8).map(r => r.item);
+        const items = fuse.search(query).slice(0, 8).map(r => r.item);
+        if (items.length > 0) trackEvent('docs-search', { query: query.trim() });
+        return items;
     }, [query, fuse]);
 
     // Close dropdown on outside click

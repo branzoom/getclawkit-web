@@ -14,6 +14,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as ChartTooltip, 
 import { Tooltip as UiTooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { COST_ESTIMATOR_MODELS, PRICING_LAST_UPDATED } from '@/data/models';
 import Link from 'next/link';
+import { trackEvent } from '@/lib/umami';
 
 export default function CostEstimator() {
     // 状态管理
@@ -103,12 +104,13 @@ export default function CostEstimator() {
         const dsCost = finalMonthlyCosts['deepseek']?.toFixed(0) ?? '0';
         const text = `My AI agent cost simulation on ClawKit:\n📉 GPT-4.1: $${gptCost}/mo\n🚀 DeepSeek V3.2: $${dsCost}/mo\n\nScale your agents without going bankrupt! 💸\nCheck it out: https://getclawkit.com/tools/cost`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+        trackEvent('cost-share-twitter');
     };
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
 
-            <Tabs defaultValue="simulator" className="w-full">
+            <Tabs defaultValue="simulator" className="w-full" onValueChange={(tab) => trackEvent('cost-tab-switch', { tab })}>
                 <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
                     <TabsList className="bg-card border border-border">
                         <TabsTrigger value="simulator" className="flex items-center gap-2">

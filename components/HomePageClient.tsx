@@ -5,6 +5,7 @@ import { FileJson, ShieldCheck, Calculator, Package, ArrowRight, Github, Clock, 
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import CopyCommand from '@/components/CopyCommand';
+import { trackEvent } from '@/lib/umami';
 
 interface MarqueeSkill {
     id: string;
@@ -42,6 +43,7 @@ const faqJsonLd = {
 const MarqueeCard = ({ skill }: { skill: MarqueeSkill }) => (
   <Link
     href={`/skills/${skill.id}`}
+    data-umami-event="homepage-skill-marquee"
     className="block w-64 p-4 rounded-xl border border-border bg-card/50 hover:bg-accent hover:border-blue-500/30 transition-all duration-300 group cursor-pointer flex-shrink-0 mx-3"
   >
     <div className="flex items-center gap-3 mb-2">
@@ -150,12 +152,12 @@ export default function HomePageClient({ skills, skillCount }: HomePageClientPro
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
             <Button asChild size="lg" className="text-base font-bold bg-foreground text-background hover:bg-foreground/90 rounded-full h-14 px-10 shadow-xl shadow-foreground/10">
-              <Link href="/tools/config">
+              <Link href="/tools/config" data-umami-event="hero-cta-config">
                 Start Config Wizard <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-base font-medium border-border bg-transparent hover:bg-muted rounded-full h-14 px-10">
-              <Link href="/tools/doctor">
+              <Link href="/tools/doctor" data-umami-event="hero-cta-doctor">
                 Run Diagnostics
               </Link>
             </Button>
@@ -185,7 +187,7 @@ export default function HomePageClient({ skills, skillCount }: HomePageClientPro
                 </div>
               </div>
               <div className="absolute inset-0 opacity-0 z-10 cursor-pointer">
-                <CopyCommand command="npx create-openclaw@latest my-agent" />
+                <CopyCommand command="npx create-openclaw@latest my-agent" eventName="hero-copy-command" />
               </div>
             </div>
             <p className="text-xs text-muted-foreground mt-3 text-center">
@@ -330,7 +332,7 @@ export default function HomePageClient({ skills, skillCount }: HomePageClientPro
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 max-w-5xl mx-auto">
           {tools.map((tool) => (
-            <Link key={tool.title} href={tool.href} className="group block text-center">
+            <Link key={tool.title} href={tool.href} className="group block text-center" onClick={() => trackEvent('homepage-tool-click', { tool: tool.title })}>
               <div className={`inline-flex p-4 rounded-2xl mb-4 bg-${tool.color}-500/10 text-${tool.color}-400 group-hover:scale-110 group-hover:bg-${tool.color}-500/20 transition-all duration-300 shadow-lg shadow-${tool.color}-900/20`}>
                 {tool.icon}
               </div>
@@ -381,7 +383,7 @@ export default function HomePageClient({ skills, skillCount }: HomePageClientPro
         </div>
 
         <div className="text-center mt-12">
-          <Link href="/skills" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground font-medium border-b border-transparent hover:border-foreground transition-colors pb-0.5">
+          <Link href="/skills" data-umami-event="homepage-browse-all-skills" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground font-medium border-b border-transparent hover:border-foreground transition-colors pb-0.5">
             Browse All {skillCount.toLocaleString()} Skills <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -395,7 +397,7 @@ export default function HomePageClient({ skills, skillCount }: HomePageClientPro
             <Accordion type="single" collapsible className="w-full">
               {FAQ_ITEMS.slice(0, 4).map((item, i) => (
                 <AccordionItem key={i} value={`faq-${i}`} className="border-border">
-                  <AccordionTrigger className="text-foreground/80 hover:text-blue-400 text-left text-sm py-3">
+                  <AccordionTrigger className="text-foreground/80 hover:text-blue-400 text-left text-sm py-3" onClick={() => trackEvent('faq-expand', { question: item.q })}>
                     {item.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-sm pb-4">
@@ -413,7 +415,7 @@ export default function HomePageClient({ skills, skillCount }: HomePageClientPro
               <p className="text-muted-foreground text-sm mb-6">ClawKit is community-driven and free forever. Not affiliated with OpenClaw.</p>
             </div>
             <Button asChild variant="outline" className="gap-2 border-border hover:bg-muted hover:text-foreground w-full md:w-auto self-start">
-              <Link href="https://github.com/branzoom/getclawkit-web" target="_blank">
+              <Link href="https://github.com/branzoom/getclawkit-web" target="_blank" data-umami-event="homepage-github-star">
                 <Github className="w-4 h-4" />
                 Star on GitHub
               </Link>

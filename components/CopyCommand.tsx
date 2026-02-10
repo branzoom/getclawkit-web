@@ -2,14 +2,16 @@
 
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
+import { trackEvent } from '@/lib/umami';
 
-export default function CopyCommand({ command }: { command: string }) {
+export default function CopyCommand({ command, eventName, eventData }: { command: string; eventName?: string; eventData?: Record<string, string | number> }) {
     const [copied, setCopied] = useState(false);
 
     const handleCopy = async () => {
         await navigator.clipboard.writeText(command);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+        if (eventName) trackEvent(eventName, eventData);
     };
 
     return (

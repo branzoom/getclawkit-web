@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { CheckCircle2, AlertCircle, RefreshCw, Share2, Activity, Globe, Server, Radio } from 'lucide-react';
+import { trackEvent } from '@/lib/umami';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -53,6 +54,7 @@ export default function StatusWidget() {
         const uptimeStr = uptime !== null ? ` ${uptime.toFixed(1)}% Uptime.` : '';
         const text = `OpenClaw Ecosystem Status: ${statusLabel}! ${statusEmoji}${uptimeStr} Checked via GetClawKit.com`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+        trackEvent('status-share-twitter');
     };
 
     const getIcon = (type: string) => {
