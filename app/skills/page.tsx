@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { getSkillsIndex } from '@/lib/db/skills';
+
+export const dynamic = 'force-dynamic';
 import SkillRegistry from '@/components/SkillRegistry';
 import { Package, Zap } from 'lucide-react';
 
