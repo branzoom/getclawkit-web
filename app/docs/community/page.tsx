@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import { Users, ChevronRight, Heart, GitPullRequest, MessageSquare, BookOpen, Shield, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'Community & Contributing — Join the OpenClaw Ecosystem | ClawKit',
+    description: 'Contribute to ClawKit and OpenClaw. Community guidelines, how to submit plugins, report bugs, and join the discussion.',
+};
 
 export default function CommunityPage() {
     return (

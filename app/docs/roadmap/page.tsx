@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import { Compass, Calendar, Target, Flag, Zap, Rocket, Globe, Shield } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'ClawKit Roadmap 2026 — Upcoming Features & Milestones | ClawKit',
+    description: 'See what\'s coming to ClawKit: planned features, integration milestones, and the vision for making autonomous AI agents accessible and cost-effective.',
+};
 
 export default function RoadmapPage() {
     return (

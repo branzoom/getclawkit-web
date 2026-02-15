@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import { Wrench, ChevronRight, Code2, Shield, AlertTriangle, Zap, FileJson, MousePointer, Globe, Terminal } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'Tool Use in AI Agents — Function Calling & Browser Actions | ClawKit',
+    description: 'How OpenClaw agents use tools: function calling, browser automation, file system access, and API integration. Understand tool selection, safety, and limitations.',
+    keywords: ['ai agent tool use', 'function calling llm', 'openclaw browser automation', 'agent tool selection'],
+};
 
 export default function ToolUsePage() {
     return (

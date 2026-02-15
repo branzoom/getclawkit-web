@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import { Puzzle, Box, ChevronRight, Shield, Zap, Code2, FileJson, GitBranch, Terminal } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'OpenClaw Skill System — How Plugins Work | ClawKit',
+    description: 'Learn how OpenClaw skills (plugins) work: discovery, installation, sandboxing, and execution. Build your own skill or browse 9,000+ verified plugins.',
+    keywords: ['openclaw skills', 'openclaw plugin system', 'how openclaw plugins work', 'build openclaw skill'],
+};
 
 export default function SkillSystemPage() {
     return (

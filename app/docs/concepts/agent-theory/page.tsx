@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import { Brain, Eye, MemoryStick, Lightbulb, ChevronRight, Zap, Target, RotateCcw, Layers } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'AI Agent Theory — Perception, Memory & Action Loops | ClawKit',
+    description: 'How AI agents think: the observe-think-act loop, working memory, long-term memory, and why agents get stuck. Essential reading for OpenClaw users.',
+    keywords: ['ai agent theory', 'how ai agents work', 'agent loop', 'openclaw agent model', 'llm agent architecture'],
+};
 
 export default function AgentTheoryPage() {
     return (

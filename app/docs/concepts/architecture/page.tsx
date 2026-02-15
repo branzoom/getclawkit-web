@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import { GitBranch, Terminal, Shield, Cpu, ChevronRight, Zap, Box, Lock, Globe } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'OpenClaw Architecture — How AI Agents Process Signals | ClawKit',
+    description: 'Understand how OpenClaw transforms text into multi-step browser actions. Learn the signal processing pipeline, sandbox model, and plugin execution flow.',
+    keywords: ['openclaw architecture', 'how openclaw works', 'ai agent architecture', 'openclaw internals'],
+};
 
 export default function ArchitecturePage() {
     return (

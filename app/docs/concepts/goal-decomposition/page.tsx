@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import { GitFork, ChevronRight, Target, Workflow, CheckCircle2, XCircle, AlertTriangle, Lightbulb } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'Goal Decomposition — How AI Agents Break Down Complex Tasks | ClawKit',
+    description: 'Learn how OpenClaw agents decompose high-level goals into actionable sub-tasks. Covers task planning, failure recovery, and prompt strategies for reliable execution.',
+    keywords: ['ai goal decomposition', 'agent task planning', 'openclaw task breakdown', 'llm planning'],
+};
 
 export default function GoalDecompositionPage() {
     return (

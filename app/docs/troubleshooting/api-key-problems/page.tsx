@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import { Terminal, ShieldCheck, AlertCircle, Key, Lock, HelpCircle, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'Fix API Key Errors in OpenClaw — Invalid Key, 401, 403 | ClawKit',
+    description: 'Solve OpenClaw API key problems: invalid key errors, 401 unauthorized, 403 forbidden, rate limits, and key rotation. Step-by-step fixes for OpenAI, DeepSeek, and Anthropic keys.',
+    keywords: ['openclaw api key error', 'openclaw 401 unauthorized', 'openclaw invalid api key', 'openai key not working openclaw'],
+};
 
 export default function ApiKeyProblemsPage() {
     return (

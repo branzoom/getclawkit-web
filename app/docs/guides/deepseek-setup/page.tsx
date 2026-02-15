@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import { Zap, Cpu, Terminal, ShieldCheck, DollarSign } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'DeepSeek V3.2 Setup Guide for OpenClaw — Save 85% on API Costs | ClawKit',
+    description: 'Configure DeepSeek V3.2 with OpenClaw in 5 minutes. Get GPT-4.1 level performance at $0.28/M tokens. Includes API key setup, model config, and cost comparison.',
+    keywords: ['deepseek openclaw setup', 'deepseek v3 config', 'cheap ai agent', 'deepseek api openclaw', 'deepseek vs openai cost'],
+};
 
 export default function DeepSeekSetupPage() {
     return (

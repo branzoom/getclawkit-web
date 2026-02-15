@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import { Shield, Lock, Eye, Server, Globe, ChevronRight, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'Data Privacy in OpenClaw — What Your Agent Sees and Sends | ClawKit',
+    description: 'Understand what data OpenClaw agents can access, where it goes, and how to lock it down. Covers browser sandbox, API key safety, and local-only processing.',
+    keywords: ['openclaw privacy', 'ai agent data privacy', 'openclaw security', 'is openclaw safe'],
+};
 
 export default function DataPrivacyPage() {
     return (
