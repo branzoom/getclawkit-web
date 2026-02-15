@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import CostEstimator from '@/components/CostEstimator';
 import { Flame, AlertTriangle, TrendingUp, ExternalLink, BookOpen } from 'lucide-react';
+import ToolCrossSell from '@/components/ToolCrossSell';
 import { Card, CardContent } from '@/components/ui/card';
 
 export const metadata: Metadata = {
@@ -163,6 +164,8 @@ export default function CostPage() {
                 </section>
 
             </div>
+
+            <ToolCrossSell current="cost" heading="Know your costs? Build your agent." />
         </div>
     );
 }

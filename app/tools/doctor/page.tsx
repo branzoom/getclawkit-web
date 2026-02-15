@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import LocalDoctor from '@/components/LocalDoctor';
 import { ShieldCheck, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import ToolCrossSell from '@/components/ToolCrossSell';
 
 export const metadata: Metadata = {
     title: 'Local Doctor - Diagnose OpenClaw Environment',
@@ -80,6 +81,8 @@ export default function DoctorPage() {
                     </div>
                 </div>
             </div>
+
+            <ToolCrossSell current="doctor" heading="Environment healthy? Next steps." />
         </div>
     );
 }

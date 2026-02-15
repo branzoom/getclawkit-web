@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import ConfigGenerator from '@/components/ConfigGenerator';
 import { FileJson, AlertTriangle, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import ToolCrossSell from '@/components/ToolCrossSell';
 
 export const metadata: Metadata = {
     title: 'Config Wizard - Generate OpenClaw JSON',
@@ -150,6 +151,8 @@ export default function ConfigPage() {
                     </CardContent>
                 </Card>
             </div>
+
+            <ToolCrossSell current="config" heading="Config done? Try these next." />
         </div>
     );
 }
