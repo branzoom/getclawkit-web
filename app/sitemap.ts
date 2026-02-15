@@ -1,13 +1,16 @@
 import { MetadataRoute } from 'next';
-import { getSitemapSkills } from '@/lib/db/skills';
 
 export const dynamic = 'force-dynamic';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = 'https://getclawkit.com';
+const baseUrl = 'https://getclawkit.com';
 
-    // 1. Static core pages
-    const staticRoutes = [
+/**
+ * Root sitemap: static pages only.
+ * Skill sitemaps are served via /sitemap/[page]/route.ts
+ * Sitemap index is at /sitemap-index.xml via /sitemap-index.xml/route.ts
+ */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    return [
         '',
         '/status',
         '/tools/config',
@@ -48,15 +51,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: (route === '' || route === '/status' ? 'daily' : 'weekly') as 'daily' | 'weekly',
         priority: route === '' ? 1.0 : (route === '/docs' ? 0.9 : 0.8),
     }));
-
-    // 2. Dynamic pSEO pages (Skills) — from DB
-    const skills = await getSitemapSkills();
-    const skillRoutes = skills.map((skill: { id: string; lastUpdated: Date }) => ({
-        url: `${baseUrl}/skills/${skill.id}`,
-        lastModified: new Date(skill.lastUpdated),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-    }));
-
-    return [...staticRoutes, ...skillRoutes];
 }

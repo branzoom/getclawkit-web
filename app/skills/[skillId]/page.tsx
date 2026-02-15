@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getSkillById } from '@/lib/db/skills';
+import { getSkillById, getRelatedSkills } from '@/lib/db/skills';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -39,6 +39,8 @@ export default async function SkillDetailPage({ params }: Props) {
     const skill = await getSkillById(skillId);
 
     if (!skill) notFound();
+
+    const relatedSkills = await getRelatedSkills(skillId, skill.tags || [], skill.author, 5);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -235,6 +237,45 @@ export default async function SkillDetailPage({ params }: Props) {
                     </div>
                 </div>
             </div>
+
+            {/* Related Skills */}
+            {relatedSkills.length > 0 && (
+                <div className="mt-16 pt-10 border-t border-border">
+                    <h2 className="text-2xl font-bold text-foreground mb-6">Related Skills</h2>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {relatedSkills.map((related) => (
+                            <Link
+                                key={related.id}
+                                href={`/skills/${related.id}`}
+                                className="group block"
+                                data-umami-event="skill-related-click"
+                                data-umami-event-skillid={related.id}
+                            >
+                                <Card className="bg-card/30 border-border h-full transition-colors group-hover:border-blue-500/30">
+                                    <CardContent className="p-5 space-y-2">
+                                        <h3 className="font-semibold text-foreground group-hover:text-blue-400 transition-colors line-clamp-1">
+                                            {related.name}
+                                        </h3>
+                                        <p className="text-sm text-muted-foreground line-clamp-2">
+                                            {related.shortDesc}
+                                        </p>
+                                        <div className="flex items-center gap-3 text-xs text-muted-foreground pt-1">
+                                            <span className="flex items-center gap-1">
+                                                <User className="w-3 h-3" /> {related.author}
+                                            </span>
+                                            {related.stars > 0 && (
+                                                <span className="flex items-center gap-1">
+                                                    <Star className="w-3 h-3" /> {related.stars}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

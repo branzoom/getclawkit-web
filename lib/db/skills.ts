@@ -90,6 +90,49 @@ export async function getSitemapSkills() {
     });
 }
 
+// Sitemap — paginated for sitemap index (chunks of SITEMAP_PAGE_SIZE)
+export const SITEMAP_PAGE_SIZE = 5000;
+
+export async function getSitemapSkillsPaginated(page: number) {
+    return prisma.skill.findMany({
+        select: { id: true, lastUpdated: true },
+        orderBy: { id: 'asc' },
+        skip: page * SITEMAP_PAGE_SIZE,
+        take: SITEMAP_PAGE_SIZE,
+    });
+}
+
+// Related skills — find skills sharing the same tags, fallback to same author
+export async function getRelatedSkills(skillId: string, tags: string[], author: string, limit = 5) {
+    const select = {
+        id: true,
+        name: true,
+        shortDesc: true,
+        tags: true,
+        author: true,
+        stars: true,
+    } as const;
+
+    // Try tag-based matching first
+    if (tags.length) {
+        const byTags = await prisma.skill.findMany({
+            where: { id: { not: skillId }, tags: { hasSome: tags } },
+            select,
+            orderBy: { stars: 'desc' },
+            take: limit,
+        });
+        if (byTags.length >= 2) return byTags;
+    }
+
+    // Fallback: same author
+    return prisma.skill.findMany({
+        where: { id: { not: skillId }, author },
+        select,
+        orderBy: { stars: 'desc' },
+        take: limit,
+    });
+}
+
 // Random skills for homepage marquee
 export const getRandomSkills = unstable_cache(
     async (count: number) => {
