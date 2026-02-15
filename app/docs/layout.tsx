@@ -25,6 +25,7 @@ const docNav = [
             { title: 'JSON Parse Errors', href: '/docs/troubleshooting/json-parse-errors' },
             { title: 'Windows Issues', href: '/docs/troubleshooting/windows-issues' },
             { title: 'API Key Problems', href: '/docs/troubleshooting/api-key-problems' },
+            { title: 'Docker macOS Errors', href: '/docs/troubleshooting/docker-macos-errors' },
         ]
     },
     {

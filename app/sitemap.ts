@@ -25,6 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/docs/troubleshooting/json-parse-errors',
         '/docs/troubleshooting/windows-issues',
         '/docs/troubleshooting/api-key-problems',
+        '/docs/troubleshooting/docker-macos-errors',
         '/docs/guides/v1-to-v2-migration',
         '/docs/guides/cost-optimization',
         '/docs/guides/deepseek-setup',
